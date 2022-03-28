@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using System.Net.Sockets;
 using System.Threading;
 using Newtonsoft.Json.Linq;
@@ -68,15 +69,15 @@ namespace NeuroTGAM
         /// </summary>
         public void ConnectToConnector()
         {
-            /*_connector.Connect("localhost", 13854);
+            _connector.Connect("localhost", 13854);
             if (!_connector.Connected) throw new Exception("Ошибка подключения к ThinkGear Connector!");
             _connectorStream = _connector.GetStream();
 
             byte[] settingsForConnector = Encoding.ASCII.GetBytes(@"{""enableRawOutput"": false,""format"": ""Json""}");
-            _connectorStream.Write(settingsForConnector, 0, settingsForConnector.Length);*/
-            Console.WriteLine("Подключение к нейроустройству...");
+            _connectorStream.Write(settingsForConnector, 0, settingsForConnector.Length);
+            /*Console.WriteLine("Подключение к нейроустройству...");
             Thread.Sleep(3000);
-            Console.WriteLine("Подключились!");
+            Console.WriteLine("Подключились!");*/
 
             _readingThread.Start();
         }
@@ -118,12 +119,12 @@ namespace NeuroTGAM
             try
             {
                 byte[] bytesFromConnector = new byte[2048];
-                while (/*_connector.Connected*/ true)
+                while (_connector.Connected /*true*/)
                 {
-                    /*int bytesRead = _connectorStream.Read(bytesFromConnector, 0, 2048);
-                    if (bytesRead <= 0) continue;*/
-                    Thread.Sleep(1000);
-                    string[] packets = new string[] { @"{""eSense"":{""attention"":91,""meditation"":60},""eegPower"":{""delta"":11743,""theta"":16291,""lowAlpha"":40586,""highAlpha"":6903,""lowBeta"":6776,""highBeta"":18351,""lowGamma"":12421,""highGamma"":1427},""poorSignalLevel"":0}" };//Encoding.UTF8.GetString(bytesFromConnector, 0, bytesRead).Split('\r');
+                    int bytesRead = _connectorStream.Read(bytesFromConnector, 0, 2048);
+                    if (bytesRead <= 0) continue;
+                    //Thread.Sleep(1000);
+                    string[] packets = Encoding.UTF8.GetString(bytesFromConnector, 0, bytesRead).Split('\r'); /*new string[] { @"{""eSense"":{""attention"":91,""meditation"":60},""eegPower"":{""delta"":11743,""theta"":16291,""lowAlpha"":40586,""highAlpha"":6903,""lowBeta"":6776,""highBeta"":18351,""lowGamma"":12421,""highGamma"":1427},""poorSignalLevel"":0}" };*/
                     foreach (string packet in packets) if (!string.IsNullOrEmpty(packet)) ParseJSON(packet.Trim());
 
                     ShowBrainData?.Invoke(new Dictionary<BrainDataTitle, double>(_currentBrainData));
@@ -140,18 +141,20 @@ namespace NeuroTGAM
             dynamic jsonObject = JObject.Parse(packet);
             if (jsonObject.eegPower == null && jsonObject.eSense == null) return;
 
+            double k = 100000.0d;
+
             _mutex.WaitOne();
-            _currentBrainData[BrainDataTitle.Low_Alpha] = (double)jsonObject.eegPower["lowAlpha"];
-            _currentBrainData[BrainDataTitle.High_Alpha] = (double)jsonObject.eegPower["highAlpha"];
+            _currentBrainData[BrainDataTitle.Low_Alpha] = (double)jsonObject.eegPower["lowAlpha"] / k;
+            _currentBrainData[BrainDataTitle.High_Alpha] = (double)jsonObject.eegPower["highAlpha"] / k;
 
-            _currentBrainData[BrainDataTitle.Low_Beta] = (double)jsonObject.eegPower["lowBeta"];
-            _currentBrainData[BrainDataTitle.High_Beta] = (double)jsonObject.eegPower["highBeta"];
+            _currentBrainData[BrainDataTitle.Low_Beta] = (double)jsonObject.eegPower["lowBeta"] / k;
+            _currentBrainData[BrainDataTitle.High_Beta] = (double)jsonObject.eegPower["highBeta"] / k;
 
-            _currentBrainData[BrainDataTitle.Low_Gamma] = (double)jsonObject.eegPower["lowGamma"];
-            _currentBrainData[BrainDataTitle.High_Gamma] = (double)jsonObject.eegPower["highGamma"];
+            _currentBrainData[BrainDataTitle.Low_Gamma] = (double)jsonObject.eegPower["lowGamma"] / k;
+            _currentBrainData[BrainDataTitle.High_Gamma] = (double)jsonObject.eegPower["highGamma"] / k;
 
-            _currentBrainData[BrainDataTitle.Theta] = (double)jsonObject.eegPower["theta"];
-            _currentBrainData[BrainDataTitle.Delta] = (double)jsonObject.eegPower["delta"];
+            _currentBrainData[BrainDataTitle.Theta] = (double)jsonObject.eegPower["theta"] / k;
+            _currentBrainData[BrainDataTitle.Delta] = (double)jsonObject.eegPower["delta"] / k;
 
             _currentBrainData[BrainDataTitle.Attention] = (double)jsonObject.eSense["attention"];
             _currentBrainData[BrainDataTitle.Meditation] = (double)jsonObject.eSense["meditation"];
