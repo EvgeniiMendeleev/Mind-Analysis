@@ -12,10 +12,10 @@ namespace EEG_Graphics
     public partial class Form1 : Form
     {
         private Dictionary<BrainDataTitle, Chart> _charts;
-        private const int MAX_CHARTS_POINTS = 40;
+        private const int MAX_CHARTS_POINTS = 30;
         private NeuroDeviceTGAM _neurodevice = new NeuroDeviceTGAM();
 
-        private delegate void ChartDisplayHandler(Chart chart, string time, double data);
+        private delegate void ChartDisplayHandler(Chart chart, double data);
 
         public Form1()
         {
@@ -63,22 +63,30 @@ namespace EEG_Graphics
         }
 
         private void DisplayDataToGraphics(Dictionary<BrainDataTitle, double> currentBrainData)
-        {
-            string time = DateTime.Now.ToString().Split()[1];
-           
+        {  
             BrainDataTitle[] brainKeys = currentBrainData.Keys.ToArray();
             foreach (BrainDataTitle brainKey in brainKeys)
             {
-                BeginInvoke(new ChartDisplayHandler(DisplayBrainDataToChart), new object[] { _charts[brainKey], time, currentBrainData[brainKey] });
+                BeginInvoke(new ChartDisplayHandler(DisplayBrainDataToChart), new object[] { _charts[brainKey], currentBrainData[brainKey] });
             }
         }
 
-        private void DisplayBrainDataToChart(Chart chart, string time, double data)
+        private void DisplayBrainDataToChart(Chart chart, double data)
         {
-            if (chart.Series[0].Points.Count > MAX_CHARTS_POINTS) chart.Series[0].Points.RemoveAt(0);
-            chart.Series[0].Points.AddXY(time, data);
-            var points = chart.Series[0].Points;
-            chart.ChartAreas[0].AxisY.Maximum = points.Max(x => x.YValues[0] + 1);
+            if (chart.Series[0].Points.Count >= MAX_CHARTS_POINTS) chart.Series[0].Points.RemoveAt(0);
+
+            Console.WriteLine();
+
+            if (chart.Series[0].Points.Count > 0)
+            {
+            }
+            double time = 0;//chart.Series[0].Points.Count <= 0 ? 0 : chart.Series[0].Points.Last().XValue + 1;
+
+
+            chart.Series[0].Points.AddXY(time.ToString(), data);
+            //var points = chart.Series[0].Points;
+            //int scale = chart != graphicMeditation && chart != graphicAttention ? 15000 : 5;
+            //chart.ChartAreas[0].AxisY.Maximum = points.Max(x => x.YValues[0]) + scale;
         }
     }
 }
