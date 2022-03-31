@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Text;
 using Newtonsoft.Json.Linq;
 using System.Linq;
 using System.Collections.Generic;
@@ -89,6 +90,34 @@ namespace EEG_Graphics
             int scale = chart != graphicMeditation && chart != graphicAttention ? 15000 : 5;
 
             chart.ChartAreas[0].AxisY.Maximum = points.Max(x => x.YValues[0]) + scale;
+        }
+
+        private void UploadBrainDataFile(object sender, EventArgs e)
+        {
+            if (File.Exists("MyFile.mind"))
+            {
+                OpenFileDialog OPF = new OpenFileDialog();
+                OPF.Filter = "Mind Files (*.mind) | *.mind";
+                if (OPF.ShowDialog() == DialogResult.OK)
+                {
+                    using (StreamReader str = new StreamReader("MyFile.mind", Encoding.UTF8))
+                    {
+                        MessageBox.Show(str.ReadLine(), "Сообщение");
+                    }
+                }
+                return;
+            }
+
+            FileStream file = File.Open("MyFile.mind", FileMode.Create);
+            using (StreamWriter writer = new StreamWriter(file, Encoding.UTF8))
+            {
+                for (int i = 1; i <= 20; i++)
+                {
+                    string str = $"Это строка №{i}";
+                    Console.WriteLine(str);
+                    writer.WriteLine(str);
+                }
+            }
         }
     }
 }

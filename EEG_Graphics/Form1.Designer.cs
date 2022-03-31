@@ -453,6 +453,7 @@ namespace EEG_Graphics
             this.button3.TabIndex = 24;
             this.button3.Text = "Загрузить имеющиеся графики";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.UploadBrainDataFile);
             // 
             // Form1
             // 
