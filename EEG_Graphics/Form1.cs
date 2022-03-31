@@ -12,7 +12,7 @@ namespace EEG_Graphics
     public partial class Form1 : Form
     {
         private Dictionary<BrainDataTitle, Chart> _charts;
-        private const int MAX_CHARTS_POINTS = 30;
+        private const int MAX_CHARTS_POINTS = 5;
         private NeuroDeviceTGAM _neurodevice = new NeuroDeviceTGAM();
 
         private delegate void ChartDisplayHandler(Chart chart, double data);
@@ -75,13 +75,11 @@ namespace EEG_Graphics
         {
             if (chart.Series[0].Points.Count >= MAX_CHARTS_POINTS) chart.Series[0].Points.RemoveAt(0);
 
-            Console.WriteLine();
-
             if (chart.Series[0].Points.Count > 0)
             {
-            }
-            double time = 0;//chart.Series[0].Points.Count <= 0 ? 0 : chart.Series[0].Points.Last().XValue + 1;
 
+            }
+            double time = chart.Series[0].Points.Count <= 0 ? 0 : (double)chart.Series[0].Points.First().XValue + 1;
 
             chart.Series[0].Points.AddXY(time.ToString(), data);
             //var points = chart.Series[0].Points;
