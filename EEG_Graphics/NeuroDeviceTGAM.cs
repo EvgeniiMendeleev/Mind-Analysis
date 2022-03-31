@@ -35,8 +35,8 @@ namespace NeuroTGAM
     public class NeuroDeviceTGAM
     {
         private TcpClient _connector;                                        //TCP соединение с ThinkGear Connector.
-        private Stream _connectorStream;                                     //Поток для передачи и получения данных от ThinkGear Connector.
         private Thread _readingThread;                                       //Поток, считывающй данные, получаемые от ThinkGear Connector.
+        private Stream _connectorStream;
         private Mutex _mutex;                                                //Для синхронизации потоков.
         private Dictionary<BrainDataTitle, double> _currentBrainData;        //Данные с нейрогарнитуры в текущую секунду.
 
@@ -47,10 +47,7 @@ namespace NeuroTGAM
 
         public NeuroDeviceTGAM()
         {
-            _connector = new TcpClient();
             _mutex = new Mutex();
-            _readingThread = new Thread(ReadingThread);
-            _readingThread.IsBackground = true;
 
             BrainDataTitle[] brainDataTitles = new BrainDataTitle[] 
             { 
@@ -69,15 +66,19 @@ namespace NeuroTGAM
         /// </summary>
         public void ConnectToConnector()
         {
-            if(!_connector.Connected)_connector.Connect("localhost", 13854);
+            if (_connector == null) _connector = new TcpClient();
+
+            _connector.Connect("localhost", 13854);
             _connectorStream = _connector.GetStream();
 
             byte[] settingsForConnector = Encoding.ASCII.GetBytes(@"{""enableRawOutput"": false,""format"": ""Json""}");
             _connectorStream.Write(settingsForConnector, 0, settingsForConnector.Length);
-            /*Console.WriteLine("Подключение к нейроустройству...");
-            Thread.Sleep(3000);
-            Console.WriteLine("Подключились!");*/
 
+            if (_readingThread == null)
+            {
+                _readingThread = new Thread(ReadingThread);
+                _readingThread.IsBackground = true;
+            }
             _readingThread.Start();
         }
 
@@ -86,7 +87,9 @@ namespace NeuroTGAM
         /// </summary>
         public void DisconnectFromConnector()
         {
-            _connectorStream.Close();
+            _connector.Close();
+            _connector = null;
+            _readingThread = null;
         }
 
         /// <summary>
@@ -118,18 +121,18 @@ namespace NeuroTGAM
             try
             {
                 byte[] bytesFromConnector = new byte[2048];
-                while (_connector.Connected /*true*/)
+                while (_connector.Connected)
                 {
                     int bytesRead = _connectorStream.Read(bytesFromConnector, 0, 2048);
                     if (bytesRead <= 0) continue;
-                    //Thread.Sleep(1000);
-                    string[] packets = Encoding.UTF8.GetString(bytesFromConnector, 0, bytesRead).Split('\r'); /*new string[] { @"{""eSense"":{""attention"":91,""meditation"":60},""eegPower"":{""delta"":11743,""theta"":16291,""lowAlpha"":40586,""highAlpha"":6903,""lowBeta"":6776,""highBeta"":18351,""lowGamma"":12421,""highGamma"":1427},""poorSignalLevel"":0}" };*/
+
+                    string[] packets = Encoding.UTF8.GetString(bytesFromConnector, 0, bytesRead).Split('\r');
                     foreach (string packet in packets) if (!string.IsNullOrEmpty(packet)) ParseJSON(packet.Trim());
                 }
             }
             catch(IOException exp)
             {
-                MessageBox.Show(exp.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Соединение разорвано!", "Предупреждение!", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 

@@ -12,7 +12,8 @@ namespace EEG_Graphics
     public partial class Form1 : Form
     {
         private Dictionary<BrainDataTitle, Chart> _charts;
-        private const int MAX_CHARTS_POINTS = 5;
+        private const int MAX_CHARTS_POINTS = 30;
+        private uint _seconds = 0;
         private NeuroDeviceTGAM _neurodevice = new NeuroDeviceTGAM();
 
         private delegate void ChartDisplayHandler(Chart chart, double data);
@@ -33,16 +34,19 @@ namespace EEG_Graphics
                 [BrainDataTitle.Attention] = graphicAttention,
                 [BrainDataTitle.Meditation] = graphicMeditation
             };
+            _neurodevice.ShowBrainData += DisplayDataToGraphics;
+            startRecordButton.Enabled = true;
+            stopRecordButton.Enabled = false;
         }
 
         private void StartToReadDataFromNeurodevice(object sender, EventArgs e)
         {
-            if (!_neurodevice.AreDataReading)
-            {
-                ClearAllGraphics();
-                _neurodevice.ConnectToConnector();
-                _neurodevice.ShowBrainData += DisplayDataToGraphics;
-            }
+            ClearAllGraphics();
+            
+            _neurodevice.ConnectToConnector();
+
+            startRecordButton.Enabled = false;
+            stopRecordButton.Enabled = true;
         }
 
         private void StopToReadDataFromNeurodevice(object sender, EventArgs e)
@@ -50,6 +54,9 @@ namespace EEG_Graphics
             if (_neurodevice.AreDataReading)
             {
                 _neurodevice.DisconnectFromConnector();
+                _seconds = 0;
+                startRecordButton.Enabled = true;
+                stopRecordButton.Enabled = false;
             }
         }
 
@@ -63,28 +70,25 @@ namespace EEG_Graphics
         }
 
         private void DisplayDataToGraphics(Dictionary<BrainDataTitle, double> currentBrainData)
-        {  
+        {
             BrainDataTitle[] brainKeys = currentBrainData.Keys.ToArray();
             foreach (BrainDataTitle brainKey in brainKeys)
             {
                 BeginInvoke(new ChartDisplayHandler(DisplayBrainDataToChart), new object[] { _charts[brainKey], currentBrainData[brainKey] });
             }
+            _seconds++;
         }
 
         private void DisplayBrainDataToChart(Chart chart, double data)
         {
             if (chart.Series[0].Points.Count >= MAX_CHARTS_POINTS) chart.Series[0].Points.RemoveAt(0);
 
-            if (chart.Series[0].Points.Count > 0)
-            {
+            chart.Series[0].Points.AddXY(_seconds.ToString(), data);
 
-            }
-            double time = chart.Series[0].Points.Count <= 0 ? 0 : (double)chart.Series[0].Points.First().XValue + 1;
+            DataPointCollection points = chart.Series[0].Points;
+            int scale = chart != graphicMeditation && chart != graphicAttention ? 15000 : 5;
 
-            chart.Series[0].Points.AddXY(time.ToString(), data);
-            //var points = chart.Series[0].Points;
-            //int scale = chart != graphicMeditation && chart != graphicAttention ? 15000 : 5;
-            //chart.ChartAreas[0].AxisY.Maximum = points.Max(x => x.YValues[0]) + scale;
+            chart.ChartAreas[0].AxisY.Maximum = points.Max(x => x.YValues[0]) + scale;
         }
     }
 }

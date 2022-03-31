@@ -62,7 +62,7 @@ namespace EEG_Graphics
             System.Windows.Forms.DataVisualization.Charting.Series series11 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.graphicLowAlpha = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.button1 = new System.Windows.Forms.Button();
+            this.startRecordButton = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.graphicHighAlpha = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.label3 = new System.Windows.Forms.Label();
@@ -82,7 +82,7 @@ namespace EEG_Graphics
             this.graphicMeditation = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.label11 = new System.Windows.Forms.Label();
             this.graphicAttention = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.button2 = new System.Windows.Forms.Button();
+            this.stopRecordButton = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.graphicLowAlpha)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.graphicHighAlpha)).BeginInit();
@@ -118,20 +118,20 @@ namespace EEG_Graphics
             series2.Name = "Загружено";
             this.graphicLowAlpha.Series.Add(series1);
             this.graphicLowAlpha.Series.Add(series2);
-            this.graphicLowAlpha.Size = new System.Drawing.Size(569, 304);
+            this.graphicLowAlpha.Size = new System.Drawing.Size(552, 304);
             this.graphicLowAlpha.TabIndex = 0;
             this.graphicLowAlpha.Text = "chart1";
             // 
-            // button1
+            // startRecordButton
             // 
-            this.button1.Location = new System.Drawing.Point(11, 11);
-            this.button1.Margin = new System.Windows.Forms.Padding(2);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(215, 30);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Начать считывание данных\r\n";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.StartToReadDataFromNeurodevice);
+            this.startRecordButton.Location = new System.Drawing.Point(11, 11);
+            this.startRecordButton.Margin = new System.Windows.Forms.Padding(2);
+            this.startRecordButton.Name = "startRecordButton";
+            this.startRecordButton.Size = new System.Drawing.Size(215, 30);
+            this.startRecordButton.TabIndex = 2;
+            this.startRecordButton.Text = "Начать считывание данных\r\n";
+            this.startRecordButton.UseVisualStyleBackColor = true;
+            this.startRecordButton.Click += new System.EventHandler(this.StartToReadDataFromNeurodevice);
             // 
             // label2
             // 
@@ -151,7 +151,7 @@ namespace EEG_Graphics
             this.graphicHighAlpha.ChartAreas.Add(chartArea2);
             legend2.Name = "Legend1";
             this.graphicHighAlpha.Legends.Add(legend2);
-            this.graphicHighAlpha.Location = new System.Drawing.Point(584, 68);
+            this.graphicHighAlpha.Location = new System.Drawing.Point(567, 68);
             this.graphicHighAlpha.Margin = new System.Windows.Forms.Padding(2);
             this.graphicHighAlpha.Name = "graphicHighAlpha";
             this.graphicHighAlpha.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.EarthTones;
@@ -169,7 +169,7 @@ namespace EEG_Graphics
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label3.Location = new System.Drawing.Point(584, 46);
+            this.label3.Location = new System.Drawing.Point(567, 46);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(86, 20);
@@ -181,7 +181,7 @@ namespace EEG_Graphics
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label4.Location = new System.Drawing.Point(584, 395);
+            this.label4.Location = new System.Drawing.Point(567, 395);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(79, 20);
@@ -195,7 +195,7 @@ namespace EEG_Graphics
             this.graphicHighBeta.ChartAreas.Add(chartArea3);
             legend3.Name = "Legend1";
             this.graphicHighBeta.Legends.Add(legend3);
-            this.graphicHighBeta.Location = new System.Drawing.Point(584, 417);
+            this.graphicHighBeta.Location = new System.Drawing.Point(567, 417);
             this.graphicHighBeta.Margin = new System.Windows.Forms.Padding(2);
             this.graphicHighBeta.Name = "graphicHighBeta";
             this.graphicHighBeta.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.EarthTones;
@@ -236,7 +236,7 @@ namespace EEG_Graphics
             series5.Legend = "Legend1";
             series5.Name = "Points";
             this.graphicLowBeta.Series.Add(series5);
-            this.graphicLowBeta.Size = new System.Drawing.Size(569, 304);
+            this.graphicLowBeta.Size = new System.Drawing.Size(552, 304);
             this.graphicLowBeta.TabIndex = 7;
             this.graphicLowBeta.Text = "chart1";
             // 
@@ -245,7 +245,7 @@ namespace EEG_Graphics
             this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label6.Location = new System.Drawing.Point(580, 739);
+            this.label6.Location = new System.Drawing.Point(563, 739);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(100, 20);
@@ -259,7 +259,7 @@ namespace EEG_Graphics
             this.graphicHighGamma.ChartAreas.Add(chartArea5);
             legend5.Name = "Legend1";
             this.graphicHighGamma.Legends.Add(legend5);
-            this.graphicHighGamma.Location = new System.Drawing.Point(584, 761);
+            this.graphicHighGamma.Location = new System.Drawing.Point(567, 761);
             this.graphicHighGamma.Margin = new System.Windows.Forms.Padding(2);
             this.graphicHighGamma.Name = "graphicHighGamma";
             this.graphicHighGamma.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.EarthTones;
@@ -300,7 +300,7 @@ namespace EEG_Graphics
             series7.Legend = "Legend1";
             series7.Name = "Points";
             this.graphicLowGamma.Series.Add(series7);
-            this.graphicLowGamma.Size = new System.Drawing.Size(569, 310);
+            this.graphicLowGamma.Size = new System.Drawing.Size(552, 310);
             this.graphicLowGamma.TabIndex = 11;
             this.graphicLowGamma.Text = "chart1";
             // 
@@ -309,7 +309,7 @@ namespace EEG_Graphics
             this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label8.Location = new System.Drawing.Point(584, 1083);
+            this.label8.Location = new System.Drawing.Point(567, 1083);
             this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(47, 20);
@@ -323,7 +323,7 @@ namespace EEG_Graphics
             this.graphicDelta.ChartAreas.Add(chartArea7);
             legend7.Name = "Legend1";
             this.graphicDelta.Legends.Add(legend7);
-            this.graphicDelta.Location = new System.Drawing.Point(584, 1105);
+            this.graphicDelta.Location = new System.Drawing.Point(567, 1105);
             this.graphicDelta.Margin = new System.Windows.Forms.Padding(2);
             this.graphicDelta.Name = "graphicDelta";
             this.graphicDelta.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.EarthTones;
@@ -365,7 +365,7 @@ namespace EEG_Graphics
             series9.Name = "Points";
             series9.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Double;
             this.graphicTheta.Series.Add(series9);
-            this.graphicTheta.Size = new System.Drawing.Size(569, 310);
+            this.graphicTheta.Size = new System.Drawing.Size(552, 310);
             this.graphicTheta.TabIndex = 15;
             this.graphicTheta.Text = "chart1";
             // 
@@ -374,7 +374,7 @@ namespace EEG_Graphics
             this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label10.Location = new System.Drawing.Point(580, 1439);
+            this.label10.Location = new System.Drawing.Point(563, 1439);
             this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(111, 20);
@@ -388,7 +388,7 @@ namespace EEG_Graphics
             this.graphicMeditation.ChartAreas.Add(chartArea9);
             legend9.Name = "Legend1";
             this.graphicMeditation.Legends.Add(legend9);
-            this.graphicMeditation.Location = new System.Drawing.Point(584, 1461);
+            this.graphicMeditation.Location = new System.Drawing.Point(567, 1461);
             this.graphicMeditation.Margin = new System.Windows.Forms.Padding(2);
             this.graphicMeditation.Name = "graphicMeditation";
             this.graphicMeditation.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.EarthTones;
@@ -429,24 +429,24 @@ namespace EEG_Graphics
             series11.Legend = "Legend1";
             series11.Name = "Points";
             this.graphicAttention.Series.Add(series11);
-            this.graphicAttention.Size = new System.Drawing.Size(569, 310);
+            this.graphicAttention.Size = new System.Drawing.Size(552, 310);
             this.graphicAttention.TabIndex = 19;
             this.graphicAttention.Text = "chart1";
             // 
-            // button2
+            // stopRecordButton
             // 
-            this.button2.Location = new System.Drawing.Point(427, 11);
-            this.button2.Margin = new System.Windows.Forms.Padding(2);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(215, 30);
-            this.button2.TabIndex = 23;
-            this.button2.Text = "Остановить считывание данных\r\n";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.StopToReadDataFromNeurodevice);
+            this.stopRecordButton.Location = new System.Drawing.Point(230, 11);
+            this.stopRecordButton.Margin = new System.Windows.Forms.Padding(2);
+            this.stopRecordButton.Name = "stopRecordButton";
+            this.stopRecordButton.Size = new System.Drawing.Size(215, 30);
+            this.stopRecordButton.TabIndex = 23;
+            this.stopRecordButton.Text = "Остановить считывание данных\r\n";
+            this.stopRecordButton.UseVisualStyleBackColor = true;
+            this.stopRecordButton.Click += new System.EventHandler(this.StopToReadDataFromNeurodevice);
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(230, 11);
+            this.button3.Location = new System.Drawing.Point(449, 11);
             this.button3.Margin = new System.Windows.Forms.Padding(2);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(193, 30);
@@ -461,7 +461,7 @@ namespace EEG_Graphics
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(1310, 670);
             this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.stopRecordButton);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.graphicMeditation);
             this.Controls.Add(this.label11);
@@ -481,7 +481,7 @@ namespace EEG_Graphics
             this.Controls.Add(this.label3);
             this.Controls.Add(this.graphicHighAlpha);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.startRecordButton);
             this.Controls.Add(this.graphicLowAlpha);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
@@ -505,7 +505,7 @@ namespace EEG_Graphics
         #endregion
 
         private System.Windows.Forms.DataVisualization.Charting.Chart graphicLowAlpha;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button startRecordButton;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataVisualization.Charting.Chart graphicHighAlpha;
         private System.Windows.Forms.Label label3;
@@ -525,7 +525,7 @@ namespace EEG_Graphics
         private System.Windows.Forms.DataVisualization.Charting.Chart graphicMeditation;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.DataVisualization.Charting.Chart graphicAttention;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button stopRecordButton;
         private System.Windows.Forms.Button button3;
     }
 }
