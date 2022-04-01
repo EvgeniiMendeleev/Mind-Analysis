@@ -130,7 +130,7 @@ namespace NeuroTGAM
                     foreach (string packet in packets) if (!string.IsNullOrEmpty(packet)) ParseJSON(packet.Trim());
                 }
             }
-            catch(IOException exp)
+            finally
             {
                 MessageBox.Show("Соединение разорвано!", "Предупреждение!", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -138,6 +138,7 @@ namespace NeuroTGAM
 
         private void ParseJSON(string packet)
         {
+            //TODO: Попробовать найти другой способ парсинга json пакетов
             dynamic jsonObject = JObject.Parse(packet);
             if (jsonObject.eegPower == null && jsonObject.eSense == null || jsonObject.status != null) return;
 

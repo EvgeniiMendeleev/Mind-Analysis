@@ -42,23 +42,30 @@ namespace EEG_Graphics
 
         private void StartToReadDataFromNeurodevice(object sender, EventArgs e)
         {
-            ClearAllGraphics();
-            
-            _neurodevice.ConnectToConnector();
-
-            startRecordButton.Enabled = false;
-            stopRecordButton.Enabled = true;
+            try
+            {
+                _neurodevice.ConnectToConnector();
+                ClearAllGraphics();
+            }
+            finally
+            {
+                stopRecordButton.Enabled = true;
+                startRecordButton.Enabled = false;
+            }
         }
 
         private void StopToReadDataFromNeurodevice(object sender, EventArgs e)
         {
             if (_neurodevice.AreDataReading)
             {
-                _neurodevice.DisconnectFromConnector();
-                _seconds = 0;
-                startRecordButton.Enabled = true;
-                stopRecordButton.Enabled = false;
+                MessageBox.Show("Ошибка!", "Соединение с ThinkGear Connector не установлено.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
+
+            _neurodevice.DisconnectFromConnector();
+            _seconds = 0;
+            startRecordButton.Enabled = true;
+            stopRecordButton.Enabled = false;
         }
 
         private void ClearAllGraphics()
@@ -82,6 +89,7 @@ namespace EEG_Graphics
 
         private void DisplayBrainDataToChart(Chart chart, double data)
         {
+            stopRecordButton.Enabled = true;
             if (chart.Series[0].Points.Count >= MAX_CHARTS_POINTS) chart.Series[0].Points.RemoveAt(0);
 
             chart.Series[0].Points.AddXY(_seconds.ToString(), data);
