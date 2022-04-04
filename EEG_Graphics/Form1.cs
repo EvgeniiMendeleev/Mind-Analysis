@@ -115,17 +115,6 @@ namespace EEG_Graphics
                 }
                 return;
             }
-
-            FileStream file = File.Open("MyFile.mind", FileMode.Create);
-            using (StreamWriter writer = new StreamWriter(file, Encoding.UTF8))
-            {
-                for (int i = 1; i <= 20; i++)
-                {
-                    string str = $"Это строка №{i}";
-                    Console.WriteLine(str);
-                    writer.WriteLine(str);
-                }
-            }
         }
     }
 }
