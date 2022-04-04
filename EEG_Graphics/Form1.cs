@@ -54,6 +54,17 @@ namespace EEG_Graphics
             }
         }
 
+        private void SaveFilePathCurrentMindRecord(object sender, EventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Mind Files (*.mind) | *.mind";
+            DialogResult dialogResult = saveFileDialog.ShowDialog();
+            if (dialogResult != DialogResult.OK) return;
+
+            if (saveFileDialog.FileName.Length > 3) fullFilePathText.Text = Path.GetFullPath(saveFileDialog.FileName);
+            else MessageBox.Show("Имя файла слишком маленькое!", "Ошибка сохранения", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
         private void StopToReadDataFromNeurodevice(object sender, EventArgs e)
         {
             if (_neurodevice.AreDataReading)
@@ -66,6 +77,33 @@ namespace EEG_Graphics
             _seconds = 0;
             startRecordButton.Enabled = true;
             stopRecordButton.Enabled = false;
+        }
+
+        private void OnChangedValueInSaveMindRecord(object sender, EventArgs e)
+        {
+            saveMindRecordButton.Enabled = !saveMindRecordButton.Enabled;
+        }
+
+        private void OnChangedValueInMaxGraphPoints(object sender, EventArgs e)
+        {
+            maxGraphPointsNumeric.Enabled = !maxGraphPointsNumeric.Enabled;
+        }
+
+        private void UploadBrainDataFile(object sender, EventArgs e)
+        {
+            if (File.Exists("MyFile.mind"))
+            {
+                OpenFileDialog OPF = new OpenFileDialog();
+                OPF.Filter = "Mind Files (*.mind) | *.mind";
+                if (OPF.ShowDialog() == DialogResult.OK)
+                {
+                    using (StreamReader str = new StreamReader("MyFile.mind", Encoding.UTF8))
+                    {
+                        MessageBox.Show(str.ReadLine(), "Сообщение");
+                    }
+                }
+                return;
+            }
         }
 
         private void ClearAllGraphics()
@@ -98,23 +136,6 @@ namespace EEG_Graphics
             int scale = chart != graphicMeditation && chart != graphicAttention ? 15000 : 5;
 
             chart.ChartAreas[0].AxisY.Maximum = points.Max(x => x.YValues[0]) + scale;
-        }
-
-        private void UploadBrainDataFile(object sender, EventArgs e)
-        {
-            if (File.Exists("MyFile.mind"))
-            {
-                OpenFileDialog OPF = new OpenFileDialog();
-                OPF.Filter = "Mind Files (*.mind) | *.mind";
-                if (OPF.ShowDialog() == DialogResult.OK)
-                {
-                    using (StreamReader str = new StreamReader("MyFile.mind", Encoding.UTF8))
-                    {
-                        MessageBox.Show(str.ReadLine(), "Сообщение");
-                    }
-                }
-                return;
-            }
         }
     }
 }
