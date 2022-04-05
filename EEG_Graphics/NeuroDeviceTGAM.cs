@@ -130,9 +130,9 @@ namespace NeuroTGAM
                     foreach (string packet in packets) if (!string.IsNullOrEmpty(packet)) ParseJSON(packet.Trim());
                 }
             }
-            finally
+            catch
             {
-                MessageBox.Show("Соединение разорвано!", "Предупреждение!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
             }
         }
 

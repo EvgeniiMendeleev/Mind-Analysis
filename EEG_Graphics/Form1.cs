@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Text;
-using Newtonsoft.Json.Linq;
 using System.Linq;
 using System.Collections.Generic;
 using System.Windows.Forms.DataVisualization.Charting;
@@ -18,6 +17,9 @@ namespace EEG_Graphics
         private NeuroDeviceTGAM _neurodevice = new NeuroDeviceTGAM();
 
         private delegate void ChartDisplayHandler(Chart chart, double data);
+
+        bool isDeleteNewChartDots;
+        bool isSaveMindDataToFile;
 
         public Form1()
         {
@@ -38,6 +40,7 @@ namespace EEG_Graphics
             _neurodevice.ShowBrainData += DisplayDataToGraphics;
             startRecordButton.Enabled = true;
             stopRecordButton.Enabled = false;
+            recordSettingsGroupBox.Enabled = true;
         }
 
         private void StartToReadDataFromNeurodevice(object sender, EventArgs e)
@@ -45,12 +48,18 @@ namespace EEG_Graphics
             try
             {
                 _neurodevice.ConnectToConnector();
-                ClearAllGraphics();
+                ClearDynamicGraphics();
             }
             finally
             {
                 stopRecordButton.Enabled = true;
                 startRecordButton.Enabled = false;
+                uploadMindFileButton.Enabled = false;
+                recordSettingsGroupBox.Enabled = false;
+                deleteUploadedGraphicButton.Enabled = false;
+
+                isDeleteNewChartDots = deleteNewPointsCheckBox.Checked;
+                isSaveMindDataToFile = saveRecordDataCheckBox.Checked;
             }
         }
 
@@ -67,9 +76,9 @@ namespace EEG_Graphics
 
         private void StopToReadDataFromNeurodevice(object sender, EventArgs e)
         {
-            if (_neurodevice.AreDataReading)
+            if (!_neurodevice.AreDataReading)
             {
-                MessageBox.Show("Ошибка!", "Соединение с ThinkGear Connector не установлено.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Соединение с ThinkGear Connector не установлено.", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -77,6 +86,8 @@ namespace EEG_Graphics
             _seconds = 0;
             startRecordButton.Enabled = true;
             stopRecordButton.Enabled = false;
+            uploadMindFileButton.Enabled = true;
+            recordSettingsGroupBox.Enabled = true;
         }
 
         private void OnChangedValueInSaveMindRecord(object sender, EventArgs e)
@@ -91,22 +102,53 @@ namespace EEG_Graphics
 
         private void UploadBrainDataFile(object sender, EventArgs e)
         {
-            if (File.Exists("MyFile.mind"))
+            using (OpenFileDialog OPF = new OpenFileDialog())
             {
-                OpenFileDialog OPF = new OpenFileDialog();
                 OPF.Filter = "Mind Files (*.mind) | *.mind";
-                if (OPF.ShowDialog() == DialogResult.OK)
+                if (OPF.ShowDialog() != DialogResult.OK) return;
+
+                Chart[] charts = _charts.Values.ToArray();
+                foreach (Chart chart in charts)
                 {
-                    using (StreamReader str = new StreamReader("MyFile.mind", Encoding.UTF8))
+                    chart.Series[1].Points.Clear();
+                }
+
+                using (StreamReader reader = new StreamReader(Path.GetFullPath(OPF.FileName)))
+                {
+                    while (!reader.EndOfStream)
                     {
-                        MessageBox.Show(str.ReadLine(), "Сообщение");
+                        string strFromMindFile = reader.ReadLine();
+                        string[] brainDatasAndTime = strFromMindFile.Split(':');
+                        uint time = Convert.ToUInt32(brainDatasAndTime[1]);
+                        string[] brainDatas = brainDatasAndTime[0].Split(',');
+
+                        foreach (string brainDataFromFile in brainDatas)
+                        {
+                            string[] brainDataAndTitle = brainDataFromFile.Split('=');
+                            Enum.TryParse(brainDataAndTitle[0], out BrainDataTitle brainDataTitle);
+                            double brainValue = Convert.ToInt32(brainDataAndTitle[1]);
+
+                            _charts[brainDataTitle].Series[1].Points.AddXY(time.ToString(), brainValue);
+                        }
                     }
                 }
-                return;
             }
+
+            deleteUploadedGraphicButton.Enabled = true;
         }
 
-        private void ClearAllGraphics()
+        private void ClearUploadedGraphic(object sender, EventArgs e)
+        {
+            Chart[] charts = _charts.Values.ToArray();
+            foreach (Chart chart in charts)
+            {
+                chart.Series[1].Points.Clear();
+            }
+
+            deleteUploadedGraphicButton.Enabled = false;
+        }
+
+        private void ClearDynamicGraphics()
         {
             Chart[] charts = _charts.Values.ToArray();
             foreach (Chart chart in charts)
@@ -123,17 +165,38 @@ namespace EEG_Graphics
                 BeginInvoke(new ChartDisplayHandler(DisplayBrainDataToChart), new object[] { _charts[brainKey], currentBrainData[brainKey] });
             }
             _seconds++;
+
+            if (!isSaveMindDataToFile || fullFilePathText.Text.Length == 0) return;
+            using (FileStream file = new FileStream(fullFilePathText.Text, FileMode.OpenOrCreate))
+            {
+                file.Seek(0, SeekOrigin.End);
+                using (StreamWriter writer = new StreamWriter(file))
+                {
+                    writer.WriteLine(
+                        $"{BrainDataTitle.Attention}={currentBrainData[BrainDataTitle.Attention]}," +
+                        $"{BrainDataTitle.Meditation}={currentBrainData[BrainDataTitle.Meditation]}," +
+                        $"{BrainDataTitle.Low_Alpha}={currentBrainData[BrainDataTitle.Low_Alpha]}," +
+                        $"{BrainDataTitle.High_Alpha}={currentBrainData[BrainDataTitle.High_Alpha]}," +
+                        $"{BrainDataTitle.Low_Gamma}={currentBrainData[BrainDataTitle.Low_Gamma]}," +
+                        $"{BrainDataTitle.High_Gamma}={currentBrainData[BrainDataTitle.High_Gamma]}," +
+                        $"{BrainDataTitle.Low_Beta}={currentBrainData[BrainDataTitle.Low_Beta]}," +
+                        $"{BrainDataTitle.High_Beta}={currentBrainData[BrainDataTitle.High_Beta]}," +
+                        $"{BrainDataTitle.Theta}={currentBrainData[BrainDataTitle.Theta]}," +
+                        $"{BrainDataTitle.Delta}={currentBrainData[BrainDataTitle.Delta]}:" + 
+                        _seconds.ToString()
+                        );
+                }
+            }
         }
 
         private void DisplayBrainDataToChart(Chart chart, double data)
         {
-            stopRecordButton.Enabled = true;
-            if (chart.Series[0].Points.Count >= MAX_CHARTS_POINTS) chart.Series[0].Points.RemoveAt(0);
+            if (isDeleteNewChartDots && chart.Series[0].Points.Count >= maxGraphPointsNumeric.Value) chart.Series[0].Points.RemoveAt(0);
 
             chart.Series[0].Points.AddXY(_seconds.ToString(), data);
 
             DataPointCollection points = chart.Series[0].Points;
-            int scale = chart != graphicMeditation && chart != graphicAttention ? 15000 : 5;
+            int scale = chart != graphicMeditation && chart != graphicAttention ? 100000 : 5;
 
             chart.ChartAreas[0].AxisY.Maximum = points.Max(x => x.YValues[0]) + scale;
         }
