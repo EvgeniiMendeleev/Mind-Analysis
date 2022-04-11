@@ -16,7 +16,7 @@ namespace EEG_Graphics
         private uint _seconds = 0;
         private NeuroDeviceTGAM _neurodevice = new NeuroDeviceTGAM();
 
-        private delegate void ChartDisplayHandler(Chart chart, double data);
+        private delegate void ChartDisplayHandler(Chart chart, int seriesNumber, int seconds, double data);
 
         bool isDeleteNewChartDots;
         bool isSaveMindDataToFile;
@@ -119,7 +119,7 @@ namespace EEG_Graphics
                     {
                         string strFromMindFile = reader.ReadLine();
                         string[] brainDatasAndTime = strFromMindFile.Split(':');
-                        uint time = Convert.ToUInt32(brainDatasAndTime[1]);
+                        int time = Convert.ToInt32(brainDatasAndTime[1]);
                         string[] brainDatas = brainDatasAndTime[0].Split(',');
 
                         foreach (string brainDataFromFile in brainDatas)
@@ -128,7 +128,7 @@ namespace EEG_Graphics
                             Enum.TryParse(brainDataAndTitle[0], out BrainDataTitle brainDataTitle);
                             double brainValue = Convert.ToInt32(brainDataAndTitle[1]);
 
-                            _charts[brainDataTitle].Series[1].Points.AddXY(time.ToString(), brainValue);
+                            DisplayBrainDataToChart(_charts[brainDataTitle], 1, time, brainValue);
                         }
                     }
                 }
@@ -162,7 +162,8 @@ namespace EEG_Graphics
             BrainDataTitle[] brainKeys = currentBrainData.Keys.ToArray();
             foreach (BrainDataTitle brainKey in brainKeys)
             {
-                BeginInvoke(new ChartDisplayHandler(DisplayBrainDataToChart), new object[] { _charts[brainKey], currentBrainData[brainKey] });
+                if (isDeleteNewChartDots && _charts[brainKey].Series[0].Points.Count >= maxGraphPointsNumeric.Value) _charts[brainKey].Series[0].Points.RemoveAt(0);
+                BeginInvoke(new ChartDisplayHandler(DisplayBrainDataToChart), new object[] { _charts[brainKey], 0, _seconds, currentBrainData[brainKey] });
             }
             _seconds++;
 
@@ -189,16 +190,14 @@ namespace EEG_Graphics
             }
         }
 
-        private void DisplayBrainDataToChart(Chart chart, double data)
+        private void DisplayBrainDataToChart(Chart chart, int seriesNumber, int seconds, double data)
         {
-            if (isDeleteNewChartDots && chart.Series[0].Points.Count >= maxGraphPointsNumeric.Value) chart.Series[0].Points.RemoveAt(0);
+            chart.Series[seriesNumber].Points.AddXY(seconds.ToString(), data);
 
-            chart.Series[0].Points.AddXY(_seconds.ToString(), data);
-
-            DataPointCollection points = chart.Series[0].Points;
+            DataPointCollection points = chart.Series[seriesNumber].Points;
             int scale = chart != graphicMeditation && chart != graphicAttention ? 100000 : 5;
 
-            chart.ChartAreas[0].AxisY.Maximum = points.Max(x => x.YValues[0]) + scale;
+            chart.ChartAreas[seriesNumber].AxisY.Maximum = points.Max(x => x.YValues[0]) + scale;
         }
     }
 }
