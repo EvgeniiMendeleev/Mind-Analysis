@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Linq;
 using System.Collections.Generic;
 using System.Windows.Forms.DataVisualization.Charting;
@@ -16,7 +17,7 @@ namespace EEG_Graphics
         private uint _seconds = 0;
         private NeuroDeviceTGAM _neurodevice = new NeuroDeviceTGAM();
 
-        private delegate void ChartDisplayHandler(Chart chart, int seriesNumber, int seconds, double data);
+        private delegate void ChartDisplayHandler(Chart chart, int seriesNumber, uint seconds, double data);
 
         bool isDeleteNewChartDots;
         bool isSaveMindDataToFile;
@@ -55,6 +56,7 @@ namespace EEG_Graphics
                 stopRecordButton.Enabled = true;
                 startRecordButton.Enabled = false;
                 uploadMindFileButton.Enabled = false;
+                uploadSecondBrainFileButton.Enabled = false;
                 recordSettingsGroupBox.Enabled = false;
                 deleteUploadedGraphicButton.Enabled = false;
 
@@ -87,6 +89,7 @@ namespace EEG_Graphics
             startRecordButton.Enabled = true;
             stopRecordButton.Enabled = false;
             uploadMindFileButton.Enabled = true;
+            uploadSecondBrainFileButton.Enabled = true;
             recordSettingsGroupBox.Enabled = true;
         }
 
@@ -100,7 +103,7 @@ namespace EEG_Graphics
             maxGraphPointsNumeric.Enabled = !maxGraphPointsNumeric.Enabled;
         }
 
-        private void UploadBrainDataFile(object sender, EventArgs e)
+        void DisplayBrainCharts(int seriesNumber)
         {
             using (OpenFileDialog OPF = new OpenFileDialog())
             {
@@ -110,16 +113,19 @@ namespace EEG_Graphics
                 Chart[] charts = _charts.Values.ToArray();
                 foreach (Chart chart in charts)
                 {
-                    chart.Series[1].Points.Clear();
+                    chart.Series[seriesNumber].Points.Clear();
                 }
 
+                Regex regex = new Regex(@"\\\S+.mind$");
+                Match match = regex.Match(OPF.FileName);
+                
                 using (StreamReader reader = new StreamReader(Path.GetFullPath(OPF.FileName)))
                 {
                     while (!reader.EndOfStream)
                     {
                         string strFromMindFile = reader.ReadLine();
                         string[] brainDatasAndTime = strFromMindFile.Split(':');
-                        int time = Convert.ToInt32(brainDatasAndTime[1]);
+                        uint time = Convert.ToUInt32(brainDatasAndTime[1]);
                         string[] brainDatas = brainDatasAndTime[0].Split(',');
 
                         foreach (string brainDataFromFile in brainDatas)
@@ -128,12 +134,23 @@ namespace EEG_Graphics
                             Enum.TryParse(brainDataAndTitle[0], out BrainDataTitle brainDataTitle);
                             double brainValue = Convert.ToInt32(brainDataAndTitle[1]);
 
-                            DisplayBrainDataToChart(_charts[brainDataTitle], 1, time, brainValue);
+                            DisplayBrainDataToChart(_charts[brainDataTitle], seriesNumber, time, brainValue);
+                            _charts[brainDataTitle].Series[seriesNumber].Name = match.Value;
                         }
                     }
                 }
             }
+        }
 
+        private void UploadFirstBrainDataFile(object sender, EventArgs e)
+        {
+            DisplayBrainCharts(1);
+            deleteUploadedGraphicButton.Enabled = true;
+        }
+
+        private void UploadSecondBrainDataFile(object sender, EventArgs e)
+        {
+            DisplayBrainCharts(2);
             deleteUploadedGraphicButton.Enabled = true;
         }
 
@@ -142,7 +159,7 @@ namespace EEG_Graphics
             Chart[] charts = _charts.Values.ToArray();
             foreach (Chart chart in charts)
             {
-                chart.Series[1].Points.Clear();
+                for(int i = 1; i < chart.Series.Count; i++) chart.Series[i].Points.Clear();
             }
 
             deleteUploadedGraphicButton.Enabled = false;
@@ -162,7 +179,7 @@ namespace EEG_Graphics
             BrainDataTitle[] brainKeys = currentBrainData.Keys.ToArray();
             foreach (BrainDataTitle brainKey in brainKeys)
             {
-                if (isDeleteNewChartDots && _charts[brainKey].Series[0].Points.Count >= maxGraphPointsNumeric.Value) _charts[brainKey].Series[0].Points.RemoveAt(0);
+                
                 BeginInvoke(new ChartDisplayHandler(DisplayBrainDataToChart), new object[] { _charts[brainKey], 0, _seconds, currentBrainData[brainKey] });
             }
             _seconds++;
@@ -190,14 +207,22 @@ namespace EEG_Graphics
             }
         }
 
-        private void DisplayBrainDataToChart(Chart chart, int seriesNumber, int seconds, double data)
+        private void DisplayBrainDataToChart(Chart chart, int seriesNumber, uint seconds, double data)
         {
+            if (isDeleteNewChartDots && chart.Series[0].Points.Count >= maxGraphPointsNumeric.Value) chart.Series[0].Points.RemoveAt(0);
             chart.Series[seriesNumber].Points.AddXY(seconds.ToString(), data);
 
-            DataPointCollection points = chart.Series[seriesNumber].Points;
+            double maxY = 0.0;
+            foreach (Series series in chart.Series)
+            {
+                DataPointCollection points = chart.Series[seriesNumber].Points;
+                double y = points.Max(point => point.YValues[0]);
+                if (maxY < y) maxY = y;
+            }
+            
             int scale = chart != graphicMeditation && chart != graphicAttention ? 100000 : 5;
 
-            chart.ChartAreas[seriesNumber].AxisY.Maximum = points.Max(x => x.YValues[0]) + scale;
+            chart.ChartAreas[0].AxisY.Maximum = maxY + scale;
         }
     }
 }
