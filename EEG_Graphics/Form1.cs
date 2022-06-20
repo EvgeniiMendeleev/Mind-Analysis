@@ -110,14 +110,13 @@ namespace EEG_Graphics
                 OPF.Filter = "Mind Files (*.mind) | *.mind";
                 if (OPF.ShowDialog() != DialogResult.OK) return;
 
+                int lastIndexInFilePath = OPF.FileName.Length - 1;
+
                 Chart[] charts = _charts.Values.ToArray();
                 foreach (Chart chart in charts)
                 {
                     chart.Series[seriesNumber].Points.Clear();
                 }
-
-                Regex regex = new Regex(@"\\\S+.mind$");
-                Match match = regex.Match(OPF.FileName);
                 
                 using (StreamReader reader = new StreamReader(Path.GetFullPath(OPF.FileName)))
                 {
@@ -135,7 +134,7 @@ namespace EEG_Graphics
                             double brainValue = Convert.ToInt32(brainDataAndTitle[1]);
 
                             DisplayBrainDataToChart(_charts[brainDataTitle], seriesNumber, time, brainValue);
-                            _charts[brainDataTitle].Series[seriesNumber].Name = match.Value;
+                            _charts[brainDataTitle].Series[seriesNumber].Name = Path.GetFileName(OPF.FileName.Remove(lastIndexInFilePath - 4));
                         }
                     }
                 }
