@@ -19,6 +19,7 @@ namespace EEG_Graphics
 
         private delegate void ChartDisplayHandler(Chart chart, int seriesNumber, uint seconds, double data);
 
+        //TODO: Попробовать реализовать enum, который содержал бы в себе настройки, связанные с удалением новых точек на графиках и сохранение данных ЭЭГ в файл.
         bool isDeleteNewChartDots;
         bool isSaveMindDataToFile;
 
@@ -53,24 +54,23 @@ namespace EEG_Graphics
             }
             finally
             {
+                //TODO: Придумать/найти решение, позволяюее избавиться от многострочной инициализации
                 stopRecordButton.Enabled = true;
                 startRecordButton.Enabled = false;
                 uploadMindFileButton.Enabled = false;
                 uploadSecondBrainFileButton.Enabled = false;
                 recordSettingsGroupBox.Enabled = false;
-                deleteUploadedGraphicButton.Enabled = false;
 
                 isDeleteNewChartDots = deleteNewPointsCheckBox.Checked;
                 isSaveMindDataToFile = saveRecordDataCheckBox.Checked;
             }
         }
 
-        private void SaveFilePathCurrentMindRecord(object sender, EventArgs e)
+        private void SaveFilePathOfCurrentMindRecord(object sender, EventArgs e)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "Mind Files (*.mind) | *.mind";
-            DialogResult dialogResult = saveFileDialog.ShowDialog();
-            if (dialogResult != DialogResult.OK) return;
+            if (saveFileDialog.ShowDialog() != DialogResult.OK) return;
 
             if (saveFileDialog.FileName.Length > 3) fullFilePathText.Text = Path.GetFullPath(saveFileDialog.FileName);
             else MessageBox.Show("Имя файла слишком маленькое!", "Ошибка сохранения", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -86,6 +86,7 @@ namespace EEG_Graphics
 
             _neurodevice.DisconnectFromConnector();
             _seconds = 0;
+            //TODO: Также придумать способ или найти решение, которое бы позволило избавить от многострочной инициализации.
             startRecordButton.Enabled = true;
             stopRecordButton.Enabled = false;
             uploadMindFileButton.Enabled = true;
@@ -105,6 +106,7 @@ namespace EEG_Graphics
 
         void DisplayBrainCharts(int seriesNumber)
         {
+            //TODO: Сделать рефакторинг. Уменьшить программный код функции с сохранением функционала.
             using (OpenFileDialog OPF = new OpenFileDialog())
             {
                 OPF.Filter = "Mind Files (*.mind) | *.mind";
@@ -144,13 +146,11 @@ namespace EEG_Graphics
         private void UploadFirstBrainDataFile(object sender, EventArgs e)
         {
             DisplayBrainCharts(1);
-            deleteUploadedGraphicButton.Enabled = true;
         }
 
         private void UploadSecondBrainDataFile(object sender, EventArgs e)
         {
             DisplayBrainCharts(2);
-            deleteUploadedGraphicButton.Enabled = true;
         }
 
         private void ClearUploadedGraphic(object sender, EventArgs e)
@@ -158,10 +158,8 @@ namespace EEG_Graphics
             Chart[] charts = _charts.Values.ToArray();
             foreach (Chart chart in charts)
             {
-                for(int i = 1; i < chart.Series.Count; i++) chart.Series[i].Points.Clear();
+                for(int i = 0; i < chart.Series.Count; i++) chart.Series[i].Points.Clear();
             }
-
-            deleteUploadedGraphicButton.Enabled = false;
         }
 
         private void ClearDynamicGraphics()
@@ -175,15 +173,14 @@ namespace EEG_Graphics
 
         private void DisplayDataToGraphics(Dictionary<BrainDataTitle, double> currentBrainData)
         {
+            //TODO: Сделать рефакторинг. Уменьшить код функции без потери функционала.
+            //TODO: Возможно, можно будет попробовать избавиться от асинхронного метода BeginInvoke().
             BrainDataTitle[] brainKeys = currentBrainData.Keys.ToArray();
-            foreach (BrainDataTitle brainKey in brainKeys)
-            {
-                
-                BeginInvoke(new ChartDisplayHandler(DisplayBrainDataToChart), new object[] { _charts[brainKey], 0, _seconds, currentBrainData[brainKey] });
-            }
+            foreach (BrainDataTitle brainKey in brainKeys) BeginInvoke(new ChartDisplayHandler(DisplayBrainDataToChart), new object[] { _charts[brainKey], 0, _seconds, currentBrainData[brainKey] });
             _seconds++;
 
             if (!isSaveMindDataToFile || fullFilePathText.Text.Length == 0) return;
+            
             using (FileStream file = new FileStream(fullFilePathText.Text, FileMode.OpenOrCreate))
             {
                 file.Seek(0, SeekOrigin.End);

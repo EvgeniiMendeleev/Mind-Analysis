@@ -182,7 +182,7 @@ namespace EEG_Graphics
             this.graphicLowAlpha.Series.Add(series1);
             this.graphicLowAlpha.Series.Add(series2);
             this.graphicLowAlpha.Series.Add(series3);
-            this.graphicLowAlpha.Size = new System.Drawing.Size(857, 310);
+            this.graphicLowAlpha.Size = new System.Drawing.Size(879, 310);
             this.graphicLowAlpha.TabIndex = 0;
             this.graphicLowAlpha.Text = "chart1";
             title1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
@@ -238,7 +238,7 @@ namespace EEG_Graphics
             this.graphicHighAlpha.Series.Add(series4);
             this.graphicHighAlpha.Series.Add(series5);
             this.graphicHighAlpha.Series.Add(series6);
-            this.graphicHighAlpha.Size = new System.Drawing.Size(857, 320);
+            this.graphicHighAlpha.Size = new System.Drawing.Size(879, 320);
             this.graphicHighAlpha.TabIndex = 5;
             this.graphicHighAlpha.Text = "chart1";
             title2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
@@ -643,7 +643,7 @@ namespace EEG_Graphics
             this.tabControl1.Margin = new System.Windows.Forms.Padding(2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(882, 661);
+            this.tabControl1.Size = new System.Drawing.Size(904, 661);
             this.tabControl1.TabIndex = 26;
             // 
             // alphaPage
@@ -655,7 +655,7 @@ namespace EEG_Graphics
             this.alphaPage.Margin = new System.Windows.Forms.Padding(2);
             this.alphaPage.Name = "alphaPage";
             this.alphaPage.Padding = new System.Windows.Forms.Padding(2);
-            this.alphaPage.Size = new System.Drawing.Size(874, 635);
+            this.alphaPage.Size = new System.Drawing.Size(896, 635);
             this.alphaPage.TabIndex = 0;
             this.alphaPage.Text = "Альфа - волна";
             // 
@@ -776,7 +776,7 @@ namespace EEG_Graphics
             this.saveMindRecordButton.TabIndex = 30;
             this.saveMindRecordButton.Text = "Выбрать путь сохранения";
             this.saveMindRecordButton.UseVisualStyleBackColor = true;
-            this.saveMindRecordButton.Click += new System.EventHandler(this.SaveFilePathCurrentMindRecord);
+            this.saveMindRecordButton.Click += new System.EventHandler(this.SaveFilePathOfCurrentMindRecord);
             // 
             // tabPage2
             // 
@@ -860,7 +860,7 @@ namespace EEG_Graphics
             this.deleteUploadedGraphicButton.Name = "deleteUploadedGraphicButton";
             this.deleteUploadedGraphicButton.Size = new System.Drawing.Size(225, 30);
             this.deleteUploadedGraphicButton.TabIndex = 29;
-            this.deleteUploadedGraphicButton.Text = "Удалить загруженные графики";
+            this.deleteUploadedGraphicButton.Text = "Очистить доски с графиками";
             this.deleteUploadedGraphicButton.UseVisualStyleBackColor = true;
             this.deleteUploadedGraphicButton.Click += new System.EventHandler(this.ClearUploadedGraphic);
             // 
