@@ -35,7 +35,7 @@ namespace NeuroTGAM
     public class NeuroDeviceTGAM
     {
         private TcpClient _connector;                                        //TCP соединение с ThinkGear Connector.
-        private Thread _readingThread;                                       //Поток, считывающй данные, получаемые от ThinkGear Connector.
+        private Thread _readingThread;                                       //Поток, считывающий данные, получаемые от ThinkGear Connector.
         private Stream _connectorStream;
         private Mutex _mutex;                                                //Для синхронизации потоков.
         private Dictionary<BrainDataTitle, double> _currentBrainData;        //Данные с нейрогарнитуры в текущую секунду.
@@ -138,7 +138,7 @@ namespace NeuroTGAM
 
         private void ParseJSON(string packet)
         {
-            //TODO: Попробовать найти другой способ парсинга json пакетов
+            //TODO: Желательно попробовать найти другой способ парсинга json пакетов
             dynamic jsonObject = JObject.Parse(packet);
             if (jsonObject.eegPower == null && jsonObject.eSense == null || jsonObject.status != null) return;
 
