@@ -79,6 +79,10 @@ namespace EEG_Graphics
             System.Windows.Forms.DataVisualization.Charting.Series series19 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series20 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Title title10 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea11 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend11 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series21 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title11 = new System.Windows.Forms.DataVisualization.Charting.Title();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.graphicLowAlpha = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.startRecordButton = new System.Windows.Forms.Button();
@@ -111,8 +115,15 @@ namespace EEG_Graphics
             this.label1 = new System.Windows.Forms.Label();
             this.maxGraphPointsNumeric = new System.Windows.Forms.NumericUpDown();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+<<<<<<< Updated upstream
             this.deleteUploadedGraphicButton = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+=======
+            this.ValueDistributionPage = new System.Windows.Forms.TabPage();
+            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+>>>>>>> Stashed changes
             ((System.ComponentModel.ISupportInitialize)(this.graphicLowAlpha)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.graphicHighAlpha)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.graphicHighBeta)).BeginInit();
@@ -135,7 +146,12 @@ namespace EEG_Graphics
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.maxGraphPointsNumeric)).BeginInit();
             this.groupBox2.SuspendLayout();
+<<<<<<< Updated upstream
             this.groupBox1.SuspendLayout();
+=======
+            this.ValueDistributionPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
+>>>>>>> Stashed changes
             this.SuspendLayout();
             // 
             // graphicLowAlpha
@@ -567,6 +583,7 @@ namespace EEG_Graphics
             this.tabControl1.Controls.Add(this.gammaPage);
             this.tabControl1.Controls.Add(this.ThetaAndDeltaPage);
             this.tabControl1.Controls.Add(this.AttantionAndMeditationPage);
+            this.tabControl1.Controls.Add(this.ValueDistributionPage);
             this.tabControl1.Cursor = System.Windows.Forms.Cursors.Default;
             this.tabControl1.Location = new System.Drawing.Point(9, 10);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(2);
@@ -780,6 +797,7 @@ namespace EEG_Graphics
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Управление сеансом записи";
             // 
+<<<<<<< Updated upstream
             // deleteUploadedGraphicButton
             // 
             this.deleteUploadedGraphicButton.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -803,6 +821,67 @@ namespace EEG_Graphics
             this.groupBox1.TabIndex = 30;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Управление загруженными графиками";
+=======
+            // ValueDistributionPage
+            // 
+            this.ValueDistributionPage.BackColor = System.Drawing.Color.Gray;
+            this.ValueDistributionPage.Controls.Add(this.button2);
+            this.ValueDistributionPage.Controls.Add(this.chart1);
+            this.ValueDistributionPage.Location = new System.Drawing.Point(4, 25);
+            this.ValueDistributionPage.Name = "ValueDistributionPage";
+            this.ValueDistributionPage.Size = new System.Drawing.Size(1109, 784);
+            this.ValueDistributionPage.TabIndex = 5;
+            this.ValueDistributionPage.Text = "Распределение уровня внимания человека";
+            // 
+            // chart1
+            // 
+            this.chart1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.chart1.BackColor = System.Drawing.Color.Gray;
+            chartArea11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            chartArea11.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea11);
+            legend11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            legend11.Name = "Legend1";
+            this.chart1.Legends.Add(legend11);
+            this.chart1.Location = new System.Drawing.Point(0, 2);
+            this.chart1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.chart1.Name = "chart1";
+            this.chart1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
+            series21.BorderWidth = 3;
+            series21.ChartArea = "ChartArea1";
+            series21.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series21.Legend = "Legend1";
+            series21.Name = "Плотность распределения";
+            this.chart1.Series.Add(series21);
+            this.chart1.Size = new System.Drawing.Size(1113, 551);
+            this.chart1.TabIndex = 6;
+            this.chart1.Text = "chart1";
+            title11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            title11.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.Center;
+            title11.Font = new System.Drawing.Font("Times New Roman", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            title11.Name = "Title1";
+            title11.Text = "Распределение уровня внимания испытуемого";
+            this.chart1.Titles.Add(title11);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(0, 0);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 29;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(849, 108);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(234, 51);
+            this.button2.TabIndex = 7;
+            this.button2.Text = "Загрузить сеанс записи для анализа";
+            this.button2.UseVisualStyleBackColor = true;
+>>>>>>> Stashed changes
             // 
             // Form1
             // 
@@ -810,7 +889,13 @@ namespace EEG_Graphics
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.SystemColors.ControlDark;
+<<<<<<< Updated upstream
             this.ClientSize = new System.Drawing.Size(864, 892);
+=======
+            this.ClientSize = new System.Drawing.Size(1152, 1051);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.groupBox2);
+>>>>>>> Stashed changes
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.recordSettingsGroupBox);
@@ -843,7 +928,12 @@ namespace EEG_Graphics
             this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.maxGraphPointsNumeric)).EndInit();
             this.groupBox2.ResumeLayout(false);
+<<<<<<< Updated upstream
             this.groupBox1.ResumeLayout(false);
+=======
+            this.ValueDistributionPage.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
+>>>>>>> Stashed changes
             this.ResumeLayout(false);
 
         }
@@ -881,8 +971,15 @@ namespace EEG_Graphics
         private System.Windows.Forms.TextBox fullFilePathText;
         private System.Windows.Forms.Button saveMindRecordButton;
         private System.Windows.Forms.TabPage tabPage2;
+<<<<<<< Updated upstream
         private System.Windows.Forms.Button deleteUploadedGraphicButton;
         private System.Windows.Forms.GroupBox groupBox1;
+=======
+        private System.Windows.Forms.TabPage ValueDistributionPage;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button1;
+>>>>>>> Stashed changes
     }
 }
 
