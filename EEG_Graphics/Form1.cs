@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Windows.Forms.DataVisualization.Charting;
 using System.Windows.Forms;
 using NeuroTGAM;
+using System.Threading;
 using MindFileSystem;
 
 namespace EEG_Graphics
@@ -152,9 +153,10 @@ namespace EEG_Graphics
             //TODO: Сделать рефакторинг. Уменьшить код функции без потери функционала.
             //TODO: Возможно, можно будет попробовать избавиться от асинхронного метода BeginInvoke().
             BrainDataTitle[] brainKeys = currentBrainData.Keys.ToArray();
-            foreach (BrainDataTitle brainKey in brainKeys) BeginInvoke(new ChartDisplayHandler(DisplayBrainDataToChart), new object[] { _charts[brainKey], 0, _seconds, currentBrainData[brainKey] });
-            _seconds++;
-
+            DisplayBrainDataToChart(_charts[BrainDataTitle.Attention], 0, _seconds, currentBrainData[BrainDataTitle.Attention]);
+            //foreach (BrainDataTitle brainKey in brainKeys) _charts[brainKey].Series[0].Points.AddXY(_seconds, currentBrainData[brainKey]); // BeginInvoke(new ChartDisplayHandler(DisplayBrainDataToChart), new object[] { _charts[brainKey], 0, _seconds, currentBrainData[brainKey] });
+             _seconds++;
+            
             if (!isSaveMindDataToFile || fullFilePathText.Text.Length == 0) return;
             
             using (FileStream file = new FileStream(fullFilePathText.Text, FileMode.OpenOrCreate))
