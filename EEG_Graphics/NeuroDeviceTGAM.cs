@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Net.Sockets;
 using System.Threading;
 using Newtonsoft.Json.Linq;
-using System.Windows.Forms;
 
 namespace NeuroTGAM
 {

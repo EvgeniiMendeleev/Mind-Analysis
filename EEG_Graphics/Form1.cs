@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Windows.Forms.DataVisualization.Charting;
 using System.Windows.Forms;
 using NeuroTGAM;
+using MindFileSystem;
 
 namespace EEG_Graphics
 {
@@ -65,16 +66,6 @@ namespace EEG_Graphics
             }
         }
 
-        private void SaveFilePathOfCurrentMindRecord(object sender, EventArgs e)
-        {
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "Mind Files (*.mind) | *.mind";
-            if (saveFileDialog.ShowDialog() != DialogResult.OK) return;
-
-            if (saveFileDialog.FileName.Length > 3) fullFilePathText.Text = Path.GetFullPath(saveFileDialog.FileName);
-            else MessageBox.Show("Имя файла слишком маленькое!", "Ошибка сохранения", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-
         private void StopToReadDataFromNeurodevice(object sender, EventArgs e)
         {
             if (!_neurodevice.AreDataReading)
@@ -104,38 +95,27 @@ namespace EEG_Graphics
 
         void DisplayBrainCharts(int seriesNumber)
         {
-            //TODO: Сделать рефакторинг. Уменьшить программный код функции с сохранением функционала.
             OpenFileDialog OPF = new OpenFileDialog();
-
             OPF.Filter = "Mind Files (*.mind) | *.mind";
             if (OPF.ShowDialog() != DialogResult.OK) return;
-
+            
+            //TODO: Попробовать сделать отдельную сущность BrainCharts, например, который бы содержал API для работы с графиками на форме.
             Chart[] charts = _charts.Values.ToArray();
             foreach (Chart chart in charts) chart.Series[seriesNumber].Points.Clear();
 
-            StreamReader reader = new StreamReader(Path.GetFullPath(OPF.FileName));
-
-            while (!reader.EndOfStream)
+            MindFileReader mindFile = new MindFileReader(OPF.FileName);
+            foreach (var brainData in mindFile)
             {
-                string strFromMindFile = reader.ReadLine();
-                string[] brainDatasAndTime = strFromMindFile.Split(':');
-                uint time = Convert.ToUInt32(brainDatasAndTime[1]);
-                string[] brainDatas = brainDatasAndTime[0].Split(',');
-
-                foreach (string brainDataFromFile in brainDatas)
-                {
-                    string[] brainDataAndTitle = brainDataFromFile.Split('=');
-                    Enum.TryParse(brainDataAndTitle[0], out BrainDataTitle brainDataTitle);
-                    double brainValue = Convert.ToInt32(brainDataAndTitle[1]);
-
-                    DisplayBrainDataToChart(_charts[brainDataTitle], seriesNumber, time, brainValue);
-                    _charts[brainDataTitle].Series[seriesNumber].Name = Path.GetFileName(OPF.FileName.Remove(OPF.FileName.Length - 5));
-                }
+                DisplayBrainDataToChart(_charts[brainData._title], seriesNumber, brainData._time, brainData._brainValue);
+                _charts[brainData._title].Series[seriesNumber].Name = Path.GetFileNameWithoutExtension(OPF.FileName);
             }
 
-            reader.Close();
+            OPF.Dispose();
+            mindFile.Close();
         }
 
+
+        //TODO: Попробовакть избавиться как - то от двух обрабочиков UploadFirstBrainDataFile для одно кнопки и UploadSecondBrainDataFile для другой кнопки, чтобы это был один обработчик.
         private void UploadFirstBrainDataFile(object sender, EventArgs e)
         {
             DisplayBrainCharts(1);
@@ -219,44 +199,26 @@ namespace EEG_Graphics
 
         private void UploadDataForDistribution(object sender, EventArgs e)
         {
-            using (OpenFileDialog OPF = new OpenFileDialog())
+            OpenFileDialog OPF = new OpenFileDialog();
+            OPF.Filter = "Mind Files (*.mind) | *.mind";
+            if (OPF.ShowDialog() != DialogResult.OK) return;
+
+            attentionDistributionChart.Series[0].Points.Clear();
+
+            MindFileReader mindFile = new MindFileReader(OPF.FileName);
+            Dictionary<double, int> frequencyChartData = new Dictionary<double, int>();
+            foreach (var brainData in mindFile)
             {
-                OPF.Filter = "Mind Files (*.mind) | *.mind";
-                if (OPF.ShowDialog() != DialogResult.OK) return;
-
-                attentionDistributionChart.Series[0].Points.Clear();
-
-                _charts[BrainDataTitle.Attention].Series[0].Name = Path.GetFileName(OPF.FileName.Remove(OPF.FileName.Length - 5));
-                Dictionary<double, int> frequencyChartData = new Dictionary<double, int>();
-
-                using (StreamReader reader = new StreamReader(Path.GetFullPath(OPF.FileName)))
+                if (brainData._title == BrainDataTitle.Attention)
                 {
-                    while (!reader.EndOfStream)
-                    {
-                        string strFromMindFile = reader.ReadLine();
-                        string[] brainDatasAndTime = strFromMindFile.Split(':');
-                        uint time = Convert.ToUInt32(brainDatasAndTime[1]);
-                        string[] brainDatas = brainDatasAndTime[0].Split(',');
-
-                        foreach (string brainDataFromFile in brainDatas)
-                        {
-                            string[] brainDataAndTitle = brainDataFromFile.Split('=');
-                            Enum.TryParse(brainDataAndTitle[0], out BrainDataTitle brainDataTitle);
-                            double brainValue = Convert.ToInt32(brainDataAndTitle[1]);
-
-                            if (brainDataTitle == BrainDataTitle.Attention)
-                            {
-                                if (frequencyChartData.ContainsKey(brainValue)) ++frequencyChartData[brainValue];
-                                else frequencyChartData.Add(brainValue, 1);
-                            }
-                        }
-                    }
+                    if (frequencyChartData.ContainsKey(brainData._brainValue)) ++frequencyChartData[brainData._brainValue];
+                    else frequencyChartData.Add(brainData._brainValue, 1);
                 }
+            }
 
-                foreach (KeyValuePair<double, int> pair in frequencyChartData)
-                {
-                    attentionDistributionChart.Series[0].Points.AddXY(pair.Key, pair.Value);
-                }
+            foreach (KeyValuePair<double, int> pair in frequencyChartData)
+            {
+                attentionDistributionChart.Series[0].Points.AddXY(pair.Key, pair.Value);
             }
         }
     }
