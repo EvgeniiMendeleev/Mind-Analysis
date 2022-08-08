@@ -42,6 +42,7 @@ namespace EEG_Graphics
             startRecordButton.Enabled = true;
             stopRecordButton.Enabled = false;
             recordSettingsGroupBox.Enabled = true;
+            attentionDistributionChart.ChartAreas[0].AxisX.Maximum = 100;
         }
 
         private void StartToReadDataFromNeurodevice(object sender, EventArgs e)
@@ -57,7 +58,6 @@ namespace EEG_Graphics
                 stopRecordButton.Enabled = true;
                 startRecordButton.Enabled = false;
                 uploadMindFileButton.Enabled = false;
-                uploadSecondBrainFileButton.Enabled = false;
                 recordSettingsGroupBox.Enabled = false;
 
                 isDeleteNewChartDots = deleteNewPointsCheckBox.Checked;
@@ -89,7 +89,6 @@ namespace EEG_Graphics
             startRecordButton.Enabled = true;
             stopRecordButton.Enabled = false;
             uploadMindFileButton.Enabled = true;
-            uploadSecondBrainFileButton.Enabled = true;
             recordSettingsGroupBox.Enabled = true;
         }
 
@@ -140,11 +139,13 @@ namespace EEG_Graphics
         private void UploadFirstBrainDataFile(object sender, EventArgs e)
         {
             DisplayBrainCharts(1);
+            deleteUploadedGraphicButton.Enabled = true;
         }
 
         private void UploadSecondBrainDataFile(object sender, EventArgs e)
         {
             DisplayBrainCharts(2);
+            deleteUploadedGraphicButton.Enabled = true;
         }
 
         private void ClearUploadedGraphic(object sender, EventArgs e)
@@ -154,6 +155,7 @@ namespace EEG_Graphics
             {
                 for(int i = 0; i < chart.Series.Count; i++) chart.Series[i].Points.Clear();
             }
+            deleteUploadedGraphicButton.Enabled = false;
         }
 
         private void ClearDynamicGraphics()
@@ -213,6 +215,49 @@ namespace EEG_Graphics
             int scale = chart != graphicMeditation && chart != graphicAttention ? 100000 : 5;
 
             chart.ChartAreas[0].AxisY.Maximum = maxY + scale;
+        }
+
+        private void UploadDataForDistribution(object sender, EventArgs e)
+        {
+            using (OpenFileDialog OPF = new OpenFileDialog())
+            {
+                OPF.Filter = "Mind Files (*.mind) | *.mind";
+                if (OPF.ShowDialog() != DialogResult.OK) return;
+
+                attentionDistributionChart.Series[0].Points.Clear();
+
+                _charts[BrainDataTitle.Attention].Series[0].Name = Path.GetFileName(OPF.FileName.Remove(OPF.FileName.Length - 5));
+                Dictionary<double, int> frequencyChartData = new Dictionary<double, int>();
+
+                using (StreamReader reader = new StreamReader(Path.GetFullPath(OPF.FileName)))
+                {
+                    while (!reader.EndOfStream)
+                    {
+                        string strFromMindFile = reader.ReadLine();
+                        string[] brainDatasAndTime = strFromMindFile.Split(':');
+                        uint time = Convert.ToUInt32(brainDatasAndTime[1]);
+                        string[] brainDatas = brainDatasAndTime[0].Split(',');
+
+                        foreach (string brainDataFromFile in brainDatas)
+                        {
+                            string[] brainDataAndTitle = brainDataFromFile.Split('=');
+                            Enum.TryParse(brainDataAndTitle[0], out BrainDataTitle brainDataTitle);
+                            double brainValue = Convert.ToInt32(brainDataAndTitle[1]);
+
+                            if (brainDataTitle == BrainDataTitle.Attention)
+                            {
+                                if (frequencyChartData.ContainsKey(brainValue)) ++frequencyChartData[brainValue];
+                                else frequencyChartData.Add(brainValue, 1);
+                            }
+                        }
+                    }
+                }
+
+                foreach (KeyValuePair<double, int> pair in frequencyChartData)
+                {
+                    attentionDistributionChart.Series[0].Points.AddXY(pair.Key, pair.Value);
+                }
+            }
         }
     }
 }
