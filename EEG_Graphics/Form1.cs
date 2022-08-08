@@ -1,7 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Text;
-using System.Text.RegularExpressions;
 using System.Linq;
 using System.Collections.Generic;
 using System.Windows.Forms.DataVisualization.Charting;
@@ -39,6 +37,7 @@ namespace EEG_Graphics
                 [BrainDataTitle.Attention] = graphicAttention,
                 [BrainDataTitle.Meditation] = graphicMeditation
             };
+
             _neurodevice.ShowBrainData += DisplayDataToGraphics;
             startRecordButton.Enabled = true;
             stopRecordButton.Enabled = false;
@@ -107,40 +106,35 @@ namespace EEG_Graphics
         void DisplayBrainCharts(int seriesNumber)
         {
             //TODO: Сделать рефакторинг. Уменьшить программный код функции с сохранением функционала.
-            using (OpenFileDialog OPF = new OpenFileDialog())
+            OpenFileDialog OPF = new OpenFileDialog();
+
+            OPF.Filter = "Mind Files (*.mind) | *.mind";
+            if (OPF.ShowDialog() != DialogResult.OK) return;
+
+            Chart[] charts = _charts.Values.ToArray();
+            foreach (Chart chart in charts) chart.Series[seriesNumber].Points.Clear();
+
+            StreamReader reader = new StreamReader(Path.GetFullPath(OPF.FileName));
+
+            while (!reader.EndOfStream)
             {
-                OPF.Filter = "Mind Files (*.mind) | *.mind";
-                if (OPF.ShowDialog() != DialogResult.OK) return;
+                string strFromMindFile = reader.ReadLine();
+                string[] brainDatasAndTime = strFromMindFile.Split(':');
+                uint time = Convert.ToUInt32(brainDatasAndTime[1]);
+                string[] brainDatas = brainDatasAndTime[0].Split(',');
 
-                int lastIndexInFilePath = OPF.FileName.Length - 1;
-
-                Chart[] charts = _charts.Values.ToArray();
-                foreach (Chart chart in charts)
+                foreach (string brainDataFromFile in brainDatas)
                 {
-                    chart.Series[seriesNumber].Points.Clear();
-                }
-                
-                using (StreamReader reader = new StreamReader(Path.GetFullPath(OPF.FileName)))
-                {
-                    while (!reader.EndOfStream)
-                    {
-                        string strFromMindFile = reader.ReadLine();
-                        string[] brainDatasAndTime = strFromMindFile.Split(':');
-                        uint time = Convert.ToUInt32(brainDatasAndTime[1]);
-                        string[] brainDatas = brainDatasAndTime[0].Split(',');
+                    string[] brainDataAndTitle = brainDataFromFile.Split('=');
+                    Enum.TryParse(brainDataAndTitle[0], out BrainDataTitle brainDataTitle);
+                    double brainValue = Convert.ToInt32(brainDataAndTitle[1]);
 
-                        foreach (string brainDataFromFile in brainDatas)
-                        {
-                            string[] brainDataAndTitle = brainDataFromFile.Split('=');
-                            Enum.TryParse(brainDataAndTitle[0], out BrainDataTitle brainDataTitle);
-                            double brainValue = Convert.ToInt32(brainDataAndTitle[1]);
-
-                            DisplayBrainDataToChart(_charts[brainDataTitle], seriesNumber, time, brainValue);
-                            _charts[brainDataTitle].Series[seriesNumber].Name = Path.GetFileName(OPF.FileName.Remove(lastIndexInFilePath - 4));
-                        }
-                    }
+                    DisplayBrainDataToChart(_charts[brainDataTitle], seriesNumber, time, brainValue);
+                    _charts[brainDataTitle].Series[seriesNumber].Name = Path.GetFileName(OPF.FileName.Remove(OPF.FileName.Length - 5));
                 }
             }
+
+            reader.Close();
         }
 
         private void UploadFirstBrainDataFile(object sender, EventArgs e)
