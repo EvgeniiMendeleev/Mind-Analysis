@@ -24,9 +24,12 @@ namespace MindFileSystem
     {
         private StreamReader _reader = null;
 
+        public string FileName { get; private set; }
+
         public MindFileReader(string filePath)
         {
             Close();
+            FileName = Path.GetFileNameWithoutExtension(filePath);
             _reader = new StreamReader(filePath);
         }
 
