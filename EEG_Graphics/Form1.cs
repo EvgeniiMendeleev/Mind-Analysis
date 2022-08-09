@@ -16,6 +16,7 @@ namespace EEG_Graphics
         private const int MAX_CHARTS_POINTS = 30;
         private uint _seconds = 0;
         private NeuroDeviceTGAM _neurodevice = new NeuroDeviceTGAM();
+        private BrainCharts _brainCharts;
 
         private delegate void ChartDisplayHandler(Chart chart, int seriesNumber, uint seconds, double data);
 
@@ -151,10 +152,8 @@ namespace EEG_Graphics
         private void DisplayDataToGraphics(Dictionary<BrainDataTitle, double> currentBrainData)
         {
             //TODO: Сделать рефакторинг. Уменьшить код функции без потери функционала.
-            //TODO: Возможно, можно будет попробовать избавиться от асинхронного метода BeginInvoke().
             BrainDataTitle[] brainKeys = currentBrainData.Keys.ToArray();
-            DisplayBrainDataToChart(_charts[BrainDataTitle.Attention], 0, _seconds, currentBrainData[BrainDataTitle.Attention]);
-            //foreach (BrainDataTitle brainKey in brainKeys) _charts[brainKey].Series[0].Points.AddXY(_seconds, currentBrainData[brainKey]); // BeginInvoke(new ChartDisplayHandler(DisplayBrainDataToChart), new object[] { _charts[brainKey], 0, _seconds, currentBrainData[brainKey] });
+            foreach (BrainDataTitle brainKey in brainKeys) BeginInvoke(new ChartDisplayHandler(DisplayBrainDataToChart), new object[] { _charts[brainKey], 0, _seconds, currentBrainData[brainKey] });
              _seconds++;
             
             if (!isSaveMindDataToFile || fullFilePathText.Text.Length == 0) return;
