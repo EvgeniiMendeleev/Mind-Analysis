@@ -11,9 +11,9 @@ namespace EEG_Graphics
 {
     class BrainCharts
     {
-        private Dictionary<BrainDataTitle, Chart> _brainCharts = new Dictionary<BrainDataTitle, Chart>();
+        private Dictionary<EEG_Title, Chart> _brainCharts = new Dictionary<EEG_Title, Chart>();
 
-        public BrainCharts(Dictionary<BrainDataTitle, Chart> brainCharts)
+        public BrainCharts(Dictionary<EEG_Title, Chart> brainCharts)
         {
             _brainCharts = brainCharts;
         }
@@ -29,11 +29,13 @@ namespace EEG_Graphics
             foreach (var brainData in mindFile)
             {
                 AddPoint(brainData._title, serie, new DataPoint(brainData._time, brainData._brainValue));
-                _brainCharts[brainData._title].Series[serie].Name = Path.GetFileNameWithoutExtension(OPF.FileName);
+                _brainCharts[brainData._title].Series[serie].Name = mindFile.FileName;
             }
         }
 
-        public void AddPoint(BrainDataTitle chartName, int serie, DataPoint chartPoint)
+        public int GetPointCount(EEG_Title chartName, int serie) => _brainCharts[chartName].Series[serie].Points.Count;
+
+        public void AddPoint(EEG_Title chartName, int serie, DataPoint chartPoint)
         {
             //if (isDeleteNewChartDots && chart.Series[0].Points.Count >= maxGraphPointsNumeric.Value) chart.Series[0].Points.RemoveAt(0);
             Chart brainChart = _brainCharts[chartName];
@@ -47,17 +49,17 @@ namespace EEG_Graphics
                 if (maxY < y) maxY = y;
             }
 
-            int scale = chartName != BrainDataTitle.Meditation && chartName != BrainDataTitle.Attention ? 100000 : 5;
+            int scale = chartName != EEG_Title.Meditation && chartName != EEG_Title.Attention ? 100000 : 5;
             brainChart.ChartAreas[0].AxisY.Maximum = maxY + scale;
         }
 
 
-        public void SetSerieName(BrainDataTitle chartName, int serie, string name)
+        public void SetSerieName(EEG_Title chartName, int serie, string name)
         {
             _brainCharts[chartName].Series[serie].Name = name;
         }
 
-        public Chart GetChart(BrainDataTitle chartName)
+        public Chart GetChart(EEG_Title chartName)
         {
             return _brainCharts[chartName];
         }

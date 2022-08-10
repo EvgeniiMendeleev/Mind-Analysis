@@ -10,7 +10,7 @@ namespace NeuroTGAM
     /// <summary>
     /// Название данных, которые можно снять с нейрогарнитуры, использующую чип TGAM.
     /// </summary>
-    public enum BrainDataTitle 
+    public enum EEG_Title 
     { 
         Meditation, 
         Attention, 
@@ -36,7 +36,7 @@ namespace NeuroTGAM
         private Thread _readingThread;                                       //Поток, считывающий данные, получаемые от ThinkGear Connector.
         private Stream _connectorStream;
         private Mutex _mutex;                                                //Для синхронизации потоков.
-        private Dictionary<BrainDataTitle, double> _currentBrainData;        //Данные с нейрогарнитуры в текущую секунду.
+        private Dictionary<EEG_Title, double> _currentBrainData;        //Данные с нейрогарнитуры в текущую секунду.
 
         /// <summary>
         /// Статус подключения к ThinkGear Connector.
@@ -47,13 +47,13 @@ namespace NeuroTGAM
         {
             _mutex = new Mutex();
 
-            BrainDataTitle[] brainDataTitles = new BrainDataTitle[] 
+            EEG_Title[] brainDataTitles = new EEG_Title[] 
             { 
-                BrainDataTitle.Attention, BrainDataTitle.Meditation,  BrainDataTitle.Low_Alpha, BrainDataTitle.High_Alpha, BrainDataTitle.Low_Beta, 
-                BrainDataTitle.High_Beta, BrainDataTitle.Low_Gamma, BrainDataTitle.High_Gamma, BrainDataTitle.Theta, BrainDataTitle.Delta
+                EEG_Title.Attention, EEG_Title.Meditation,  EEG_Title.Low_Alpha, EEG_Title.High_Alpha, EEG_Title.Low_Beta, 
+                EEG_Title.High_Beta, EEG_Title.Low_Gamma, EEG_Title.High_Gamma, EEG_Title.Theta, EEG_Title.Delta
             };
-            _currentBrainData = new Dictionary<BrainDataTitle, double>();
-            foreach (BrainDataTitle title in brainDataTitles)
+            _currentBrainData = new Dictionary<EEG_Title, double>();
+            foreach (EEG_Title title in brainDataTitles)
             {
                 _currentBrainData.Add(title, 0);
             }
@@ -95,7 +95,7 @@ namespace NeuroTGAM
         /// </summary>
         /// <param name="brainDataTitle">Название мозговой волны/состояния.</param>
         /// <returns>Число в диапазоне, заданном протоколом NeuroSky.</returns>
-        public double GetBrainDataAbout(BrainDataTitle brainDataTitle)
+        public double GetBrainDataAbout(EEG_Title brainDataTitle)
         {
             _mutex.WaitOne();
             double brainData = _currentBrainData[brainDataTitle];
@@ -107,7 +107,7 @@ namespace NeuroTGAM
         /// Делегат, позволяющий работать со всеми данными нейрогарнитуры, считанные на текущий момент.
         /// </summary>
         /// <param name="brainDatas">Словарь со всеми данными нейрогарнитуры на текущую секунду.</param>
-        public delegate void BrainDataHandler(Dictionary<BrainDataTitle, double> brainDatas);
+        public delegate void BrainDataHandler(Dictionary<EEG_Title, double> brainDatas);
         /// <summary>
         /// Событие, позволяющее отображать все данные с нейрогарнитуры на экран.
         /// </summary>
@@ -141,23 +141,23 @@ namespace NeuroTGAM
             if (jsonObject.eegPower == null && jsonObject.eSense == null || jsonObject.status != null) return;
 
             _mutex.WaitOne();
-            _currentBrainData[BrainDataTitle.Low_Alpha] = (double)jsonObject.eegPower["lowAlpha"];
-            _currentBrainData[BrainDataTitle.High_Alpha] = (double)jsonObject.eegPower["highAlpha"];
+            _currentBrainData[EEG_Title.Low_Alpha] = (double)jsonObject.eegPower["lowAlpha"];
+            _currentBrainData[EEG_Title.High_Alpha] = (double)jsonObject.eegPower["highAlpha"];
 
-            _currentBrainData[BrainDataTitle.Low_Beta] = (double)jsonObject.eegPower["lowBeta"];
-            _currentBrainData[BrainDataTitle.High_Beta] = (double)jsonObject.eegPower["highBeta"];
+            _currentBrainData[EEG_Title.Low_Beta] = (double)jsonObject.eegPower["lowBeta"];
+            _currentBrainData[EEG_Title.High_Beta] = (double)jsonObject.eegPower["highBeta"];
 
-            _currentBrainData[BrainDataTitle.Low_Gamma] = (double)jsonObject.eegPower["lowGamma"];
-            _currentBrainData[BrainDataTitle.High_Gamma] = (double)jsonObject.eegPower["highGamma"];
+            _currentBrainData[EEG_Title.Low_Gamma] = (double)jsonObject.eegPower["lowGamma"];
+            _currentBrainData[EEG_Title.High_Gamma] = (double)jsonObject.eegPower["highGamma"];
 
-            _currentBrainData[BrainDataTitle.Theta] = (double)jsonObject.eegPower["theta"];
-            _currentBrainData[BrainDataTitle.Delta] = (double)jsonObject.eegPower["delta"];
+            _currentBrainData[EEG_Title.Theta] = (double)jsonObject.eegPower["theta"];
+            _currentBrainData[EEG_Title.Delta] = (double)jsonObject.eegPower["delta"];
 
-            _currentBrainData[BrainDataTitle.Attention] = (double)jsonObject.eSense["attention"];
-            _currentBrainData[BrainDataTitle.Meditation] = (double)jsonObject.eSense["meditation"];
+            _currentBrainData[EEG_Title.Attention] = (double)jsonObject.eSense["attention"];
+            _currentBrainData[EEG_Title.Meditation] = (double)jsonObject.eSense["meditation"];
             _mutex.ReleaseMutex();
 
-            ShowBrainData?.Invoke(new Dictionary<BrainDataTitle, double>(_currentBrainData));
+            ShowBrainData?.Invoke(new Dictionary<EEG_Title, double>(_currentBrainData));
         }
     }
 }

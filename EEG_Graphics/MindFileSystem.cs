@@ -8,11 +8,11 @@ namespace MindFileSystem
     //Пометка: Будет занимать память в стеке.
     public struct BrainData
     {
-        public BrainDataTitle _title;
+        public EEG_Title _title;
         public uint _time;
         public double _brainValue;
 
-        public BrainData(uint time, BrainDataTitle title, double brainValue)
+        public BrainData(uint time, EEG_Title title, double brainValue)
         {
             _time = time;
             _brainValue = brainValue;
@@ -51,7 +51,7 @@ namespace MindFileSystem
                 foreach (string brainDataFromFile in brainDatas)
                 {
                     string[] brainDataAndTitle = brainDataFromFile.Split('=');
-                    Enum.TryParse(brainDataAndTitle[0], out BrainDataTitle brainValueTitle);
+                    Enum.TryParse(brainDataAndTitle[0], out EEG_Title brainValueTitle);
                     double brainValue = Convert.ToInt32(brainDataAndTitle[1]);
                     yield return new BrainData(time, brainValueTitle, brainValue);
                 }

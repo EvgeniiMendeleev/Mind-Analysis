@@ -5,46 +5,39 @@ using System.Collections.Generic;
 using System.Windows.Forms.DataVisualization.Charting;
 using System.Windows.Forms;
 using NeuroTGAM;
-using System.Threading;
 using MindFileSystem;
 
 namespace EEG_Graphics
 {
     public partial class Form1 : Form
     {
+        private delegate void ChartDisplayHandler(EEG_Title chartName, int seriesNumber, DataPoint point);
+
         private uint _seconds = 0;
         private NeuroDeviceTGAM _neurodevice;
         private BrainCharts _brainCharts;
-
-        private delegate void ChartDisplayHandler(Chart chart, int seriesNumber, uint seconds, double data);
-
-        //TODO: Попробовать реализовать enum, который содержал бы в себе настройки, связанные с удалением новых точек на графиках и сохранение данных ЭЭГ в файл.
-        bool isDeleteNewChartDots;
-        bool isSaveMindDataToFile;
 
         public Form1()
         {
             InitializeComponent();
 
             _neurodevice = new NeuroDeviceTGAM();
-            _brainCharts = new BrainCharts(new Dictionary<BrainDataTitle, Chart>()
+            _brainCharts = new BrainCharts(new Dictionary<EEG_Title, Chart>()
             {
-                [BrainDataTitle.Low_Alpha] = graphicLowAlpha,
-                [BrainDataTitle.High_Alpha] = graphicHighAlpha,
-                [BrainDataTitle.Low_Beta] = graphicLowBeta,
-                [BrainDataTitle.High_Beta] = graphicHighBeta,
-                [BrainDataTitle.Low_Gamma] = graphicLowGamma,
-                [BrainDataTitle.High_Gamma] = graphicHighGamma,
-                [BrainDataTitle.Theta] = graphicTheta,
-                [BrainDataTitle.Delta] = graphicDelta,
-                [BrainDataTitle.Attention] = graphicAttention,
-                [BrainDataTitle.Meditation] = graphicMeditation
+                [EEG_Title.Low_Alpha] = graphicLowAlpha,
+                [EEG_Title.High_Alpha] = graphicHighAlpha,
+                [EEG_Title.Low_Beta] = graphicLowBeta,
+                [EEG_Title.High_Beta] = graphicHighBeta,
+                [EEG_Title.Low_Gamma] = graphicLowGamma,
+                [EEG_Title.High_Gamma] = graphicHighGamma,
+                [EEG_Title.Theta] = graphicTheta,
+                [EEG_Title.Delta] = graphicDelta,
+                [EEG_Title.Attention] = graphicAttention,
+                [EEG_Title.Meditation] = graphicMeditation
             });
 
             _neurodevice.ShowBrainData += DisplayDataToGraphics;
-            startRecordButton.Enabled = true;
-            stopRecordButton.Enabled = false;
-            recordSettingsGroupBox.Enabled = true;
+            UserControlSystem.GetSystem().Enable(btnStartRecord).Disable(btnStopRecord).Enable(groupRecordSettings);
             attentionDistributionChart.ChartAreas[0].AxisX.Maximum = 100;
         }
 
@@ -57,14 +50,8 @@ namespace EEG_Graphics
             }
             finally
             {
-                //TODO: Придумать/найти решение, позволяюее избавиться от многострочной инициализации
-                stopRecordButton.Enabled = true;
-                startRecordButton.Enabled = false;
-                uploadMindFileButton.Enabled = false;
-                recordSettingsGroupBox.Enabled = false;
-
-                isDeleteNewChartDots = deleteNewPointsCheckBox.Checked;
-                isSaveMindDataToFile = saveRecordDataCheckBox.Checked;
+                UserControlSystem.GetSystem().Disable(btnStartRecord).Enable(btnStopRecord).Disable(btnLoadFirstFile)
+                    .Disable(groupRecordSettings).Disable(btnLoadSecondFile);
             }
         }
 
@@ -75,18 +62,13 @@ namespace EEG_Graphics
                 MessageBox.Show("Соединение с ThinkGear Connector не установлено.", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-
             _neurodevice.DisconnectFromConnector();
             _seconds = 0;
-            //TODO: Также придумать способ или найти решение, которое бы позволило избавить от многострочной инициализации.
-            startRecordButton.Enabled = true;
-            stopRecordButton.Enabled = false;
-            uploadMindFileButton.Enabled = true;
-            recordSettingsGroupBox.Enabled = true;
+            UserControlSystem.GetSystem().Disable(btnStopRecord).Enable(btnStartRecord).Enable(btnLoadFirstFile).Enable(groupRecordSettings);
         }
 
-        private void OnChangedValueInSaveMindRecord(object sender, EventArgs e) => saveMindRecordButton.Enabled = !saveMindRecordButton.Enabled;
-        private void OnChangedValueInMaxGraphPoints(object sender, EventArgs e) => maxGraphPointsNumeric.Enabled = !maxGraphPointsNumeric.Enabled;
+        private void OnChangedValueInSaveMindRecord(object sender, EventArgs e) => btnChangeSavePath.Enabled = !btnChangeSavePath.Enabled;
+        private void OnChangedValueInMaxGraphPoints(object sender, EventArgs e) => numMaxChartPoints.Enabled = !numMaxChartPoints.Enabled;
         private void UploadFirstBrainDataFile(object sender, EventArgs e) => DisplayBrainCharts(1);
         private void UploadSecondBrainDataFile(object sender, EventArgs e) => DisplayBrainCharts(2);
 
@@ -103,44 +85,33 @@ namespace EEG_Graphics
             OPF.Dispose();
             mindFile.Close();
 
-            deleteAllGraphicsButton.Enabled = true;
+            UserControlSystem.GetSystem().Enable(btnClearAllCharts);
         }
 
         private void ClearAllGraphics(object sender, EventArgs e)
         {
             _brainCharts.ClearAllSeries();
-            deleteAllGraphicsButton.Enabled = false;
+            UserControlSystem.GetSystem().Disable(btnClearAllCharts);
         }
 
-        private void DisplayDataToGraphics(Dictionary<BrainDataTitle, double> currentBrainData)
+        private void DisplayDataToGraphics(Dictionary<EEG_Title, double> currentBrainData)
         {
-            //TODO: Сделать рефакторинг. Уменьшить код функции без потери функционала.
-            BrainDataTitle[] brainKeys = currentBrainData.Keys.ToArray();
-            //TODO: Сделать отображение точек на графике.
-            //foreach (BrainDataTitle brainKey in brainKeys) BeginInvoke(new ChartDisplayHandler(DisplayBrainDataToChart), new object[] { _charts[brainKey], 0, _seconds, currentBrainData[brainKey] });
-             _seconds++;
-            
-            if (!isSaveMindDataToFile || fullFilePathText.Text.Length == 0) return;
-            
-            using (FileStream file = new FileStream(fullFilePathText.Text, FileMode.OpenOrCreate))
+            var brainKeys = currentBrainData.Keys;
+            foreach (EEG_Title brainKey in brainKeys)
             {
-                file.Seek(0, SeekOrigin.End);
-                using (StreamWriter writer = new StreamWriter(file))
-                {
-                    writer.WriteLine(
-                        $"{BrainDataTitle.Attention}={currentBrainData[BrainDataTitle.Attention]}," +
-                        $"{BrainDataTitle.Meditation}={currentBrainData[BrainDataTitle.Meditation]}," +
-                        $"{BrainDataTitle.Low_Alpha}={currentBrainData[BrainDataTitle.Low_Alpha]}," +
-                        $"{BrainDataTitle.High_Alpha}={currentBrainData[BrainDataTitle.High_Alpha]}," +
-                        $"{BrainDataTitle.Low_Gamma}={currentBrainData[BrainDataTitle.Low_Gamma]}," +
-                        $"{BrainDataTitle.High_Gamma}={currentBrainData[BrainDataTitle.High_Gamma]}," +
-                        $"{BrainDataTitle.Low_Beta}={currentBrainData[BrainDataTitle.Low_Beta]}," +
-                        $"{BrainDataTitle.High_Beta}={currentBrainData[BrainDataTitle.High_Beta]}," +
-                        $"{BrainDataTitle.Theta}={currentBrainData[BrainDataTitle.Theta]}," +
-                        $"{BrainDataTitle.Delta}={currentBrainData[BrainDataTitle.Delta]}:" + 
-                        _seconds.ToString()
-                        );
-                }
+                if(numMaxChartPoints.Value < _brainCharts.GetPointCount(brainKey, 0)) 
+                BeginInvoke(new ChartDisplayHandler(_brainCharts.AddPoint), new object[] { brainKey, 0, new DataPoint(_seconds, currentBrainData[brainKey]) });
+            }
+            _seconds++;
+            if (!chkSaveRecordData.Checked) return;
+            using (StreamWriter writer = new StreamWriter(new FileStream(fullFilePathText.Text, FileMode.OpenOrCreate)))
+            {
+                writer.WriteLine($"{EEG_Title.Attention}={currentBrainData[EEG_Title.Attention]}, {EEG_Title.Meditation}={currentBrainData[EEG_Title.Meditation]}," +
+                    $"{EEG_Title.Low_Alpha}={currentBrainData[EEG_Title.Low_Alpha]}, {EEG_Title.High_Alpha}={currentBrainData[EEG_Title.High_Alpha]}," +
+                    $"{EEG_Title.Low_Gamma}={currentBrainData[EEG_Title.Low_Gamma]}, {EEG_Title.High_Gamma}={currentBrainData[EEG_Title.High_Gamma]}," +
+                    $"{EEG_Title.Low_Beta}={currentBrainData[EEG_Title.Low_Beta]}, {EEG_Title.High_Beta}={currentBrainData[EEG_Title.High_Beta]}," +
+                    $"{EEG_Title.Theta}={currentBrainData[EEG_Title.Theta]}, {EEG_Title.Delta}={currentBrainData[EEG_Title.Delta]}:{_seconds}"
+                    );
             }
         }
 
@@ -156,7 +127,7 @@ namespace EEG_Graphics
             Dictionary<double, int> frequencyChartData = new Dictionary<double, int>();
             foreach (var brainData in mindFile)
             {
-                if (brainData._title == BrainDataTitle.Attention)
+                if (brainData._title == EEG_Title.Attention)
                 {
                     if (frequencyChartData.ContainsKey(brainData._brainValue)) ++frequencyChartData[brainData._brainValue];
                     else frequencyChartData.Add(brainData._brainValue, 1);
