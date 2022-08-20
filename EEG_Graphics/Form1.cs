@@ -36,6 +36,7 @@ namespace EEG_Graphics
                 [EEG_Title.Meditation] = graphicMeditation
             });
 
+            //TODO: Попробовать реализовать отображение данных не при помощи вызова делегата.
             _neurodevice.ShowBrainData += DisplayDataToGraphics;
             UserControlSystem.GetSystem().Enable(btnStartRecord).Disable(btnStopRecord).Enable(groupRecordSettings);
             attentionDistributionChart.ChartAreas[0].AxisX.Maximum = 100;
@@ -99,20 +100,19 @@ namespace EEG_Graphics
             var brainKeys = currentBrainData.Keys;
             foreach (EEG_Title brainKey in brainKeys)
             {
-                if(numMaxChartPoints.Value < _brainCharts.GetPointCount(brainKey, 0)) 
+                if (numMaxChartPoints.Value < _brainCharts[brainKey].Series[0].Points.Count) _brainCharts[brainKey].Series[0].Points.RemoveAt(0);
                 BeginInvoke(new ChartDisplayHandler(_brainCharts.AddPoint), new object[] { brainKey, 0, new DataPoint(_seconds, currentBrainData[brainKey]) });
             }
             _seconds++;
-            if (!chkSaveRecordData.Checked) return;
-            using (StreamWriter writer = new StreamWriter(new FileStream(fullFilePathText.Text, FileMode.OpenOrCreate)))
-            {
-                writer.WriteLine($"{EEG_Title.Attention}={currentBrainData[EEG_Title.Attention]}, {EEG_Title.Meditation}={currentBrainData[EEG_Title.Meditation]}," +
-                    $"{EEG_Title.Low_Alpha}={currentBrainData[EEG_Title.Low_Alpha]}, {EEG_Title.High_Alpha}={currentBrainData[EEG_Title.High_Alpha]}," +
-                    $"{EEG_Title.Low_Gamma}={currentBrainData[EEG_Title.Low_Gamma]}, {EEG_Title.High_Gamma}={currentBrainData[EEG_Title.High_Gamma]}," +
-                    $"{EEG_Title.Low_Beta}={currentBrainData[EEG_Title.Low_Beta]}, {EEG_Title.High_Beta}={currentBrainData[EEG_Title.High_Beta]}," +
-                    $"{EEG_Title.Theta}={currentBrainData[EEG_Title.Theta]}, {EEG_Title.Delta}={currentBrainData[EEG_Title.Delta]}:{_seconds}"
-                    );
-            }
+            if (chkSaveRecordData.Checked) using (StreamWriter writer = new StreamWriter(new FileStream(fullFilePathText.Text, FileMode.OpenOrCreate)))
+                {
+                    writer.WriteLine($"{EEG_Title.Attention}={currentBrainData[EEG_Title.Attention]}, {EEG_Title.Meditation}={currentBrainData[EEG_Title.Meditation]}," +
+                        $"{EEG_Title.Low_Alpha}={currentBrainData[EEG_Title.Low_Alpha]}, {EEG_Title.High_Alpha}={currentBrainData[EEG_Title.High_Alpha]}," +
+                        $"{EEG_Title.Low_Gamma}={currentBrainData[EEG_Title.Low_Gamma]}, {EEG_Title.High_Gamma}={currentBrainData[EEG_Title.High_Gamma]}," +
+                        $"{EEG_Title.Low_Beta}={currentBrainData[EEG_Title.Low_Beta]}, {EEG_Title.High_Beta}={currentBrainData[EEG_Title.High_Beta]}," +
+                        $"{EEG_Title.Theta}={currentBrainData[EEG_Title.Theta]}, {EEG_Title.Delta}={currentBrainData[EEG_Title.Delta]}:{_seconds}"
+                        );
+                }
         }
 
         private void UploadDataForDistribution(object sender, EventArgs e)

@@ -13,9 +13,11 @@ namespace EEG_Graphics
     {
         private Dictionary<EEG_Title, Chart> _brainCharts = new Dictionary<EEG_Title, Chart>();
 
-        public BrainCharts(Dictionary<EEG_Title, Chart> brainCharts)
+        public BrainCharts(Dictionary<EEG_Title, Chart> brainCharts) => _brainCharts = brainCharts;
+
+        public Chart this[EEG_Title chartName]
         {
-            _brainCharts = brainCharts;
+            get => _brainCharts[chartName];
         }
 
         public void ClearSerieOnCharts(int serie)
@@ -33,11 +35,8 @@ namespace EEG_Graphics
             }
         }
 
-        public int GetPointCount(EEG_Title chartName, int serie) => _brainCharts[chartName].Series[serie].Points.Count;
-
         public void AddPoint(EEG_Title chartName, int serie, DataPoint chartPoint)
         {
-            //if (isDeleteNewChartDots && chart.Series[0].Points.Count >= maxGraphPointsNumeric.Value) chart.Series[0].Points.RemoveAt(0);
             Chart brainChart = _brainCharts[chartName];
             brainChart.Series[serie].Points.Add(chartPoint);
 
@@ -51,17 +50,6 @@ namespace EEG_Graphics
 
             int scale = chartName != EEG_Title.Meditation && chartName != EEG_Title.Attention ? 100000 : 5;
             brainChart.ChartAreas[0].AxisY.Maximum = maxY + scale;
-        }
-
-
-        public void SetSerieName(EEG_Title chartName, int serie, string name)
-        {
-            _brainCharts[chartName].Series[serie].Name = name;
-        }
-
-        public Chart GetChart(EEG_Title chartName)
-        {
-            return _brainCharts[chartName];
         }
 
         public void ClearAllSeries()
