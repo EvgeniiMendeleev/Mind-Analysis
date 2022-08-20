@@ -727,7 +727,7 @@ namespace EEG_Graphics
             this.AttentionDistributionPage.Name = "AttentionDistributionPage";
             this.AttentionDistributionPage.Size = new System.Drawing.Size(1176, 785);
             this.AttentionDistributionPage.TabIndex = 5;
-            this.AttentionDistributionPage.Text = "Распределение уровня внимания";
+            this.AttentionDistributionPage.Text = "Распределение уровня внимания (Alpha)";
             // 
             // btnLoadRecordSessionForDistribution
             // 
@@ -812,31 +812,32 @@ namespace EEG_Graphics
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 41);
+            this.label2.Location = new System.Drawing.Point(3, 40);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(124, 17);
+            this.label2.Size = new System.Drawing.Size(183, 17);
             this.label2.TabIndex = 32;
-            this.label2.Text = "Путь сохранения:";
+            this.label2.Text = "Выбрать путь сохранения:";
             // 
             // fullFilePathText
             // 
-            this.fullFilePathText.Location = new System.Drawing.Point(133, 38);
+            this.fullFilePathText.Location = new System.Drawing.Point(6, 62);
             this.fullFilePathText.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.fullFilePathText.Name = "fullFilePathText";
             this.fullFilePathText.ReadOnly = true;
-            this.fullFilePathText.Size = new System.Drawing.Size(383, 22);
+            this.fullFilePathText.Size = new System.Drawing.Size(403, 22);
             this.fullFilePathText.TabIndex = 31;
             // 
             // btnChangeSavePath
             // 
             this.btnChangeSavePath.Enabled = false;
-            this.btnChangeSavePath.Location = new System.Drawing.Point(5, 66);
+            this.btnChangeSavePath.Location = new System.Drawing.Point(415, 59);
             this.btnChangeSavePath.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnChangeSavePath.Name = "btnChangeSavePath";
-            this.btnChangeSavePath.Size = new System.Drawing.Size(203, 36);
+            this.btnChangeSavePath.Size = new System.Drawing.Size(89, 29);
             this.btnChangeSavePath.TabIndex = 30;
-            this.btnChangeSavePath.Text = "Выбрать путь сохранения";
+            this.btnChangeSavePath.Text = "Обзор";
             this.btnChangeSavePath.UseVisualStyleBackColor = true;
+            this.btnChangeSavePath.Click += new System.EventHandler(this.SaveFilePathOfCurrentMindRecord);
             // 
             // tabPage2
             // 
@@ -900,7 +901,6 @@ namespace EEG_Graphics
             // btnClearAllCharts
             // 
             this.btnClearAllCharts.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnClearAllCharts.Enabled = false;
             this.btnClearAllCharts.Location = new System.Drawing.Point(7, 108);
             this.btnClearAllCharts.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnClearAllCharts.Name = "btnClearAllCharts";
@@ -916,9 +916,9 @@ namespace EEG_Graphics
             this.groupBox1.Controls.Add(this.btnLoadFirstFile);
             this.groupBox1.Controls.Add(this.btnClearAllCharts);
             this.groupBox1.Location = new System.Drawing.Point(560, 831);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox1.Size = new System.Drawing.Size(315, 158);
             this.groupBox1.TabIndex = 30;
             this.groupBox1.TabStop = false;
@@ -950,7 +950,7 @@ namespace EEG_Graphics
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Form1";
-            this.Text = "ЭЭГ анализ";
+            this.Text = "Mind Analysis v1.0.a.0";
             ((System.ComponentModel.ISupportInitialize)(this.graphicLowAlpha)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.graphicHighAlpha)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.graphicHighBeta)).EndInit();

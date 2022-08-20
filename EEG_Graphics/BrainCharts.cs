@@ -1,7 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using System.Collections.Generic;
 using System.Windows.Forms.DataVisualization.Charting;
 using MindFileSystem;
@@ -12,13 +9,7 @@ namespace EEG_Graphics
     class BrainCharts
     {
         private Dictionary<EEG_Title, Chart> _brainCharts = new Dictionary<EEG_Title, Chart>();
-
         public BrainCharts(Dictionary<EEG_Title, Chart> brainCharts) => _brainCharts = brainCharts;
-
-        public Chart this[EEG_Title chartName]
-        {
-            get => _brainCharts[chartName];
-        }
 
         public void ClearSerieOnCharts(int serie)
         {
@@ -31,14 +22,19 @@ namespace EEG_Graphics
             foreach (var brainData in mindFile)
             {
                 AddPoint(brainData._title, serie, new DataPoint(brainData._time, brainData._brainValue));
-                _brainCharts[brainData._title].Series[serie].Name = mindFile.FileName;
+                //TODO: Решить проблему с повторяющимися именами в легендах графиков.
+                //_brainCharts[brainData._title].Series[serie].Name = mindFile.FileName;
             }
         }
+
+        public int PointsCount(EEG_Title eegTitle, int serie) => _brainCharts[eegTitle].Series[0].Points.Count;
+
+        public void DeletePoint(EEG_Title eegTitle, int serie, int pointPosition) => _brainCharts[eegTitle].Series[serie].Points.RemoveAt(pointPosition);
 
         public void AddPoint(EEG_Title chartName, int serie, DataPoint chartPoint)
         {
             Chart brainChart = _brainCharts[chartName];
-            brainChart.Series[serie].Points.Add(chartPoint);
+            brainChart.Series[serie].Points.AddXY(chartPoint.XValue.ToString(), chartPoint.YValues[0]);
 
             double maxY = 0.0;
             foreach (Series series in brainChart.Series)

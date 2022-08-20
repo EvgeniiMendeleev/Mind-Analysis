@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
 using System.Collections.Generic;
 using System.Windows.Forms.DataVisualization.Charting;
 using System.Windows.Forms;
@@ -9,9 +8,13 @@ using MindFileSystem;
 
 namespace EEG_Graphics
 {
+    //Общие задачи
+    //TODO: Попробовать реализовать вывод графиков ЭЭГ на печать.
+    //TODO: Добавить вкладку "О программе"
+    //TODO: Сделать так, чтобы после старта записи данных с нейинтерфейса можно было просмотреть настройки записи, но чтобы нельзя было менять их значения.
     public partial class Form1 : Form
     {
-        private delegate void ChartDisplayHandler(EEG_Title chartName, int seriesNumber, DataPoint point);
+        private delegate void DynamicChartDisplay(EEG_Title chartName, DataPoint point);
 
         private uint _seconds = 0;
         private NeuroDeviceTGAM _neurodevice;
@@ -36,7 +39,6 @@ namespace EEG_Graphics
                 [EEG_Title.Meditation] = graphicMeditation
             });
 
-            //TODO: Попробовать реализовать отображение данных не при помощи вызова делегата.
             _neurodevice.ShowBrainData += DisplayDataToGraphics;
             UserControlSystem.GetSystem().Enable(btnStartRecord).Disable(btnStopRecord).Enable(groupRecordSettings);
             attentionDistributionChart.ChartAreas[0].AxisX.Maximum = 100;
@@ -47,13 +49,15 @@ namespace EEG_Graphics
             try
             {
                 _neurodevice.ConnectToConnector();
-                _brainCharts.ClearSerieOnCharts(0);
             }
-            finally
+            catch
             {
-                UserControlSystem.GetSystem().Disable(btnStartRecord).Enable(btnStopRecord).Disable(btnLoadFirstFile)
-                    .Disable(groupRecordSettings).Disable(btnLoadSecondFile);
+                MessageBox.Show("Не был запущен ThinkGear Connector", "Ошибка соединения!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
+            _brainCharts.ClearSerieOnCharts(0);
+            UserControlSystem.GetSystem().Disable(btnStartRecord).Enable(btnStopRecord).Disable(btnLoadFirstFile).Disable(groupRecordSettings)
+                .Disable(btnLoadSecondFile).Disable(btnClearAllCharts);
         }
 
         private void StopToReadDataFromNeurodevice(object sender, EventArgs e)
@@ -65,13 +69,31 @@ namespace EEG_Graphics
             }
             _neurodevice.DisconnectFromConnector();
             _seconds = 0;
-            UserControlSystem.GetSystem().Disable(btnStopRecord).Enable(btnStartRecord).Enable(btnLoadFirstFile).Enable(groupRecordSettings);
+            UserControlSystem.GetSystem()
+                .Disable(btnStopRecord)
+                .Enable(btnStartRecord)
+                .Enable(btnLoadFirstFile)
+                .Enable(btnLoadSecondFile)
+                .Enable(groupRecordSettings)
+                .Enable(btnClearAllCharts);
         }
 
         private void OnChangedValueInSaveMindRecord(object sender, EventArgs e) => btnChangeSavePath.Enabled = !btnChangeSavePath.Enabled;
         private void OnChangedValueInMaxGraphPoints(object sender, EventArgs e) => numMaxChartPoints.Enabled = !numMaxChartPoints.Enabled;
+
+        //TODO: Попробовать реализавать систему, которая бы позволяла добавлять сколько угодно серий точек на график для анализа более чем трёх графиков.
         private void UploadFirstBrainDataFile(object sender, EventArgs e) => DisplayBrainCharts(1);
         private void UploadSecondBrainDataFile(object sender, EventArgs e) => DisplayBrainCharts(2);
+
+        private void SaveFilePathOfCurrentMindRecord(object sender, EventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Mind Files (*.mind) | *.mind";
+            if (saveFileDialog.ShowDialog() != DialogResult.OK) return;
+
+            if (saveFileDialog.FileName.Length > 3) fullFilePathText.Text = Path.GetFullPath(saveFileDialog.FileName);
+            else MessageBox.Show("Имя файла слишком маленькое!", "Ошибка сохранения", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
 
         void DisplayBrainCharts(int seriesNumber)
         {
@@ -89,30 +111,36 @@ namespace EEG_Graphics
             UserControlSystem.GetSystem().Enable(btnClearAllCharts);
         }
 
-        private void ClearAllGraphics(object sender, EventArgs e)
-        {
-            _brainCharts.ClearAllSeries();
-            UserControlSystem.GetSystem().Disable(btnClearAllCharts);
-        }
+        private void ClearAllGraphics(object sender, EventArgs e) => _brainCharts.ClearAllSeries();
 
         private void DisplayDataToGraphics(Dictionary<EEG_Title, double> currentBrainData)
         {
             var brainKeys = currentBrainData.Keys;
             foreach (EEG_Title brainKey in brainKeys)
             {
-                if (numMaxChartPoints.Value < _brainCharts[brainKey].Series[0].Points.Count) _brainCharts[brainKey].Series[0].Points.RemoveAt(0);
-                BeginInvoke(new ChartDisplayHandler(_brainCharts.AddPoint), new object[] { brainKey, 0, new DataPoint(_seconds, currentBrainData[brainKey]) });
+                object[] DisplaingPointParams = new object[] { brainKey, new DataPoint(_seconds, currentBrainData[brainKey]) };
+                BeginInvoke(new DynamicChartDisplay(DisplayPointToDynamicGraphic), DisplaingPointParams);
             }
             _seconds++;
-            if (chkSaveRecordData.Checked) using (StreamWriter writer = new StreamWriter(new FileStream(fullFilePathText.Text, FileMode.OpenOrCreate)))
+            //TODO: Попробовать переписать сохранение данных c нейроинтерфейса с учётом новой библиотеки (де)сериализации данных в виде JSON строк.
+            if (chkSaveRecordData.Checked) using (FileStream file = new FileStream(fullFilePathText.Text, FileMode.OpenOrCreate))
                 {
-                    writer.WriteLine($"{EEG_Title.Attention}={currentBrainData[EEG_Title.Attention]}, {EEG_Title.Meditation}={currentBrainData[EEG_Title.Meditation]}," +
-                        $"{EEG_Title.Low_Alpha}={currentBrainData[EEG_Title.Low_Alpha]}, {EEG_Title.High_Alpha}={currentBrainData[EEG_Title.High_Alpha]}," +
-                        $"{EEG_Title.Low_Gamma}={currentBrainData[EEG_Title.Low_Gamma]}, {EEG_Title.High_Gamma}={currentBrainData[EEG_Title.High_Gamma]}," +
-                        $"{EEG_Title.Low_Beta}={currentBrainData[EEG_Title.Low_Beta]}, {EEG_Title.High_Beta}={currentBrainData[EEG_Title.High_Beta]}," +
-                        $"{EEG_Title.Theta}={currentBrainData[EEG_Title.Theta]}, {EEG_Title.Delta}={currentBrainData[EEG_Title.Delta]}:{_seconds}"
-                        );
+                    file.Seek(0, SeekOrigin.End);
+                    using (StreamWriter writer = new StreamWriter(file))
+                    {
+                        writer.WriteLine($"{EEG_Title.Attention}={currentBrainData[EEG_Title.Attention]}, {EEG_Title.Meditation}={currentBrainData[EEG_Title.Meditation]}," +
+                            $"{EEG_Title.Low_Alpha}={currentBrainData[EEG_Title.Low_Alpha]}, {EEG_Title.High_Alpha}={currentBrainData[EEG_Title.High_Alpha]}," +
+                            $"{EEG_Title.Low_Gamma}={currentBrainData[EEG_Title.Low_Gamma]}, {EEG_Title.High_Gamma}={currentBrainData[EEG_Title.High_Gamma]}," +
+                            $"{EEG_Title.Low_Beta}={currentBrainData[EEG_Title.Low_Beta]}, {EEG_Title.High_Beta}={currentBrainData[EEG_Title.High_Beta]}," +
+                            $"{EEG_Title.Theta}={currentBrainData[EEG_Title.Theta]}, {EEG_Title.Delta}={currentBrainData[EEG_Title.Delta]}:{_seconds}");
+                    }
                 }
+        }
+
+        void DisplayPointToDynamicGraphic(EEG_Title eegTitle, DataPoint point)
+        {
+            if (numMaxChartPoints.Value < _brainCharts.PointsCount(eegTitle, 0)) _brainCharts.DeletePoint(eegTitle, 0, 0);
+            _brainCharts.AddPoint(eegTitle, 0, point);
         }
 
         private void UploadDataForDistribution(object sender, EventArgs e)
@@ -134,10 +162,7 @@ namespace EEG_Graphics
                 }
             }
 
-            foreach (KeyValuePair<double, int> pair in frequencyChartData)
-            {
-                attentionDistributionChart.Series[0].Points.AddXY(pair.Key, pair.Value);
-            }
+            foreach (KeyValuePair<double, int> pair in frequencyChartData) attentionDistributionChart.Series[0].Points.AddXY(pair.Key, pair.Value);
         }
     }
 }

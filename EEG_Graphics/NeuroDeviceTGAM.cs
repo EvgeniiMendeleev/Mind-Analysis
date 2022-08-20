@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Net.Sockets;
@@ -65,7 +66,7 @@ namespace NeuroTGAM
         public void ConnectToConnector()
         {
             if (_connector == null) _connector = new TcpClient();
-
+            
             _connector.Connect("localhost", 13854);
             _connectorStream = _connector.GetStream();
 
@@ -119,7 +120,7 @@ namespace NeuroTGAM
             try
             {
                 byte[] bytesFromConnector = new byte[2048];
-                while (_connector.Connected)
+                while (_connector != null && _connector.Connected)
                 {
                     int bytesRead = _connectorStream.Read(bytesFromConnector, 0, 2048);
                     if (bytesRead <= 0) continue;
