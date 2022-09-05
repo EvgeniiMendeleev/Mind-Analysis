@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Forms.DataVisualization.Charting;
 using MindFileSystem;
 using NeuroTGAM;
+using System;
 
 namespace EEG_Graphics
 {
@@ -35,17 +36,6 @@ namespace EEG_Graphics
         {
             Chart brainChart = _brainCharts[chartName];
             brainChart.Series[serie].Points.AddXY(chartPoint.XValue.ToString(), chartPoint.YValues[0]);
-
-            double maxY = 0.0;
-            foreach (Series series in brainChart.Series)
-            {
-                DataPointCollection points = brainChart.Series[serie].Points;
-                double y = points.Max(point => point.YValues[0]);
-                if (maxY < y) maxY = y;
-            }
-
-            int scale = chartName != EEG_Title.Meditation && chartName != EEG_Title.Attention ? 100000 : 5;
-            brainChart.ChartAreas[0].AxisY.Maximum = maxY + scale;
         }
 
         public void ClearAllSeries()
@@ -58,3 +48,21 @@ namespace EEG_Graphics
         }
     }
 }
+
+
+/*public void UpdateCharts()
+{
+    foreach (var brainChart in _brainCharts)
+    {
+        double maxY = 0.0;
+        foreach (Series series in brainChart.Value.Series)
+        {
+            DataPointCollection points = series.Points;
+            double y = points.Max(point => point.YValues[0]);
+            if (maxY < y) maxY = y;
+        }
+
+        int scale = brainChart.Key != EEG_Title.Meditation && brainChart.Key != EEG_Title.Attention ? 100000 : 0;
+        brainChart.Value.ChartAreas[0].AxisY.Maximum = maxY + scale;
+    }
+}*/

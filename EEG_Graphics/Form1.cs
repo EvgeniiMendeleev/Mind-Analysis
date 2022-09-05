@@ -121,6 +121,7 @@ namespace EEG_Graphics
                 object[] DisplaingPointParams = new object[] { brainKey, new DataPoint(_seconds, currentBrainData[brainKey]) };
                 BeginInvoke(new DynamicChartDisplay(DisplayPointToDynamicGraphic), DisplaingPointParams);
             }
+
             _seconds++;
             //TODO: Попробовать переписать сохранение данных c нейроинтерфейса с учётом новой библиотеки (де)сериализации данных в виде JSON строк.
             if (chkSaveRecordData.Checked) using (FileStream file = new FileStream(fullFilePathText.Text, FileMode.OpenOrCreate))
