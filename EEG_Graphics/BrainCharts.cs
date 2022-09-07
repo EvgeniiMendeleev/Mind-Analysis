@@ -23,8 +23,8 @@ namespace EEG_Graphics
             foreach (var brainData in mindFile)
             {
                 AddPoint(brainData._title, serie, new DataPoint(brainData._time, brainData._brainValue));
-                //TODO: Решить проблему с повторяющимися именами в легендах графиков.
-                //_brainCharts[brainData._title].Series[serie].Name = mindFile.FileName;
+                string serieName = !_brainCharts[brainData._title].Series.IsUniqueName(mindFile.FileName) ? $"{mindFile.FileName} (1)" : mindFile.FileName;
+                _brainCharts[brainData._title].Series[serie].Name = serieName;
             }
         }
 

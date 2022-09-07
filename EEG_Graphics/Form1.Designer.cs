@@ -950,7 +950,7 @@ namespace EEG_Graphics
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
-            this.Text = "Mind Analysis v1.0.a.1";
+            this.Text = "Mind Analysis v1.0.a.2";
             ((System.ComponentModel.ISupportInitialize)(this.graphicLowAlpha)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.graphicHighAlpha)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.graphicHighBeta)).EndInit();
