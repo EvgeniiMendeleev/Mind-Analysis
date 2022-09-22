@@ -23,8 +23,8 @@ namespace EEG_Graphics
         public Form1()
         {
             InitializeComponent();
-
             _neurodevice = new NeuroDeviceTGAM();
+            attentionDistributionChart.Series[0].Points.Add(new DataPoint(1, 2));
             _brainCharts = new BrainCharts(new Dictionary<EEG_Title, Chart>()
             {
                 [EEG_Title.Low_Alpha] = graphicLowAlpha,
@@ -41,7 +41,6 @@ namespace EEG_Graphics
 
             _neurodevice.ShowBrainData += DisplayDataToGraphics;
             UserControlSystem.GetSystem().Enable(btnStartRecord).Disable(btnStopRecord).Enable(groupRecordSettings);
-            attentionDistributionChart.ChartAreas[0].AxisX.Maximum = 100;
         }
 
         private void StartToReadDataFromNeurodevice(object sender, EventArgs e)
@@ -146,24 +145,6 @@ namespace EEG_Graphics
 
         private void UploadDataForDistribution(object sender, EventArgs e)
         {
-            OpenFileDialog OPF = new OpenFileDialog();
-            OPF.Filter = "Mind Files (*.mind) | *.mind";
-            if (OPF.ShowDialog() != DialogResult.OK) return;
-
-            attentionDistributionChart.Series[0].Points.Clear();
-
-            MindFileReader mindFile = new MindFileReader(OPF.FileName);
-            Dictionary<double, int> frequencyChartData = new Dictionary<double, int>();
-            foreach (var brainData in mindFile)
-            {
-                if (brainData._title == EEG_Title.Attention)
-                {
-                    if (frequencyChartData.ContainsKey(brainData._brainValue)) ++frequencyChartData[brainData._brainValue];
-                    else frequencyChartData.Add(brainData._brainValue, 1);
-                }
-            }
-
-            foreach (KeyValuePair<double, int> pair in frequencyChartData) attentionDistributionChart.Series[0].Points.AddXY(pair.Key, pair.Value);
         }
     }
 }
