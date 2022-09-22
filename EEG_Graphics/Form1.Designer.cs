@@ -115,7 +115,6 @@ namespace EEG_Graphics
             this.ThetaAndDeltaPage = new System.Windows.Forms.TabPage();
             this.AttantionAndMeditationPage = new System.Windows.Forms.TabPage();
             this.AttentionDistributionPage = new System.Windows.Forms.TabPage();
-            this.btnLoadRecordSessionForDistribution = new System.Windows.Forms.Button();
             this.attentionDistributionChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.groupRecordSettings = new System.Windows.Forms.GroupBox();
             this.tabControl2 = new System.Windows.Forms.TabControl();
@@ -130,6 +129,7 @@ namespace EEG_Graphics
             this.btnClearAllCharts = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnLoadSecondFile = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.graphicLowAlpha)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.graphicHighAlpha)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.graphicHighBeta)).BeginInit();
@@ -720,7 +720,6 @@ namespace EEG_Graphics
             // AttentionDistributionPage
             // 
             this.AttentionDistributionPage.BackColor = System.Drawing.Color.Gray;
-            this.AttentionDistributionPage.Controls.Add(this.btnLoadRecordSessionForDistribution);
             this.AttentionDistributionPage.Controls.Add(this.attentionDistributionChart);
             this.AttentionDistributionPage.Location = new System.Drawing.Point(4, 22);
             this.AttentionDistributionPage.Margin = new System.Windows.Forms.Padding(2);
@@ -728,17 +727,6 @@ namespace EEG_Graphics
             this.AttentionDistributionPage.Size = new System.Drawing.Size(880, 635);
             this.AttentionDistributionPage.TabIndex = 5;
             this.AttentionDistributionPage.Text = "Распределение уровня внимания (Alpha)";
-            // 
-            // btnLoadRecordSessionForDistribution
-            // 
-            this.btnLoadRecordSessionForDistribution.Location = new System.Drawing.Point(33, 362);
-            this.btnLoadRecordSessionForDistribution.Margin = new System.Windows.Forms.Padding(2);
-            this.btnLoadRecordSessionForDistribution.Name = "btnLoadRecordSessionForDistribution";
-            this.btnLoadRecordSessionForDistribution.Size = new System.Drawing.Size(172, 41);
-            this.btnLoadRecordSessionForDistribution.TabIndex = 7;
-            this.btnLoadRecordSessionForDistribution.Text = "Загрузить сеанс записи";
-            this.btnLoadRecordSessionForDistribution.UseVisualStyleBackColor = true;
-            this.btnLoadRecordSessionForDistribution.Click += new System.EventHandler(this.UploadDataForDistribution);
             // 
             // attentionDistributionChart
             // 
@@ -760,7 +748,7 @@ namespace EEG_Graphics
             series31.Legend = "Legend1";
             series31.Name = "Частота значений";
             this.attentionDistributionChart.Series.Add(series31);
-            this.attentionDistributionChart.Size = new System.Drawing.Size(880, 356);
+            this.attentionDistributionChart.Size = new System.Drawing.Size(880, 631);
             this.attentionDistributionChart.TabIndex = 6;
             this.attentionDistributionChart.Text = "chart1";
             title11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
@@ -936,6 +924,15 @@ namespace EEG_Graphics
             this.btnLoadSecondFile.UseVisualStyleBackColor = true;
             this.btnLoadSecondFile.Click += new System.EventHandler(this.UploadSecondBrainDataFile);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(661, 764);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(225, 39);
+            this.button1.TabIndex = 31;
+            this.button1.Text = "Перейти в упрощённый режим";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -943,6 +940,7 @@ namespace EEG_Graphics
             this.AutoScroll = true;
             this.BackColor = System.Drawing.SystemColors.ControlDark;
             this.ClientSize = new System.Drawing.Size(906, 857);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupRecordSettings);
@@ -1019,8 +1017,8 @@ namespace EEG_Graphics
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnLoadSecondFile;
         private System.Windows.Forms.TabPage AttentionDistributionPage;
-        private System.Windows.Forms.Button btnLoadRecordSessionForDistribution;
         private System.Windows.Forms.DataVisualization.Charting.Chart attentionDistributionChart;
+        private System.Windows.Forms.Button button1;
     }
 }
 
