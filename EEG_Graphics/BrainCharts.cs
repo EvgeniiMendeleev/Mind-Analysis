@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Windows.Forms.DataVisualization.Charting;
 using MindFileSystem;
 using NeuroTGAM;
-using System;
 
 namespace EEG_Graphics
 {
