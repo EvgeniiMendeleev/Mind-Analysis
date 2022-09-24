@@ -5,6 +5,7 @@ using System.Windows.Forms.DataVisualization.Charting;
 using System.Windows.Forms;
 using NeuroTGAM;
 using MindFileSystem;
+using System.Drawing;
 
 namespace EEG_Graphics
 {
@@ -24,7 +25,7 @@ namespace EEG_Graphics
         {
             InitializeComponent();
             _neurodevice = new NeuroDeviceTGAM();
-            attentionDistributionChart.Series[0].Points.Add(new DataPoint(1, 2));
+            _neurodevice.ShowBrainData += DisplayDataToGraphics;
             _brainCharts = new BrainCharts(new Dictionary<EEG_Title, Chart>()
             {
                 [EEG_Title.Low_Alpha] = graphicLowAlpha,
@@ -38,9 +39,7 @@ namespace EEG_Graphics
                 [EEG_Title.Attention] = graphicAttention,
                 [EEG_Title.Meditation] = graphicMeditation
             });
-
-            _neurodevice.ShowBrainData += DisplayDataToGraphics;
-            UserControlSystem.GetSystem().Enable(btnStartRecord).Disable(btnStopRecord).Enable(groupRecordSettings);
+            UserControlSystem.GetSystem().Disable(btnStopRecord);
         }
 
         private void StartToReadDataFromNeurodevice(object sender, EventArgs e)
@@ -139,12 +138,16 @@ namespace EEG_Graphics
 
         void DisplayPointToDynamicGraphic(EEG_Title eegTitle, DataPoint point)
         {
+            if(eegTitle == EEG_Title.Attention)
+            {
+                attentionLevelChart.Series[0].Points.Clear();
+                if (point.YValues[0] > 0 && point.YValues[0] <= 50) attentionLevelChart.Series[0].Color = Color.Red;
+                else if (point.YValues[0] > 50 && point.YValues[0] <= 80) attentionLevelChart.Series[0].Color = Color.Yellow;
+                else if (point.YValues[0] > 80) attentionLevelChart.Series[0].Color = Color.Green;
+                attentionLevelChart.Series[0].Points.AddXY(1.0f, point.YValues[0]);
+            }
             if (numMaxChartPoints.Value < _brainCharts.PointsCount(eegTitle, 0)) _brainCharts.DeletePoint(eegTitle, 0, 0);
             _brainCharts.AddPoint(eegTitle, 0, point);
-        }
-
-        private void UploadDataForDistribution(object sender, EventArgs e)
-        {
         }
     }
 }
