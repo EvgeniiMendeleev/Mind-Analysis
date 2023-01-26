@@ -2,24 +2,10 @@
 using System.Collections.Generic;
 using System.IO;
 using NeuroTGAM;
+using CsvHelper;
 
 namespace MindFileSystem
 {
-    //Пометка: Будет занимать память в стеке.
-    public struct BrainData
-    {
-        public EEG_Title _title;
-        public uint _time;
-        public double _brainValue;
-
-        public BrainData(uint time, EEG_Title title, double brainValue)
-        {
-            _time = time;
-            _brainValue = brainValue;
-            _title = title;
-        }
-    }
-
     public class MindFileReader
     {
         private StreamReader _reader = null;
@@ -40,7 +26,7 @@ namespace MindFileSystem
             _reader.Dispose();
         }
 
-        public IEnumerator<BrainData> GetEnumerator()
+        public IEnumerator<BrainInfo> GetEnumerator()
         {
             while (!_reader.EndOfStream)
             {
