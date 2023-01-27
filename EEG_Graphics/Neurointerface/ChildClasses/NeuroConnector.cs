@@ -16,17 +16,15 @@ namespace NeuroTGAM
     {
         private TcpClient _connector;                                        //TCP соединение с ThinkGear Connector.
         private Stream _connectorStream;
-        private Mutex _mutex;                                                //Для синхронизации потоков.
         private BrainInfo _currentBrainData;                                 //Данные о мозговой деятельности в текущую секунду.
 
         /// <summary>
         /// Статус подключения к ThinkGear Connector.
         /// </summary>
-        public override bool AreDataReading() => _connector.Connected;
+        public override bool AreDataReading { get { return _connector.Connected; } }
 
         public NeuroConnector()
         {
-            _mutex = new Mutex();
             _connector = new TcpClient();
             _currentBrainData = new BrainInfo();
         }
