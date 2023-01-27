@@ -20,17 +20,31 @@ namespace EEG_Graphics
         public MainForm()
         {
             InitializeComponent();
-            _neurodevice = new NeuroSerialPort("COM5", "COM6");
-            _brainCharts = new BrainCharts();
-            _neurodevice.OnBrainInfoReceived += (BrainInfo brainInfo) => Invoke(new DynamicChartDisplay(DisplayPointToDynamicGraphic), brainInfo);
+            _brainCharts = new BrainCharts(Convert.ToInt32(numMaxChartPoints.Value));
+            _neurodevice = new NeuroSerialPort("COM4", "COM5");
             UserControlSystem.GetSystem().Disable(btnStopRecord);
+            _neurodevice.OnBrainInfoReceived += DisplayDataToGraphics;
+            _brainCharts.AddGraphic(BrainChartName.Attention, graphicAttention);
+            _brainCharts.AddGraphic(BrainChartName.Meditation, graphicMeditation);
+            _brainCharts.AddGraphic(BrainChartName.Alpha_Low, graphicLowAlpha);
+            _brainCharts.AddGraphic(BrainChartName.Alpha_High, graphicHighAlpha);
+            _brainCharts.AddGraphic(BrainChartName.Beta_Low, graphicLowBeta);
+            _brainCharts.AddGraphic(BrainChartName.Beta_High, graphicHighBeta);
+            _brainCharts.AddGraphic(BrainChartName.Gamma_Low, graphicLowGamma);
+            _brainCharts.AddGraphic(BrainChartName.Gamma_High, graphicHighGamma);
+            _brainCharts.AddGraphic(BrainChartName.Delta, graphicDelta);
+            _brainCharts.AddGraphic(BrainChartName.Theta, graphicTheta);
         }
 
         private void StartToReadDataFromNeurodevice(object sender, EventArgs e)
         {
             try
             {
+                DialogResult result = MessageBox.Show("Подключиться к пауку?", "Подключение!", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                if (result == DialogResult.Yes) _neurodevice.ConnectToSpider();
+                MessageBox.Show("Подготовьте нейроинтерфейс к подключению!", "Подключение!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 _neurodevice.Connect();
+                //getDataTimer.Start();
             }
             catch
             {
@@ -51,6 +65,7 @@ namespace EEG_Graphics
             }
             _neurodevice.CloseConnection();
             _seconds = 0;
+            //getDataTimer.Stop();
             UserControlSystem.GetSystem().Disable(btnStopRecord).Enable(btnStartRecord).Enable(btnLoadFirstFile)
                 .Enable(groupRecordSettings).Enable(btnClearAllCharts);
         }
@@ -94,7 +109,12 @@ namespace EEG_Graphics
             _brainCharts.ClearSerieOnCharts(serieNumber);
         }
 
-        void DisplayPointToDynamicGraphic(BrainInfo brainInfo)
+        private void DisplayBrainInfo(object sender, EventArgs e)
+        {
+            _brainCharts.DisplayBrainInfo(_neurodevice.GetCurrentBrainData());
+        }
+
+        private void DisplayDataToGraphics(BrainInfo currentBrainData)
         {
             brainInfo.second = _seconds;
 
@@ -104,18 +124,7 @@ namespace EEG_Graphics
             else if (brainInfo.attention > 80) attentionLevelChart.Series[0].Color = Color.Green;
             attentionLevelChart.Series[0].Points.AddXY(1.0f, brainInfo.attention);
 
-            if (numMaxChartPoints.Value < _brainCharts.DynamicChartPointsCount) _brainCharts.DeletePointOnCharts(0, 0);
             _brainCharts.DisplayBrainInfo(brainInfo);
-            _brainCharts.ScaleCharts();
-
-            _seconds++;
-
-            if (chkSaveRecordData.Checked) return;
-            using (FileStream file = new FileStream(fullFilePathText.Text, FileMode.OpenOrCreate))
-            {
-                file.Seek(0, SeekOrigin.End);
-                using (CsvWriter csvWriter = new CsvWriter(new StreamWriter(file), CultureInfo.CurrentCulture)) csvWriter.WriteRecord(brainInfo);
-            }
         }
     }
 }

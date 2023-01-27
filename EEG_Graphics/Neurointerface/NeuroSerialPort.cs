@@ -6,11 +6,26 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO.Ports;
 using System.Threading;
+using System.Windows.Forms;
+using System.IO;
+using CsvHelper;
+using System.Drawing;
+using System.Globalization;
 
 namespace EEG_Graphics
 {
     public class NeuroSerialPort
     {
+        /// <summary>
+        /// Делегат, позволяющий работать со всеми данными нейрогарнитуры, считанные на текущий момент.
+        /// </summary>
+        /// <param name="currentBrainInfo">Буфер со всеми данными нейрогарнитуры на текущую секунду.</param>
+        public delegate void BrainDataHandler(BrainInfo currentBrainInfo);
+        /// <summary>
+        /// Событие, позволяющее отображать все данные с нейрогарнитуры на экран.
+        /// </summary>
+        public event BrainDataHandler OnBrainInfoReceived;
+
         const char EXCODE = '\x55', SYNC = '\xAA', ASIC_EEG_POWER_INT = '\x83', POOR_SIGNAL = '\x02', ATTENTION = '\x04', MEDITATION = '\x05';
 
         /// <summary>
@@ -54,9 +69,17 @@ namespace EEG_Graphics
 
         public  void Connect()
         {
-            _neuroPort.Open();
-            _spiderPort.Open();
-            _readingThread.Start();
+            if (!AreDataReading)
+            {
+                _neuroPort.Open();
+                _readingThread.Start();
+            }
+        }
+
+        public void ConnectToSpider()
+        {
+            if(!_spiderPort.IsOpen) _spiderPort.Open();
+            Console.WriteLine("Подключился!");
         }
 
         public  bool AreDataReading { get { return _neuroPort.IsOpen; } }
@@ -73,7 +96,7 @@ namespace EEG_Graphics
         public BrainInfo GetCurrentBrainData()
         {
             _mutex.WaitOne();
-            BrainInfo brainInfo = CurrentBrainInfo.Clone() as BrainInfo;
+            BrainInfo brainInfo = CurrentBrainInfo;
             _mutex.ReleaseMutex();
             return brainInfo;
         }
@@ -85,17 +108,22 @@ namespace EEG_Graphics
                 while (AreDataReading)
                 {
                     _spiderData.Clear();
-                    var infoFromPort = ReadPayloadFromPort();
-                    if (infoFromPort.isReadPayload) ParsingPayload(infoFromPort.payload);
-                    OnBrainInfoReceived?.Invoke(CurrentBrainInfo);
+
+                    WaitOnPortTwoSync();
+                    int pLength = ReadPayloadLength();
+                    if (pLength > SYNC) return;
+                    var payload = ReadPayload(pLength);
+                    int readedCheckSum = _neuroPort.ReadByte();
+                    _spiderData.Add(Convert.ToByte(readedCheckSum));
+                    if (readedCheckSum != payload.calculatedChecksum) return;
+
+                    ParsingPayload(payload.payload);
                     _spiderPort.Write(_spiderData.ToArray(), 0, _spiderData.Count);
                 }
             }
             catch (Exception exp)
             {
-                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine($"[Reading thread]: {exp.Message}");
-                Console.ResetColor();
             }
         }
 

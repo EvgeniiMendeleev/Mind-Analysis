@@ -23,24 +23,32 @@ namespace EEG_Graphics
     {
         private Dictionary<BrainChartName, Chart> _brainCharts;
         public int DynamicChartPointsCount { get; private set; } = 0;
-
-        public BrainCharts() => _brainCharts = new Dictionary<BrainChartName, Chart>();
+        public int MaxPointOnCharts { get; private set; }
+        public BrainCharts(int maxPointsOnCharts)
+        {
+            _brainCharts = new Dictionary<BrainChartName, Chart>();
+            MaxPointOnCharts = maxPointsOnCharts;
+        }
 
         public void AddGraphic(BrainChartName chartName, Chart chart) => _brainCharts.Add(chartName, chart);
 
         public void DisplayBrainInfo(BrainInfo brainInfo, int serie = 0)
         {
-            _brainCharts[BrainChartName.Attention].Series[serie].Points.AddXY(brainInfo.second, brainInfo.attention);
-            _brainCharts[BrainChartName.Meditation].Series[serie].Points.AddXY(brainInfo.second, brainInfo.meditation);
-            _brainCharts[BrainChartName.Alpha_High].Series[serie].Points.AddXY(brainInfo.second, brainInfo.alphaHigh);
-            _brainCharts[BrainChartName.Alpha_Low].Series[serie].Points.AddXY(brainInfo.second, brainInfo.alphaLow);
-            _brainCharts[BrainChartName.Beta_High].Series[serie].Points.AddXY(brainInfo.second, brainInfo.betaHigh);
-            _brainCharts[BrainChartName.Beta_Low].Series[serie].Points.AddXY(brainInfo.second, brainInfo.betaLow);
-            _brainCharts[BrainChartName.Gamma_High].Series[serie].Points.AddXY(brainInfo.second, brainInfo.gammaHigh);
-            _brainCharts[BrainChartName.Gamma_Low].Series[serie].Points.AddXY(brainInfo.second, brainInfo.gammaLow);
-            _brainCharts[BrainChartName.Delta].Series[serie].Points.AddXY(brainInfo.second, brainInfo.delta);
-            _brainCharts[BrainChartName.Theta].Series[serie].Points.AddXY(brainInfo.second, brainInfo.theta);
+            if (MaxPointOnCharts < DynamicChartPointsCount) DeletePointOnCharts(0, 0);
+
             DynamicChartPointsCount++;
+            _brainCharts[BrainChartName.Attention].Series[serie].Points.AddXY(DynamicChartPointsCount, brainInfo.attention);
+            _brainCharts[BrainChartName.Meditation].Series[serie].Points.AddXY(DynamicChartPointsCount, brainInfo.meditation);
+            _brainCharts[BrainChartName.Alpha_High].Series[serie].Points.AddXY(DynamicChartPointsCount, brainInfo.alphaHigh);
+            _brainCharts[BrainChartName.Alpha_Low].Series[serie].Points.AddXY(DynamicChartPointsCount, brainInfo.alphaLow);
+            _brainCharts[BrainChartName.Beta_High].Series[serie].Points.AddXY(DynamicChartPointsCount, brainInfo.betaHigh);
+            _brainCharts[BrainChartName.Beta_Low].Series[serie].Points.AddXY(DynamicChartPointsCount, brainInfo.betaLow);
+            _brainCharts[BrainChartName.Gamma_High].Series[serie].Points.AddXY(DynamicChartPointsCount, brainInfo.gammaHigh);
+            _brainCharts[BrainChartName.Gamma_Low].Series[serie].Points.AddXY(DynamicChartPointsCount, brainInfo.gammaLow);
+            _brainCharts[BrainChartName.Delta].Series[serie].Points.AddXY(DynamicChartPointsCount, brainInfo.delta);
+            _brainCharts[BrainChartName.Theta].Series[serie].Points.AddXY(DynamicChartPointsCount, brainInfo.theta);
+
+            ScaleCharts();
         }
 
         public void ScaleCharts()
