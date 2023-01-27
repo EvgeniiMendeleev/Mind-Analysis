@@ -20,7 +20,7 @@ namespace EEG_Graphics
         public MainForm()
         {
             InitializeComponent();
-            _neurodevice = new NeuroConnector();
+            _neurodevice = new NeuroSerialPort("COM5", "COM6");
             _brainCharts = new BrainCharts();
             _neurodevice.OnBrainInfoReceived += DisplayDataToGraphics;
             UserControlSystem.GetSystem().Disable(btnStopRecord);
@@ -44,7 +44,7 @@ namespace EEG_Graphics
 
         private void StopToReadDataFromNeurodevice(object sender, EventArgs e)
         {
-            if (!_neurodevice.AreDataReading())
+            if (!_neurodevice.AreDataReading)
             {
                 MessageBox.Show("Соединение с ThinkGear Connector не установлено.", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
