@@ -14,6 +14,16 @@ namespace NeuroTGAM
     /// </summary>
     public class NeuroConnector : NeuroModuleBase
     {
+        /// <summary>
+        /// Делегат, позволяющий работать со всеми данными нейрогарнитуры, считанные на текущий момент.
+        /// </summary>
+        /// <param name="currentBrainInfo">Буфер со всеми данными нейрогарнитуры на текущую секунду.</param>
+        public delegate void BrainDataHandler(BrainInfo currentBrainInfo);
+        /// <summary>
+        /// Событие, позволяющее отображать все данные с нейрогарнитуры на экран.
+        /// </summary>
+        public event BrainDataHandler OnBrainInfoReceived;
+
         private TcpClient _connector;                                        //TCP соединение с ThinkGear Connector.
         private Stream _connectorStream;
         private BrainInfo _currentBrainData;                                 //Данные о мозговой деятельности в текущую секунду.
