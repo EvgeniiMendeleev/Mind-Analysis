@@ -131,6 +131,11 @@ namespace EEG_Graphics
             this.button1 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.serieNumericUp = new System.Windows.Forms.NumericUpDown();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.neuroPortTextBox = new System.Windows.Forms.TextBox();
+            this.spiderPortTextBox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.graphicLowAlpha)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.graphicHighAlpha)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.graphicHighBeta)).BeginInit();
@@ -157,6 +162,7 @@ namespace EEG_Graphics
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.serieNumericUp)).BeginInit();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // graphicLowAlpha
@@ -210,7 +216,7 @@ namespace EEG_Graphics
             this.btnStartRecord.Location = new System.Drawing.Point(5, 16);
             this.btnStartRecord.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.btnStartRecord.Name = "btnStartRecord";
-            this.btnStartRecord.Size = new System.Drawing.Size(203, 30);
+            this.btnStartRecord.Size = new System.Drawing.Size(298, 30);
             this.btnStartRecord.TabIndex = 2;
             this.btnStartRecord.Text = "Начать считывание данных\r\n";
             this.btnStartRecord.UseVisualStyleBackColor = true;
@@ -615,7 +621,7 @@ namespace EEG_Graphics
             this.btnStopRecord.Location = new System.Drawing.Point(5, 46);
             this.btnStopRecord.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.btnStopRecord.Name = "btnStopRecord";
-            this.btnStopRecord.Size = new System.Drawing.Size(203, 30);
+            this.btnStopRecord.Size = new System.Drawing.Size(298, 30);
             this.btnStopRecord.TabIndex = 23;
             this.btnStopRecord.Text = "Остановить считывание данных\r\n";
             this.btnStopRecord.UseVisualStyleBackColor = true;
@@ -660,7 +666,7 @@ namespace EEG_Graphics
             this.tabControl1.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(895, 649);
+            this.tabControl1.Size = new System.Drawing.Size(989, 649);
             this.tabControl1.TabIndex = 26;
             // 
             // alphaPage
@@ -732,7 +738,7 @@ namespace EEG_Graphics
             this.currAttenLevelPage.Location = new System.Drawing.Point(4, 22);
             this.currAttenLevelPage.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.currAttenLevelPage.Name = "currAttenLevelPage";
-            this.currAttenLevelPage.Size = new System.Drawing.Size(887, 623);
+            this.currAttenLevelPage.Size = new System.Drawing.Size(981, 623);
             this.currAttenLevelPage.TabIndex = 5;
             this.currAttenLevelPage.Text = "Текущий уровень внимания";
             // 
@@ -760,7 +766,7 @@ namespace EEG_Graphics
             series31.Legend = "Legend1";
             series31.Name = "Уровень внимания";
             this.attentionLevelChart.Series.Add(series31);
-            this.attentionLevelChart.Size = new System.Drawing.Size(879, 621);
+            this.attentionLevelChart.Size = new System.Drawing.Size(973, 621);
             this.attentionLevelChart.TabIndex = 6;
             this.attentionLevelChart.Text = "chart1";
             title11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
@@ -894,7 +900,7 @@ namespace EEG_Graphics
             this.groupBox2.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(3, 1, 3, 1);
-            this.groupBox2.Size = new System.Drawing.Size(213, 84);
+            this.groupBox2.Size = new System.Drawing.Size(310, 84);
             this.groupBox2.TabIndex = 28;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Управление сеансом записи";
@@ -968,12 +974,61 @@ namespace EEG_Graphics
             0,
             0});
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.groupBox3.Controls.Add(this.spiderPortTextBox);
+            this.groupBox3.Controls.Add(this.neuroPortTextBox);
+            this.groupBox3.Controls.Add(this.label5);
+            this.groupBox3.Controls.Add(this.label4);
+            this.groupBox3.Location = new System.Drawing.Point(691, 749);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.groupBox3.Size = new System.Drawing.Size(310, 93);
+            this.groupBox3.TabIndex = 31;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "COM - порты устройств";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(7, 28);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(97, 13);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "Нейроинтерфейс:";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(69, 53);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(35, 13);
+            this.label5.TabIndex = 1;
+            this.label5.Text = "Паук:";
+            // 
+            // neuroPortTextBox
+            // 
+            this.neuroPortTextBox.Location = new System.Drawing.Point(107, 25);
+            this.neuroPortTextBox.Name = "neuroPortTextBox";
+            this.neuroPortTextBox.Size = new System.Drawing.Size(196, 20);
+            this.neuroPortTextBox.TabIndex = 2;
+            // 
+            // spiderPortTextBox
+            // 
+            this.spiderPortTextBox.Location = new System.Drawing.Point(107, 50);
+            this.spiderPortTextBox.Name = "spiderPortTextBox";
+            this.spiderPortTextBox.Size = new System.Drawing.Size(196, 20);
+            this.spiderPortTextBox.TabIndex = 3;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.ClientSize = new System.Drawing.Size(912, 849);
+            this.ClientSize = new System.Drawing.Size(1006, 849);
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupRecordSettings);
@@ -1011,6 +1066,8 @@ namespace EEG_Graphics
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.serieNumericUp)).EndInit();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1055,6 +1112,11 @@ namespace EEG_Graphics
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.NumericUpDown serieNumericUp;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.TextBox spiderPortTextBox;
+        private System.Windows.Forms.TextBox neuroPortTextBox;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
     }
 }
 

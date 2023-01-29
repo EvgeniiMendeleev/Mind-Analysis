@@ -31,7 +31,7 @@ namespace EEG_Graphics
 
         public BrainInfo CurrentBrainInfo { get; private set; }
 
-        public NeuroSerialPort(string neuroCOM, string spiderCOM)
+        public NeuroSerialPort()
         {
             _readingThread = new Thread(ReadingThread);
             _readingThread.IsBackground = true;
@@ -40,14 +40,11 @@ namespace EEG_Graphics
             _spiderPort = new SerialPort();
             _spiderData = new List<byte>();
 
-            _neuroPort.PortName = neuroCOM;
             _neuroPort.BaudRate = 57600;
             _neuroPort.Parity = Parity.None;
             _neuroPort.DataBits = 8;
             _neuroPort.StopBits = StopBits.One;
             _neuroPort.ReadTimeout = 12000;
-
-            _spiderPort.PortName = spiderCOM;
 
             CurrentBrainInfo = new BrainInfo();
         }
@@ -61,6 +58,12 @@ namespace EEG_Graphics
         public void ConnectToSpider()
         {
             _spiderPort.Open();
+        }
+
+        public void SetPorts(string neuroPort, string spiderPort)
+        {
+            _neuroPort.PortName = neuroPort;
+            _spiderPort.PortName = spiderPort;
         }
 
         public  bool AreDataReading { get { return _neuroPort.IsOpen; } }

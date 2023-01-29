@@ -20,7 +20,7 @@ namespace EEG_Graphics
         public MainForm()
         {
             InitializeComponent();
-            _neurodevice = new NeuroSerialPort("COM4", "COM5");
+            _neurodevice = new NeuroSerialPort();
             _brainCharts = new BrainCharts();
             _neurodevice.OnBrainInfoReceived += (BrainInfo brainInfo) => Invoke(new DynamicChartDisplay(DisplayPointToDynamicGraphic), brainInfo);
             UserControlSystem.GetSystem().Disable(btnStopRecord);
@@ -30,6 +30,8 @@ namespace EEG_Graphics
         {
             try
             {
+                _neurodevice.SetPorts(neuroPortTextBox.Text, spiderPortTextBox.Text);
+
                 DialogResult result = MessageBox.Show("Подключиться к пауку?", "Паук", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if(result == DialogResult.Yes) _neurodevice.Connect();
 
