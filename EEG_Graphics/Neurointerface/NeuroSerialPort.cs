@@ -5,13 +5,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO.Ports;
+using System.Threading;
 
 namespace EEG_Graphics
 {
-    public class NeuroSerialPort : NeuroModuleBase
+    public class NeuroSerialPort
     {
         const char EXCODE = '\x55', SYNC = '\xAA', ASIC_EEG_POWER_INT = '\x83', POOR_SIGNAL = '\x02', ATTENTION = '\x04', MEDITATION = '\x05';
 
+        private Thread _readingThread;
+        private readonly Mutex _mutex;
         private SerialPort _neuroPort;
         private SerialPort _spiderPort;
 
@@ -19,8 +22,11 @@ namespace EEG_Graphics
 
         public BrainInfo CurrentBrainInfo { get; private set; }
 
-        public NeuroSerialPort(string neuroCOM, string spiderCOM) : base()
+        public NeuroSerialPort(string neuroCOM, string spiderCOM)
         {
+            _readingThread = new Thread(ReadingThread);
+            _readingThread.IsBackground = true;
+            _mutex = new Mutex();
             _neuroPort = new SerialPort();
             _spiderPort = new SerialPort();
             _spiderData = new List<byte>();
@@ -37,16 +43,16 @@ namespace EEG_Graphics
             CurrentBrainInfo = new BrainInfo();
         }
 
-        public override void Connect()
+        public  void Connect()
         {
             _neuroPort.Open();
             _spiderPort.Open();
             _readingThread.Start();
         }
 
-        public override bool AreDataReading { get { return _neuroPort.IsOpen; } }
+        public  bool AreDataReading { get { return _neuroPort.IsOpen; } }
 
-        public override void CloseConnection()
+        public  void CloseConnection()
         {
             if (AreDataReading)
             {
@@ -55,7 +61,7 @@ namespace EEG_Graphics
             }
         }
 
-        public override BrainInfo GetCurrentBrainData()
+        public BrainInfo GetCurrentBrainData()
         {
             _mutex.WaitOne();
             BrainInfo brainInfo = CurrentBrainInfo.Clone() as BrainInfo;
@@ -63,7 +69,7 @@ namespace EEG_Graphics
             return brainInfo;
         }
 
-        protected override void ReadingThread()
+        protected void ReadingThread()
         {
             try
             {

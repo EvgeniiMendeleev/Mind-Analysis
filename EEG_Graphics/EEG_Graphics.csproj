@@ -104,9 +104,8 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Neurointerface\NeuroSerialPort.cs" />
     <Compile Include="Neurointerface\ParentClasses\NeuroModuleBase.cs" />
-    <Compile Include="Neurointerface\ChildClasses\NeuroConnector.cs" />
-    <Compile Include="Neurointerface\ChildClasses\NeuroSerialPort.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GUI\GUI_ControlSystem\UserControlSystem.cs" />
