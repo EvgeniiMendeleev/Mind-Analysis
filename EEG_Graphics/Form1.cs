@@ -20,8 +20,9 @@ namespace EEG_Graphics
         public MainForm()
         {
             InitializeComponent();
-            _brainCharts = new BrainCharts(Convert.ToInt32(numMaxChartPoints.Value));
             _neurodevice = new NeuroSerialPort("COM4", "COM5");
+            _brainCharts = new BrainCharts();
+            _neurodevice.OnBrainInfoReceived += (BrainInfo brainInfo) => Invoke(new DynamicChartDisplay(DisplayPointToDynamicGraphic), brainInfo);
             UserControlSystem.GetSystem().Disable(btnStopRecord);
             _neurodevice.OnBrainInfoReceived += DisplayDataToGraphics;
             _brainCharts.AddGraphic(BrainChartName.Attention, graphicAttention);
