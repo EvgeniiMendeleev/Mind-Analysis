@@ -128,6 +128,16 @@ namespace EEG_Graphics
             attentionLevelChart.Series[0].Points.AddXY(1.0f, brainInfo.attention);
 
             _brainCharts.DisplayBrainInfo(brainInfo);
+            _brainCharts.ScaleCharts();
+
+            _seconds++;
+
+            if (!chkSaveRecordData.Checked) return;
+            using (FileStream file = new FileStream(fullFilePathText.Text, FileMode.OpenOrCreate))
+            {
+                file.Seek(0, SeekOrigin.End);
+                using (CsvWriter csvWriter = new CsvWriter(new StreamWriter(file), CultureInfo.CurrentCulture)) csvWriter.WriteRecord(brainInfo);
+            }
         }
     }
 }
