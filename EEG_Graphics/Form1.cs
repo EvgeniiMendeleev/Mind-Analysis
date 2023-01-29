@@ -13,7 +13,7 @@ namespace EEG_Graphics
     public partial class MainForm : Form
     {
         private delegate void DynamicChartDisplay(BrainInfo brainInfo);
-        private NeuroModuleBase _neurodevice;
+        private NeuroSerialPort _neurodevice;
         private BrainCharts _brainCharts;
         private uint _seconds = 0;
 
@@ -22,7 +22,7 @@ namespace EEG_Graphics
             InitializeComponent();
             _neurodevice = new NeuroSerialPort("COM5", "COM6");
             _brainCharts = new BrainCharts();
-            _neurodevice.OnBrainInfoReceived += DisplayDataToGraphics;
+            _neurodevice.OnBrainInfoReceived += (BrainInfo brainInfo) => Invoke(new DynamicChartDisplay(DisplayPointToDynamicGraphic), brainInfo);
             UserControlSystem.GetSystem().Disable(btnStopRecord);
         }
 
@@ -56,7 +56,6 @@ namespace EEG_Graphics
         }
 
         private void OnChangedValueInSaveMindRecord(object sender, EventArgs e) => btnChangeSavePath.Enabled = !btnChangeSavePath.Enabled;
-        private void OnChangedValueInMaxGraphPoints(object sender, EventArgs e) => numMaxChartPoints.Enabled = !numMaxChartPoints.Enabled;
 
         private void UploadBrainFile(object sender, EventArgs e)
         {
@@ -65,8 +64,8 @@ namespace EEG_Graphics
             if (OPF.ShowDialog() != DialogResult.OK) return;
 
             int serieNumber = Convert.ToInt32(serieNumericUp.Value);
-            _brainCharts.ClearSerieOnCharts(serieNumber);
 
+            _brainCharts.ClearSerieOnCharts(serieNumber);
             using (CsvReader csvReader = new CsvReader(File.OpenText(OPF.FileName), CultureInfo.CurrentCulture))
             {
                 var brainInfos = csvReader.GetRecords<BrainInfo>();
@@ -95,25 +94,10 @@ namespace EEG_Graphics
             _brainCharts.ClearSerieOnCharts(serieNumber);
         }
 
-        private void DisplayDataToGraphics(BrainInfo currentBrainData)
-        {
-            currentBrainData.second = _seconds;
-            BeginInvoke(new DynamicChartDisplay(DisplayPointToDynamicGraphic), currentBrainData);
-            _seconds++;
-
-            if (chkSaveRecordData.Checked) return;
-            using (FileStream file = new FileStream(fullFilePathText.Text, FileMode.OpenOrCreate))
-            {
-                file.Seek(0, SeekOrigin.End);
-                using (CsvWriter csvWriter = new CsvWriter(new StreamWriter(file), CultureInfo.CurrentCulture))
-                {
-                    csvWriter.WriteRecord(currentBrainData);
-                }
-            }
-        }
-
         void DisplayPointToDynamicGraphic(BrainInfo brainInfo)
         {
+            brainInfo.second = _seconds;
+
             attentionLevelChart.Series[0].Points.Clear();
             if (brainInfo.attention > 0 && brainInfo.attention <= 50) attentionLevelChart.Series[0].Color = Color.Red;
             else if (brainInfo.attention > 50 && brainInfo.attention <= 80) attentionLevelChart.Series[0].Color = Color.Yellow;
@@ -123,6 +107,15 @@ namespace EEG_Graphics
             if (numMaxChartPoints.Value < _brainCharts.DynamicChartPointsCount) _brainCharts.DeletePointOnCharts(0, 0);
             _brainCharts.DisplayBrainInfo(brainInfo);
             _brainCharts.ScaleCharts();
+
+            _seconds++;
+
+            if (chkSaveRecordData.Checked) return;
+            using (FileStream file = new FileStream(fullFilePathText.Text, FileMode.OpenOrCreate))
+            {
+                file.Seek(0, SeekOrigin.End);
+                using (CsvWriter csvWriter = new CsvWriter(new StreamWriter(file), CultureInfo.CurrentCulture)) csvWriter.WriteRecord(brainInfo);
+            }
         }
     }
 }
