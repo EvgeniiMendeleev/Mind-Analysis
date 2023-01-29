@@ -41,11 +41,11 @@ namespace EEG_Graphics
         {
             try
             {
-                DialogResult result = MessageBox.Show("Подключиться к пауку?", "Подключение!", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                DialogResult result = MessageBox.Show("Подключиться к пауку?", "Паук", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if(result == DialogResult.Yes) _neurodevice.Connect();
+
+                result = MessageBox.Show("Подключиться к нейроинтерфейсу?", "Нейроинтерфейс", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result == DialogResult.Yes) _neurodevice.ConnectToSpider();
-                MessageBox.Show("Подготовьте нейроинтерфейс к подключению!", "Подключение!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                _neurodevice.Connect();
-                //getDataTimer.Start();
             }
             catch
             {
