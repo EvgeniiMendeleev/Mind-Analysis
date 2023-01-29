@@ -30,7 +30,11 @@ namespace EEG_Graphics
         {
             try
             {
-                _neurodevice.Connect();
+                DialogResult result = MessageBox.Show("Подключиться к пауку?", "Паук", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if(result == DialogResult.Yes) _neurodevice.Connect();
+
+                result = MessageBox.Show("Подключиться к нейроинтерфейсу?", "Нейроинтерфейс", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result == DialogResult.Yes) _neurodevice.ConnectToSpider();
             }
             catch
             {

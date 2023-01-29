@@ -55,8 +55,12 @@ namespace EEG_Graphics
         public  void Connect()
         {
             _neuroPort.Open();
-            _spiderPort.Open();
             _readingThread.Start();
+        }
+
+        public void ConnectToSpider()
+        {
+            _spiderPort.Open();
         }
 
         public  bool AreDataReading { get { return _neuroPort.IsOpen; } }
