@@ -13,11 +13,20 @@ namespace EEG_Graphics
     {
         const char EXCODE = '\x55', SYNC = '\xAA', ASIC_EEG_POWER_INT = '\x83', POOR_SIGNAL = '\x02', ATTENTION = '\x04', MEDITATION = '\x05';
 
+        /// <summary>
+        /// Делегат, позволяющий работать со всеми данными нейрогарнитуры, считанные на текущий момент.
+        /// </summary>
+        /// <param name="currentBrainInfo">Буфер со всеми данными нейрогарнитуры на текущую секунду.</param>
+        public delegate void BrainDataHandler(BrainInfo currentBrainInfo);
+        /// <summary>
+        /// Событие, позволяющее отображать все данные с нейрогарнитуры на экран.
+        /// </summary>
+        public BrainDataHandler OnBrainInfoReceived;
+
         private Thread _readingThread;
         private readonly Mutex _mutex;
         private SerialPort _neuroPort;
         private SerialPort _spiderPort;
-
         private List<byte> _spiderData;
 
         public BrainInfo CurrentBrainInfo { get; private set; }
