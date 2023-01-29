@@ -44,10 +44,10 @@ namespace EEG_Graphics
                 _neurodevice.SetPorts(neuroPortTextBox.Text, spiderPortTextBox.Text);
 
                 DialogResult result = MessageBox.Show("Подключиться к пауку?", "Паук", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if(result == DialogResult.Yes) _neurodevice.Connect();
+                if(result == DialogResult.Yes) _neurodevice.ConnectToSpider();
 
                 result = MessageBox.Show("Подключиться к нейроинтерфейсу?", "Нейроинтерфейс", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (result == DialogResult.Yes) _neurodevice.ConnectToSpider();
+                if (result == DialogResult.Yes) _neurodevice.Connect();
             }
             catch
             {
