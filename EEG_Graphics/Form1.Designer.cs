@@ -161,7 +161,8 @@ namespace EEG_Graphics
             // 
             // graphicLowAlpha
             // 
-            this.graphicLowAlpha.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.graphicLowAlpha.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.graphicLowAlpha.BackColor = System.Drawing.Color.Gray;
             chartArea1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
@@ -170,8 +171,8 @@ namespace EEG_Graphics
             legend1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             legend1.Name = "Legend1";
             this.graphicLowAlpha.Legends.Add(legend1);
-            this.graphicLowAlpha.Location = new System.Drawing.Point(7, 490);
-            this.graphicLowAlpha.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.graphicLowAlpha.Location = new System.Drawing.Point(5, 318);
+            this.graphicLowAlpha.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.graphicLowAlpha.Name = "graphicLowAlpha";
             this.graphicLowAlpha.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
             series1.BorderWidth = 3;
@@ -192,7 +193,7 @@ namespace EEG_Graphics
             this.graphicLowAlpha.Series.Add(series1);
             this.graphicLowAlpha.Series.Add(series2);
             this.graphicLowAlpha.Series.Add(series3);
-            this.graphicLowAlpha.Size = new System.Drawing.Size(2036, 480);
+            this.graphicLowAlpha.Size = new System.Drawing.Size(885, 305);
             this.graphicLowAlpha.TabIndex = 0;
             this.graphicLowAlpha.Text = "chart1";
             title1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
@@ -206,10 +207,10 @@ namespace EEG_Graphics
             // btnStartRecord
             // 
             this.btnStartRecord.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnStartRecord.Location = new System.Drawing.Point(7, 25);
-            this.btnStartRecord.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.btnStartRecord.Location = new System.Drawing.Point(5, 16);
+            this.btnStartRecord.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.btnStartRecord.Name = "btnStartRecord";
-            this.btnStartRecord.Size = new System.Drawing.Size(383, 46);
+            this.btnStartRecord.Size = new System.Drawing.Size(203, 30);
             this.btnStartRecord.TabIndex = 2;
             this.btnStartRecord.Text = "Начать считывание данных\r\n";
             this.btnStartRecord.UseVisualStyleBackColor = true;
@@ -226,8 +227,8 @@ namespace EEG_Graphics
             legend2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             legend2.Name = "Legend1";
             this.graphicHighAlpha.Legends.Add(legend2);
-            this.graphicHighAlpha.Location = new System.Drawing.Point(7, 2);
-            this.graphicHighAlpha.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.graphicHighAlpha.Location = new System.Drawing.Point(5, 1);
+            this.graphicHighAlpha.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.graphicHighAlpha.Name = "graphicHighAlpha";
             this.graphicHighAlpha.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
             series4.BorderWidth = 3;
@@ -248,7 +249,7 @@ namespace EEG_Graphics
             this.graphicHighAlpha.Series.Add(series4);
             this.graphicHighAlpha.Series.Add(series5);
             this.graphicHighAlpha.Series.Add(series6);
-            this.graphicHighAlpha.Size = new System.Drawing.Size(2036, 485);
+            this.graphicHighAlpha.Size = new System.Drawing.Size(885, 315);
             this.graphicHighAlpha.TabIndex = 5;
             this.graphicHighAlpha.Text = "chart1";
             title2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
@@ -269,8 +270,8 @@ namespace EEG_Graphics
             legend3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             legend3.Name = "Legend1";
             this.graphicHighBeta.Legends.Add(legend3);
-            this.graphicHighBeta.Location = new System.Drawing.Point(7, 2);
-            this.graphicHighBeta.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.graphicHighBeta.Location = new System.Drawing.Point(5, 1);
+            this.graphicHighBeta.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.graphicHighBeta.Name = "graphicHighBeta";
             this.graphicHighBeta.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
             series7.BorderWidth = 3;
@@ -291,7 +292,7 @@ namespace EEG_Graphics
             this.graphicHighBeta.Series.Add(series7);
             this.graphicHighBeta.Series.Add(series8);
             this.graphicHighBeta.Series.Add(series9);
-            this.graphicHighBeta.Size = new System.Drawing.Size(1060, 485);
+            this.graphicHighBeta.Size = new System.Drawing.Size(885, 315);
             this.graphicHighBeta.TabIndex = 9;
             this.graphicHighBeta.Text = "chart1";
             title3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
@@ -313,8 +314,8 @@ namespace EEG_Graphics
             legend4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             legend4.Name = "Legend1";
             this.graphicLowBeta.Legends.Add(legend4);
-            this.graphicLowBeta.Location = new System.Drawing.Point(7, 490);
-            this.graphicLowBeta.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.graphicLowBeta.Location = new System.Drawing.Point(5, 318);
+            this.graphicLowBeta.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.graphicLowBeta.Name = "graphicLowBeta";
             this.graphicLowBeta.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
             series10.BorderWidth = 3;
@@ -335,7 +336,7 @@ namespace EEG_Graphics
             this.graphicLowBeta.Series.Add(series10);
             this.graphicLowBeta.Series.Add(series11);
             this.graphicLowBeta.Series.Add(series12);
-            this.graphicLowBeta.Size = new System.Drawing.Size(1060, 484);
+            this.graphicLowBeta.Size = new System.Drawing.Size(885, 305);
             this.graphicLowBeta.TabIndex = 7;
             this.graphicLowBeta.Text = "chart1";
             title4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
@@ -356,8 +357,8 @@ namespace EEG_Graphics
             legend5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             legend5.Name = "Legend1";
             this.graphicHighGamma.Legends.Add(legend5);
-            this.graphicHighGamma.Location = new System.Drawing.Point(7, 2);
-            this.graphicHighGamma.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.graphicHighGamma.Location = new System.Drawing.Point(5, 1);
+            this.graphicHighGamma.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.graphicHighGamma.Name = "graphicHighGamma";
             this.graphicHighGamma.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
             series13.BorderWidth = 3;
@@ -378,7 +379,7 @@ namespace EEG_Graphics
             this.graphicHighGamma.Series.Add(series13);
             this.graphicHighGamma.Series.Add(series14);
             this.graphicHighGamma.Series.Add(series15);
-            this.graphicHighGamma.Size = new System.Drawing.Size(1060, 485);
+            this.graphicHighGamma.Size = new System.Drawing.Size(885, 315);
             this.graphicHighGamma.TabIndex = 13;
             this.graphicHighGamma.Text = "chart1";
             title5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
@@ -400,8 +401,8 @@ namespace EEG_Graphics
             legend6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             legend6.Name = "Legend1";
             this.graphicLowGamma.Legends.Add(legend6);
-            this.graphicLowGamma.Location = new System.Drawing.Point(7, 490);
-            this.graphicLowGamma.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.graphicLowGamma.Location = new System.Drawing.Point(5, 318);
+            this.graphicLowGamma.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.graphicLowGamma.Name = "graphicLowGamma";
             this.graphicLowGamma.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
             series16.BorderWidth = 3;
@@ -422,7 +423,7 @@ namespace EEG_Graphics
             this.graphicLowGamma.Series.Add(series16);
             this.graphicLowGamma.Series.Add(series17);
             this.graphicLowGamma.Series.Add(series18);
-            this.graphicLowGamma.Size = new System.Drawing.Size(1060, 484);
+            this.graphicLowGamma.Size = new System.Drawing.Size(885, 305);
             this.graphicLowGamma.TabIndex = 11;
             this.graphicLowGamma.Text = "chart1";
             title6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
@@ -443,8 +444,8 @@ namespace EEG_Graphics
             legend7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             legend7.Name = "Legend1";
             this.graphicDelta.Legends.Add(legend7);
-            this.graphicDelta.Location = new System.Drawing.Point(7, 2);
-            this.graphicDelta.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.graphicDelta.Location = new System.Drawing.Point(5, 1);
+            this.graphicDelta.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.graphicDelta.Name = "graphicDelta";
             this.graphicDelta.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
             series19.BorderWidth = 3;
@@ -465,7 +466,7 @@ namespace EEG_Graphics
             this.graphicDelta.Series.Add(series19);
             this.graphicDelta.Series.Add(series20);
             this.graphicDelta.Series.Add(series21);
-            this.graphicDelta.Size = new System.Drawing.Size(1060, 485);
+            this.graphicDelta.Size = new System.Drawing.Size(885, 315);
             this.graphicDelta.TabIndex = 17;
             this.graphicDelta.Text = "chart1";
             title7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
@@ -487,8 +488,8 @@ namespace EEG_Graphics
             legend8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             legend8.Name = "Legend1";
             this.graphicTheta.Legends.Add(legend8);
-            this.graphicTheta.Location = new System.Drawing.Point(7, 490);
-            this.graphicTheta.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.graphicTheta.Location = new System.Drawing.Point(5, 318);
+            this.graphicTheta.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.graphicTheta.Name = "graphicTheta";
             this.graphicTheta.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
             series22.BorderWidth = 3;
@@ -510,7 +511,7 @@ namespace EEG_Graphics
             this.graphicTheta.Series.Add(series22);
             this.graphicTheta.Series.Add(series23);
             this.graphicTheta.Series.Add(series24);
-            this.graphicTheta.Size = new System.Drawing.Size(1060, 484);
+            this.graphicTheta.Size = new System.Drawing.Size(885, 305);
             this.graphicTheta.TabIndex = 15;
             this.graphicTheta.Text = "chart1";
             title8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
@@ -531,8 +532,8 @@ namespace EEG_Graphics
             legend9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             legend9.Name = "Legend1";
             this.graphicMeditation.Legends.Add(legend9);
-            this.graphicMeditation.Location = new System.Drawing.Point(7, 2);
-            this.graphicMeditation.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.graphicMeditation.Location = new System.Drawing.Point(5, 1);
+            this.graphicMeditation.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.graphicMeditation.Name = "graphicMeditation";
             this.graphicMeditation.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
             series25.BorderWidth = 3;
@@ -553,7 +554,7 @@ namespace EEG_Graphics
             this.graphicMeditation.Series.Add(series25);
             this.graphicMeditation.Series.Add(series26);
             this.graphicMeditation.Series.Add(series27);
-            this.graphicMeditation.Size = new System.Drawing.Size(1060, 485);
+            this.graphicMeditation.Size = new System.Drawing.Size(885, 315);
             this.graphicMeditation.TabIndex = 21;
             this.graphicMeditation.Text = "chart1";
             title9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
@@ -575,8 +576,8 @@ namespace EEG_Graphics
             legend10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             legend10.Name = "Legend1";
             this.graphicAttention.Legends.Add(legend10);
-            this.graphicAttention.Location = new System.Drawing.Point(7, 490);
-            this.graphicAttention.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.graphicAttention.Location = new System.Drawing.Point(5, 318);
+            this.graphicAttention.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.graphicAttention.Name = "graphicAttention";
             this.graphicAttention.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
             series28.BorderWidth = 3;
@@ -597,7 +598,7 @@ namespace EEG_Graphics
             this.graphicAttention.Series.Add(series28);
             this.graphicAttention.Series.Add(series29);
             this.graphicAttention.Series.Add(series30);
-            this.graphicAttention.Size = new System.Drawing.Size(1060, 484);
+            this.graphicAttention.Size = new System.Drawing.Size(885, 305);
             this.graphicAttention.TabIndex = 19;
             this.graphicAttention.Text = "chart1";
             title10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
@@ -611,10 +612,10 @@ namespace EEG_Graphics
             // btnStopRecord
             // 
             this.btnStopRecord.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnStopRecord.Location = new System.Drawing.Point(7, 71);
-            this.btnStopRecord.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.btnStopRecord.Location = new System.Drawing.Point(5, 46);
+            this.btnStopRecord.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.btnStopRecord.Name = "btnStopRecord";
-            this.btnStopRecord.Size = new System.Drawing.Size(383, 46);
+            this.btnStopRecord.Size = new System.Drawing.Size(203, 30);
             this.btnStopRecord.TabIndex = 23;
             this.btnStopRecord.Text = "Остановить считывание данных\r\n";
             this.btnStopRecord.UseVisualStyleBackColor = true;
@@ -623,10 +624,10 @@ namespace EEG_Graphics
             // btnLoadFirstFile
             // 
             this.btnLoadFirstFile.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnLoadFirstFile.Location = new System.Drawing.Point(9, 76);
-            this.btnLoadFirstFile.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.btnLoadFirstFile.Location = new System.Drawing.Point(7, 49);
+            this.btnLoadFirstFile.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.btnLoadFirstFile.Name = "btnLoadFirstFile";
-            this.btnLoadFirstFile.Size = new System.Drawing.Size(400, 46);
+            this.btnLoadFirstFile.Size = new System.Drawing.Size(229, 30);
             this.btnLoadFirstFile.TabIndex = 24;
             this.btnLoadFirstFile.Text = "Загрузить сеанс записи";
             this.btnLoadFirstFile.UseVisualStyleBackColor = true;
@@ -634,10 +635,10 @@ namespace EEG_Graphics
             // 
             // chkSaveRecordData
             // 
-            this.chkSaveRecordData.Location = new System.Drawing.Point(7, 15);
-            this.chkSaveRecordData.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.chkSaveRecordData.Location = new System.Drawing.Point(5, 10);
+            this.chkSaveRecordData.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.chkSaveRecordData.Name = "chkSaveRecordData";
-            this.chkSaveRecordData.Size = new System.Drawing.Size(523, 32);
+            this.chkSaveRecordData.Size = new System.Drawing.Size(392, 21);
             this.chkSaveRecordData.TabIndex = 25;
             this.chkSaveRecordData.Text = "Сохранять данные с нейрогарнитуры во время записи";
             this.chkSaveRecordData.UseVisualStyleBackColor = true;
@@ -655,11 +656,11 @@ namespace EEG_Graphics
             this.tabControl1.Controls.Add(this.AttantionAndMeditationPage);
             this.tabControl1.Controls.Add(this.currAttenLevelPage);
             this.tabControl1.Cursor = System.Windows.Forms.Cursors.Default;
-            this.tabControl1.Location = new System.Drawing.Point(16, 15);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.tabControl1.Location = new System.Drawing.Point(12, 10);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1561, 1002);
+            this.tabControl1.Size = new System.Drawing.Size(895, 649);
             this.tabControl1.TabIndex = 26;
             // 
             // alphaPage
@@ -667,11 +668,11 @@ namespace EEG_Graphics
             this.alphaPage.BackColor = System.Drawing.Color.Gray;
             this.alphaPage.Controls.Add(this.graphicHighAlpha);
             this.alphaPage.Controls.Add(this.graphicLowAlpha);
-            this.alphaPage.Location = new System.Drawing.Point(4, 25);
-            this.alphaPage.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.alphaPage.Location = new System.Drawing.Point(4, 22);
+            this.alphaPage.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.alphaPage.Name = "alphaPage";
-            this.alphaPage.Padding = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.alphaPage.Size = new System.Drawing.Size(1553, 973);
+            this.alphaPage.Padding = new System.Windows.Forms.Padding(3, 1, 3, 1);
+            this.alphaPage.Size = new System.Drawing.Size(887, 623);
             this.alphaPage.TabIndex = 0;
             this.alphaPage.Text = "Альфа - волна";
             // 
@@ -680,11 +681,11 @@ namespace EEG_Graphics
             this.betaPage.BackColor = System.Drawing.Color.Gray;
             this.betaPage.Controls.Add(this.graphicHighBeta);
             this.betaPage.Controls.Add(this.graphicLowBeta);
-            this.betaPage.Location = new System.Drawing.Point(4, 25);
-            this.betaPage.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.betaPage.Location = new System.Drawing.Point(4, 22);
+            this.betaPage.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.betaPage.Name = "betaPage";
-            this.betaPage.Padding = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.betaPage.Size = new System.Drawing.Size(1060, 973);
+            this.betaPage.Padding = new System.Windows.Forms.Padding(3, 1, 3, 1);
+            this.betaPage.Size = new System.Drawing.Size(887, 623);
             this.betaPage.TabIndex = 1;
             this.betaPage.Text = "Бета - волна";
             // 
@@ -693,10 +694,10 @@ namespace EEG_Graphics
             this.gammaPage.BackColor = System.Drawing.Color.Gray;
             this.gammaPage.Controls.Add(this.graphicLowGamma);
             this.gammaPage.Controls.Add(this.graphicHighGamma);
-            this.gammaPage.Location = new System.Drawing.Point(4, 25);
-            this.gammaPage.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.gammaPage.Location = new System.Drawing.Point(4, 22);
+            this.gammaPage.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.gammaPage.Name = "gammaPage";
-            this.gammaPage.Size = new System.Drawing.Size(1060, 973);
+            this.gammaPage.Size = new System.Drawing.Size(887, 623);
             this.gammaPage.TabIndex = 2;
             this.gammaPage.Text = "Гамма - волна";
             // 
@@ -705,10 +706,10 @@ namespace EEG_Graphics
             this.ThetaAndDeltaPage.BackColor = System.Drawing.Color.Gray;
             this.ThetaAndDeltaPage.Controls.Add(this.graphicTheta);
             this.ThetaAndDeltaPage.Controls.Add(this.graphicDelta);
-            this.ThetaAndDeltaPage.Location = new System.Drawing.Point(4, 25);
-            this.ThetaAndDeltaPage.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.ThetaAndDeltaPage.Location = new System.Drawing.Point(4, 22);
+            this.ThetaAndDeltaPage.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.ThetaAndDeltaPage.Name = "ThetaAndDeltaPage";
-            this.ThetaAndDeltaPage.Size = new System.Drawing.Size(1060, 973);
+            this.ThetaAndDeltaPage.Size = new System.Drawing.Size(887, 623);
             this.ThetaAndDeltaPage.TabIndex = 3;
             this.ThetaAndDeltaPage.Text = "Тета и Дельта волны";
             // 
@@ -717,10 +718,10 @@ namespace EEG_Graphics
             this.AttantionAndMeditationPage.BackColor = System.Drawing.Color.Gray;
             this.AttantionAndMeditationPage.Controls.Add(this.graphicAttention);
             this.AttantionAndMeditationPage.Controls.Add(this.graphicMeditation);
-            this.AttantionAndMeditationPage.Location = new System.Drawing.Point(4, 25);
-            this.AttantionAndMeditationPage.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.AttantionAndMeditationPage.Location = new System.Drawing.Point(4, 22);
+            this.AttantionAndMeditationPage.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.AttantionAndMeditationPage.Name = "AttantionAndMeditationPage";
-            this.AttantionAndMeditationPage.Size = new System.Drawing.Size(1060, 973);
+            this.AttantionAndMeditationPage.Size = new System.Drawing.Size(887, 623);
             this.AttantionAndMeditationPage.TabIndex = 4;
             this.AttantionAndMeditationPage.Text = "Внимание и расслабление";
             // 
@@ -728,10 +729,10 @@ namespace EEG_Graphics
             // 
             this.currAttenLevelPage.BackColor = System.Drawing.Color.Gray;
             this.currAttenLevelPage.Controls.Add(this.attentionLevelChart);
-            this.currAttenLevelPage.Location = new System.Drawing.Point(4, 25);
-            this.currAttenLevelPage.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.currAttenLevelPage.Location = new System.Drawing.Point(4, 22);
+            this.currAttenLevelPage.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.currAttenLevelPage.Name = "currAttenLevelPage";
-            this.currAttenLevelPage.Size = new System.Drawing.Size(1060, 973);
+            this.currAttenLevelPage.Size = new System.Drawing.Size(887, 623);
             this.currAttenLevelPage.TabIndex = 5;
             this.currAttenLevelPage.Text = "Текущий уровень внимания";
             // 
@@ -750,8 +751,8 @@ namespace EEG_Graphics
             legend11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             legend11.Name = "Legend1";
             this.attentionLevelChart.Legends.Add(legend11);
-            this.attentionLevelChart.Location = new System.Drawing.Point(7, 2);
-            this.attentionLevelChart.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.attentionLevelChart.Location = new System.Drawing.Point(5, 1);
+            this.attentionLevelChart.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.attentionLevelChart.Name = "attentionLevelChart";
             this.attentionLevelChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
             series31.BorderWidth = 3;
@@ -759,7 +760,7 @@ namespace EEG_Graphics
             series31.Legend = "Legend1";
             series31.Name = "Уровень внимания";
             this.attentionLevelChart.Series.Add(series31);
-            this.attentionLevelChart.Size = new System.Drawing.Size(1055, 955);
+            this.attentionLevelChart.Size = new System.Drawing.Size(879, 621);
             this.attentionLevelChart.TabIndex = 6;
             this.attentionLevelChart.Text = "chart1";
             title11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
@@ -773,11 +774,11 @@ namespace EEG_Graphics
             // 
             this.groupRecordSettings.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.groupRecordSettings.Controls.Add(this.tabControl2);
-            this.groupRecordSettings.Location = new System.Drawing.Point(16, 1023);
-            this.groupRecordSettings.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.groupRecordSettings.Location = new System.Drawing.Point(12, 661);
+            this.groupRecordSettings.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.groupRecordSettings.Name = "groupRecordSettings";
-            this.groupRecordSettings.Padding = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.groupRecordSettings.Size = new System.Drawing.Size(721, 256);
+            this.groupRecordSettings.Padding = new System.Windows.Forms.Padding(3, 1, 3, 1);
+            this.groupRecordSettings.Size = new System.Drawing.Size(421, 166);
             this.groupRecordSettings.TabIndex = 27;
             this.groupRecordSettings.TabStop = false;
             this.groupRecordSettings.Text = "Настройки записи сеанса";
@@ -786,11 +787,11 @@ namespace EEG_Graphics
             // 
             this.tabControl2.Controls.Add(this.tabPage1);
             this.tabControl2.Controls.Add(this.tabPage2);
-            this.tabControl2.Location = new System.Drawing.Point(7, 26);
-            this.tabControl2.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.tabControl2.Location = new System.Drawing.Point(5, 17);
+            this.tabControl2.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.tabControl2.Name = "tabControl2";
             this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(705, 223);
+            this.tabControl2.Size = new System.Drawing.Size(411, 145);
             this.tabControl2.TabIndex = 31;
             // 
             // tabPage1
@@ -800,40 +801,39 @@ namespace EEG_Graphics
             this.tabPage1.Controls.Add(this.fullFilePathText);
             this.tabPage1.Controls.Add(this.chkSaveRecordData);
             this.tabPage1.Controls.Add(this.btnChangeSavePath);
-            this.tabPage1.Location = new System.Drawing.Point(4, 25);
-            this.tabPage1.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.tabPage1.Size = new System.Drawing.Size(697, 194);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3, 1, 3, 1);
+            this.tabPage1.Size = new System.Drawing.Size(403, 119);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Сохранение сеанса";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(4, 48);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(3, 31);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(178, 16);
+            this.label2.Size = new System.Drawing.Size(141, 13);
             this.label2.TabIndex = 32;
             this.label2.Text = "Выбрать путь сохранения:";
             // 
             // fullFilePathText
             // 
-            this.fullFilePathText.Location = new System.Drawing.Point(7, 76);
-            this.fullFilePathText.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.fullFilePathText.Location = new System.Drawing.Point(5, 49);
+            this.fullFilePathText.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.fullFilePathText.Name = "fullFilePathText";
             this.fullFilePathText.ReadOnly = true;
-            this.fullFilePathText.Size = new System.Drawing.Size(536, 22);
+            this.fullFilePathText.Size = new System.Drawing.Size(275, 20);
             this.fullFilePathText.TabIndex = 31;
             // 
             // btnChangeSavePath
             // 
             this.btnChangeSavePath.Enabled = false;
-            this.btnChangeSavePath.Location = new System.Drawing.Point(553, 73);
-            this.btnChangeSavePath.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.btnChangeSavePath.Location = new System.Drawing.Point(286, 46);
+            this.btnChangeSavePath.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.btnChangeSavePath.Name = "btnChangeSavePath";
-            this.btnChangeSavePath.Size = new System.Drawing.Size(119, 37);
+            this.btnChangeSavePath.Size = new System.Drawing.Size(89, 24);
             this.btnChangeSavePath.TabIndex = 30;
             this.btnChangeSavePath.Text = "Обзор";
             this.btnChangeSavePath.UseVisualStyleBackColor = true;
@@ -844,28 +844,27 @@ namespace EEG_Graphics
             this.tabPage2.BackColor = System.Drawing.Color.Gray;
             this.tabPage2.Controls.Add(this.label1);
             this.tabPage2.Controls.Add(this.numMaxChartPoints);
-            this.tabPage2.Location = new System.Drawing.Point(4, 25);
-            this.tabPage2.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.tabPage2.Size = new System.Drawing.Size(697, 194);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 1, 3, 1);
+            this.tabPage2.Size = new System.Drawing.Size(403, 119);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Настройки отображения";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(7, 12);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(5, 8);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(306, 16);
+            this.label1.Size = new System.Drawing.Size(240, 13);
             this.label1.TabIndex = 28;
             this.label1.Text = "Максимальное количество точек на графике:";
             // 
             // numMaxChartPoints
             // 
-            this.numMaxChartPoints.Location = new System.Drawing.Point(441, 9);
-            this.numMaxChartPoints.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.numMaxChartPoints.Location = new System.Drawing.Point(251, 6);
+            this.numMaxChartPoints.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.numMaxChartPoints.Maximum = new decimal(new int[] {
             80,
             0,
@@ -877,7 +876,7 @@ namespace EEG_Graphics
             0,
             0});
             this.numMaxChartPoints.Name = "numMaxChartPoints";
-            this.numMaxChartPoints.Size = new System.Drawing.Size(160, 22);
+            this.numMaxChartPoints.Size = new System.Drawing.Size(75, 20);
             this.numMaxChartPoints.TabIndex = 27;
             this.numMaxChartPoints.Value = new decimal(new int[] {
             10,
@@ -891,11 +890,11 @@ namespace EEG_Graphics
             this.groupBox2.Controls.Add(this.btnStartRecord);
             this.groupBox2.Controls.Add(this.btnStopRecord);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.groupBox2.Location = new System.Drawing.Point(1177, 1023);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.groupBox2.Location = new System.Drawing.Point(691, 661);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.groupBox2.Size = new System.Drawing.Size(400, 130);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(3, 1, 3, 1);
+            this.groupBox2.Size = new System.Drawing.Size(213, 84);
             this.groupBox2.TabIndex = 28;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Управление сеансом записи";
@@ -903,10 +902,10 @@ namespace EEG_Graphics
             // btnClearAllCharts
             // 
             this.btnClearAllCharts.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnClearAllCharts.Location = new System.Drawing.Point(9, 127);
-            this.btnClearAllCharts.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.btnClearAllCharts.Location = new System.Drawing.Point(7, 83);
+            this.btnClearAllCharts.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.btnClearAllCharts.Name = "btnClearAllCharts";
-            this.btnClearAllCharts.Size = new System.Drawing.Size(400, 46);
+            this.btnClearAllCharts.Size = new System.Drawing.Size(229, 30);
             this.btnClearAllCharts.TabIndex = 29;
             this.btnClearAllCharts.Text = "Очистить график по номеру серии точек";
             this.btnClearAllCharts.UseVisualStyleBackColor = true;
@@ -920,11 +919,11 @@ namespace EEG_Graphics
             this.groupBox1.Controls.Add(this.serieNumericUp);
             this.groupBox1.Controls.Add(this.btnLoadFirstFile);
             this.groupBox1.Controls.Add(this.btnClearAllCharts);
-            this.groupBox1.Location = new System.Drawing.Point(747, 1023);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.groupBox1.Location = new System.Drawing.Point(440, 661);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(5, 5, 5, 5);
-            this.groupBox1.Size = new System.Drawing.Size(421, 238);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.groupBox1.Size = new System.Drawing.Size(244, 155);
             this.groupBox1.TabIndex = 30;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Управление загруженными графиками";
@@ -932,10 +931,10 @@ namespace EEG_Graphics
             // button1
             // 
             this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button1.Location = new System.Drawing.Point(9, 178);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.button1.Location = new System.Drawing.Point(7, 116);
+            this.button1.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(400, 46);
+            this.button1.Size = new System.Drawing.Size(229, 30);
             this.button1.TabIndex = 32;
             this.button1.Text = "Очистить все графики";
             this.button1.UseVisualStyleBackColor = true;
@@ -944,24 +943,24 @@ namespace EEG_Graphics
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(15, 38);
-            this.label3.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label3.Location = new System.Drawing.Point(11, 25);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(136, 16);
+            this.label3.Size = new System.Drawing.Size(108, 13);
             this.label3.TabIndex = 31;
             this.label3.Text = "Номер серии точек:";
             // 
             // serieNumericUp
             // 
-            this.serieNumericUp.Location = new System.Drawing.Point(217, 34);
-            this.serieNumericUp.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.serieNumericUp.Location = new System.Drawing.Point(163, 22);
+            this.serieNumericUp.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.serieNumericUp.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
             this.serieNumericUp.Name = "serieNumericUp";
-            this.serieNumericUp.Size = new System.Drawing.Size(192, 22);
+            this.serieNumericUp.Size = new System.Drawing.Size(73, 20);
             this.serieNumericUp.TabIndex = 30;
             this.serieNumericUp.Value = new decimal(new int[] {
             1,
@@ -971,16 +970,16 @@ namespace EEG_Graphics
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.ClientSize = new System.Drawing.Size(1584, 1055);
+            this.ClientSize = new System.Drawing.Size(912, 849);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupRecordSettings);
             this.Controls.Add(this.tabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.Name = "MainForm";
             this.Text = "Mind Analysis v1.0.a.2";
             ((System.ComponentModel.ISupportInitialize)(this.graphicLowAlpha)).EndInit();
