@@ -92,9 +92,12 @@ namespace EEG_Graphics
                 while (AreDataReading)
                 {
                     _spiderData.Clear();
-                    var infoFromPort = ReadPayloadFromPort();
-                    if (infoFromPort.isReadPayload) ParsingPayload(infoFromPort.payload);
-                    OnBrainInfoReceived?.Invoke(CurrentBrainInfo);
+                    int pLength = ReadPayloadFromPort(out var infoFromPort);
+                    if (pLength > 4)
+                    {
+                        ParsingPayload(infoFromPort);
+                        OnBrainInfoReceived?.Invoke(CurrentBrainInfo);
+                    }
                     _spiderPort.Write(_spiderData.ToArray(), 0, _spiderData.Count);
                 }
             }
@@ -147,17 +150,27 @@ namespace EEG_Graphics
             bytesParsed += 3;
             CurrentBrainInfo.gammaHigh = Convert.ToUInt32(payload[bytesParsed] * 65536 + payload[bytesParsed + 1] * 256 + payload[bytesParsed + 2]);
         }
-        private (bool isReadPayload, List<int> payload) ReadPayloadFromPort()
+        private int ReadPayloadFromPort(out List<int> infoFromNeuro)
         {
             WaitOnPortTwoSync();
             int pLength = ReadPayloadLength();
-            if (pLength > SYNC) return (false, null);
-            var payload = ReadPayload(pLength);
+            if (pLength > SYNC)
+            {
+                infoFromNeuro = null;
+                return 0;
+            }
+            infoFromNeuro = ReadPayload(pLength);
+            int calculatedCheckSum = ~(infoFromNeuro.Sum() & 0xFF) & 0xFF;
             int readedCheckSum = _neuroPort.ReadByte();
             _spiderData.Add(Convert.ToByte(readedCheckSum));
-            if (readedCheckSum != payload.calculatedChecksum) return (false, null);
 
-            return (true, payload.payload);
+            if (readedCheckSum != calculatedCheckSum)
+            {
+                infoFromNeuro = null;
+                return 0;
+            }
+
+            return pLength;
         }
 
         private void WaitOnPortTwoSync()
@@ -188,24 +201,16 @@ namespace EEG_Graphics
             return pLength;
         }
 
-        private (int calculatedChecksum, List<int> payload) ReadPayload(in int pLength)
+        private List<int> ReadPayload(in int pLength)
         {
-            var funcResult = (calculatedChecksum: 0, payload: new List<int>());
-
+            List<int> readedPayload = new List<int>();
             for (int i = 0; i < pLength; i++)
             {
                 int dataFromPort = _neuroPort.ReadByte();
-
                 _spiderData.Add(Convert.ToByte(dataFromPort));
-
-                funcResult.payload.Add(dataFromPort);
-                funcResult.calculatedChecksum += dataFromPort;
+                readedPayload.Add(dataFromPort);
             }
-
-            funcResult.calculatedChecksum &= 0xFF;
-            funcResult.calculatedChecksum = ~funcResult.calculatedChecksum & 0xFF;
-
-            return funcResult;
+            return readedPayload;
         }
     }
 }
