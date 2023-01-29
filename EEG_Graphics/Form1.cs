@@ -127,7 +127,7 @@ namespace EEG_Graphics
 
             _seconds++;
 
-            if (chkSaveRecordData.Checked) return;
+            if (!chkSaveRecordData.Checked) return;
             using (FileStream file = new FileStream(fullFilePathText.Text, FileMode.OpenOrCreate))
             {
                 file.Seek(0, SeekOrigin.End);

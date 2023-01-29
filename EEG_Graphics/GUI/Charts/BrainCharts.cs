@@ -79,6 +79,7 @@ namespace EEG_Graphics
             foreach (var chart in _brainCharts)
             {
                 chart.Value.Series[serie].Points.RemoveAt(pointNumber);
+                chart.Value.ResetAutoValues();
             }
         }
     }
