@@ -20,7 +20,7 @@ namespace EEG_Graphics
         public MainForm()
         {
             InitializeComponent();
-            _neurodevice = new NeuroSerialPort("COM5", "COM6");
+            _neurodevice = new NeuroSerialPort("COM4", "COM5");
             _brainCharts = new BrainCharts();
             _neurodevice.OnBrainInfoReceived += (BrainInfo brainInfo) => Invoke(new DynamicChartDisplay(DisplayPointToDynamicGraphic), brainInfo);
             UserControlSystem.GetSystem().Disable(btnStopRecord);

@@ -23,19 +23,12 @@ namespace EEG_Graphics
     {
         private Dictionary<BrainChartName, Chart> _brainCharts;
         public int DynamicChartPointsCount { get; private set; } = 0;
-        public int MaxPointOnCharts { get; private set; }
-        public BrainCharts(int maxPointsOnCharts)
-        {
-            _brainCharts = new Dictionary<BrainChartName, Chart>();
-            MaxPointOnCharts = maxPointsOnCharts;
-        }
+        public BrainCharts() => _brainCharts = new Dictionary<BrainChartName, Chart>();
 
         public void AddGraphic(BrainChartName chartName, Chart chart) => _brainCharts.Add(chartName, chart);
 
         public void DisplayBrainInfo(BrainInfo brainInfo, int serie = 0)
         {
-            if (MaxPointOnCharts < DynamicChartPointsCount) DeletePointOnCharts(0, 0);
-
             DynamicChartPointsCount++;
             _brainCharts[BrainChartName.Attention].Series[serie].Points.AddXY(DynamicChartPointsCount, brainInfo.attention);
             _brainCharts[BrainChartName.Meditation].Series[serie].Points.AddXY(DynamicChartPointsCount, brainInfo.meditation);
@@ -47,8 +40,6 @@ namespace EEG_Graphics
             _brainCharts[BrainChartName.Gamma_Low].Series[serie].Points.AddXY(DynamicChartPointsCount, brainInfo.gammaLow);
             _brainCharts[BrainChartName.Delta].Series[serie].Points.AddXY(DynamicChartPointsCount, brainInfo.delta);
             _brainCharts[BrainChartName.Theta].Series[serie].Points.AddXY(DynamicChartPointsCount, brainInfo.theta);
-
-            ScaleCharts();
         }
 
         public void ScaleCharts()
