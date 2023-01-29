@@ -24,17 +24,17 @@ namespace EEG_Graphics
             _brainCharts = new BrainCharts();
             _neurodevice.OnBrainInfoReceived += (BrainInfo brainInfo) => Invoke(new DynamicChartDisplay(DisplayPointToDynamicGraphic), brainInfo);
             UserControlSystem.GetSystem().Disable(btnStopRecord);
-            _neurodevice.OnBrainInfoReceived += DisplayDataToGraphics;
-            _brainCharts.AddGraphic(BrainChartName.Attention, graphicAttention);
-            _brainCharts.AddGraphic(BrainChartName.Meditation, graphicMeditation);
-            _brainCharts.AddGraphic(BrainChartName.Alpha_Low, graphicLowAlpha);
-            _brainCharts.AddGraphic(BrainChartName.Alpha_High, graphicHighAlpha);
-            _brainCharts.AddGraphic(BrainChartName.Beta_Low, graphicLowBeta);
-            _brainCharts.AddGraphic(BrainChartName.Beta_High, graphicHighBeta);
-            _brainCharts.AddGraphic(BrainChartName.Gamma_Low, graphicLowGamma);
-            _brainCharts.AddGraphic(BrainChartName.Gamma_High, graphicHighGamma);
-            _brainCharts.AddGraphic(BrainChartName.Delta, graphicDelta);
-            _brainCharts.AddGraphic(BrainChartName.Theta, graphicTheta);
+
+            _brainCharts.AddChart(BrainChartName.Attention, graphicAttention);
+            _brainCharts.AddChart(BrainChartName.Meditation, graphicMeditation);
+            _brainCharts.AddChart(BrainChartName.Alpha_Low, graphicLowAlpha);
+            _brainCharts.AddChart(BrainChartName.Alpha_High, graphicHighAlpha);
+            _brainCharts.AddChart(BrainChartName.Beta_Low, graphicLowBeta);
+            _brainCharts.AddChart(BrainChartName.Beta_High, graphicHighBeta);
+            _brainCharts.AddChart(BrainChartName.Gamma_Low, graphicLowGamma);
+            _brainCharts.AddChart(BrainChartName.Gamma_High, graphicHighGamma);
+            _brainCharts.AddChart(BrainChartName.Theta, graphicTheta);
+            _brainCharts.AddChart(BrainChartName.Delta, graphicDelta);
         }
 
         private void StartToReadDataFromNeurodevice(object sender, EventArgs e)

@@ -25,7 +25,7 @@ namespace EEG_Graphics
         public int DynamicChartPointsCount { get; private set; } = 0;
         public BrainCharts() => _brainCharts = new Dictionary<BrainChartName, Chart>();
 
-        public void AddGraphic(BrainChartName chartName, Chart chart) => _brainCharts.Add(chartName, chart);
+        public void AddChart(BrainChartName chartName, Chart chart) => _brainCharts.Add(chartName, chart);
 
         public void DisplayBrainInfo(BrainInfo brainInfo, int serie = 0)
         {
