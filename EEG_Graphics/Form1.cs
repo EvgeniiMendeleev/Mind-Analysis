@@ -49,7 +49,7 @@ namespace EEG_Graphics
             }
             catch
             {
-                MessageBox.Show("Не был запущен ThinkGear Connector", "Ошибка соединения!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Ошибка подключения к одному из устройств", "Ошибка соединения!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             _brainCharts.ClearSerieOnCharts(0);
