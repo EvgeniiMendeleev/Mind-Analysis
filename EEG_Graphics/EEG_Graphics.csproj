@@ -97,6 +97,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GUI\Charts\BrainCharts.cs" />
+    <Compile Include="MathLibrary\MathModel.cs" />
     <Compile Include="Neurointerface\BrainInfo.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>

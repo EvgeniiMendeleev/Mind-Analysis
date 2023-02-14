@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO.Ports;
 using System.Threading;
 
@@ -23,21 +21,21 @@ namespace EEG_Graphics
         /// </summary>
         public BrainDataHandler OnBrainInfoReceived;
 
-        private Thread _readingThread;
         private readonly Mutex _mutex;
         private SerialPort _neuroPort;
         private SerialPort _spiderPort;
         private List<byte> _spiderData;
 
+        public bool AreDataReading { get { return _neuroPort.IsOpen; } }
+
         public BrainInfo CurrentBrainInfo { get; private set; }
 
         public NeuroSerialPort()
         {
-            _readingThread = new Thread(ReadingThread);
-            _readingThread.IsBackground = true;
             _mutex = new Mutex();
             _neuroPort = new SerialPort();
             _spiderPort = new SerialPort();
+            CurrentBrainInfo = new BrainInfo();
             _spiderData = new List<byte>();
 
             _neuroPort.BaudRate = 57600;
@@ -45,36 +43,28 @@ namespace EEG_Graphics
             _neuroPort.DataBits = 8;
             _neuroPort.StopBits = StopBits.One;
             _neuroPort.ReadTimeout = 12000;
-
-            CurrentBrainInfo = new BrainInfo();
         }
 
-        public  void Connect()
+        public  void Connect(string neuroPort)
         {
+            _neuroPort.PortName = neuroPort;
             _neuroPort.Open();
+
+            Thread _readingThread = new Thread(ReadingThread);
+            _readingThread.IsBackground = true;
             _readingThread.Start();
         }
 
-        public void ConnectToSpider()
+        public void ConnectToSpider(string spiderPort)
         {
+            _spiderPort.PortName = spiderPort;
             _spiderPort.Open();
         }
 
-        public void SetPorts(string neuroPort, string spiderPort)
-        {
-            _neuroPort.PortName = neuroPort;
-            _spiderPort.PortName = spiderPort;
-        }
-
-        public  bool AreDataReading { get { return _neuroPort.IsOpen; } }
-
         public  void CloseConnection()
         {
-            if (AreDataReading)
-            {
-                _neuroPort.Close();
-                _spiderPort.Close();
-            }
+            _neuroPort.Close();
+            if(_spiderPort.IsOpen) _spiderPort.Close();
         }
 
         public BrainInfo GetCurrentBrainData()
@@ -98,12 +88,11 @@ namespace EEG_Graphics
                         ParsingPayload(infoFromPort);
                         OnBrainInfoReceived?.Invoke(CurrentBrainInfo);
                     }
-                    _spiderPort.Write(_spiderData.ToArray(), 0, _spiderData.Count);
+                    if (_spiderPort.IsOpen) _spiderPort.Write(_spiderData.ToArray(), 0, _spiderData.Count);
                 }
             }
             catch (Exception exp)
             {
-                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine($"[Reading thread]: {exp.Message}");
                 Console.ResetColor();
             }
@@ -123,8 +112,8 @@ namespace EEG_Graphics
                 if (code == ASIC_EEG_POWER_INT) SaveBrainDataAboutASIG(payload, bytesParsed);
                 else 
                 {
-                    if (code == MEDITATION) CurrentBrainInfo.meditation = Convert.ToUInt32(payload[bytesParsed]);
-                    else if (code == ATTENTION) CurrentBrainInfo.attention = Convert.ToUInt32(payload[bytesParsed]);
+                    if (code == MEDITATION) CurrentBrainInfo.Meditation = Convert.ToUInt32(payload[bytesParsed]);
+                    else if (code == ATTENTION) CurrentBrainInfo.Attention = Convert.ToUInt32(payload[bytesParsed]);
                 }
                 _mutex.ReleaseMutex();
 
@@ -134,21 +123,21 @@ namespace EEG_Graphics
 
         private void SaveBrainDataAboutASIG(in List<int> payload, int bytesParsed)
         {
-            CurrentBrainInfo.delta = Convert.ToUInt32(payload[bytesParsed] * 65536 + payload[bytesParsed + 1] * 256 + payload[bytesParsed + 2]);
+            CurrentBrainInfo.Delta = Convert.ToUInt32(payload[bytesParsed] * 65536 + payload[bytesParsed + 1] * 256 + payload[bytesParsed + 2]);
             bytesParsed += 3;
-            CurrentBrainInfo.theta = Convert.ToUInt32(payload[bytesParsed] * 65536 + payload[bytesParsed + 1] * 256 + payload[bytesParsed + 2]);
+            CurrentBrainInfo.Theta = Convert.ToUInt32(payload[bytesParsed] * 65536 + payload[bytesParsed + 1] * 256 + payload[bytesParsed + 2]);
             bytesParsed += 3;
-            CurrentBrainInfo.alphaLow = Convert.ToUInt32(payload[bytesParsed] * 65536 + payload[bytesParsed + 1] * 256 + payload[bytesParsed + 2]);
+            CurrentBrainInfo.AlphaLow = Convert.ToUInt32(payload[bytesParsed] * 65536 + payload[bytesParsed + 1] * 256 + payload[bytesParsed + 2]);
             bytesParsed += 3;
-            CurrentBrainInfo.alphaHigh = Convert.ToUInt32(payload[bytesParsed] * 65536 + payload[bytesParsed + 1] * 256 + payload[bytesParsed + 2]);
+            CurrentBrainInfo.AlphaHigh = Convert.ToUInt32(payload[bytesParsed] * 65536 + payload[bytesParsed + 1] * 256 + payload[bytesParsed + 2]);
             bytesParsed += 3;
-            CurrentBrainInfo.betaLow = Convert.ToUInt32(payload[bytesParsed] * 65536 + payload[bytesParsed + 1] * 256 + payload[bytesParsed + 2]);
+            CurrentBrainInfo.BetaLow = Convert.ToUInt32(payload[bytesParsed] * 65536 + payload[bytesParsed + 1] * 256 + payload[bytesParsed + 2]);
             bytesParsed += 3;
-            CurrentBrainInfo.betaHigh = Convert.ToUInt32(payload[bytesParsed] * 65536 + payload[bytesParsed + 1] * 256 + payload[bytesParsed + 2]);
+            CurrentBrainInfo.BetaHigh = Convert.ToUInt32(payload[bytesParsed] * 65536 + payload[bytesParsed + 1] * 256 + payload[bytesParsed + 2]);
             bytesParsed += 3;
-            CurrentBrainInfo.gammaLow = Convert.ToUInt32(payload[bytesParsed] * 65536 + payload[bytesParsed + 1] * 256 + payload[bytesParsed + 2]);
+            CurrentBrainInfo.GammaLow = Convert.ToUInt32(payload[bytesParsed] * 65536 + payload[bytesParsed + 1] * 256 + payload[bytesParsed + 2]);
             bytesParsed += 3;
-            CurrentBrainInfo.gammaHigh = Convert.ToUInt32(payload[bytesParsed] * 65536 + payload[bytesParsed + 1] * 256 + payload[bytesParsed + 2]);
+            CurrentBrainInfo.GammaHigh = Convert.ToUInt32(payload[bytesParsed] * 65536 + payload[bytesParsed + 1] * 256 + payload[bytesParsed + 2]);
         }
         private int ReadPayloadFromPort(out List<int> infoFromNeuro)
         {
