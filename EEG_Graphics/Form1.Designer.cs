@@ -93,6 +93,12 @@ namespace EEG_Graphics
             System.Windows.Forms.DataVisualization.Charting.Legend legend11 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series31 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Title title11 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea12 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend12 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Title title12 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea13 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend13 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Title title13 = new System.Windows.Forms.DataVisualization.Charting.Title();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.graphicLowAlpha = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.btnStartRecord = new System.Windows.Forms.Button();
@@ -116,6 +122,27 @@ namespace EEG_Graphics
             this.AttantionAndMeditationPage = new System.Windows.Forms.TabPage();
             this.currAttenLevelPage = new System.Windows.Forms.TabPage();
             this.attentionLevelChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.ChartsComparisonPage = new System.Windows.Forms.TabPage();
+            this.button6 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.domainUpDown1 = new System.Windows.Forms.DomainUpDown();
+            this.label7 = new System.Windows.Forms.Label();
+            this.button4 = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
+            this.filePathComparisonTextBox = new System.Windows.Forms.TextBox();
+            this.button3 = new System.Windows.Forms.Button();
+            this.chartsComparisonChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.ParamsComparisonPage = new System.Windows.Forms.TabPage();
+            this.paramsComparisonDomain2 = new System.Windows.Forms.DomainUpDown();
+            this.label10 = new System.Windows.Forms.Label();
+            this.button8 = new System.Windows.Forms.Button();
+            this.paramsComparisonDomain1 = new System.Windows.Forms.DomainUpDown();
+            this.label8 = new System.Windows.Forms.Label();
+            this.button9 = new System.Windows.Forms.Button();
+            this.label9 = new System.Windows.Forms.Label();
+            this.paramsComparisontextBox = new System.Windows.Forms.TextBox();
+            this.button10 = new System.Windows.Forms.Button();
+            this.paramsComparisonChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.groupRecordSettings = new System.Windows.Forms.GroupBox();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -128,14 +155,15 @@ namespace EEG_Graphics
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnClearAllCharts = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.serieNumericUp = new System.Windows.Forms.NumericUpDown();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.neuroPortTextBox = new System.Windows.Forms.TextBox();
             this.spiderPortTextBox = new System.Windows.Forms.TextBox();
+            this.neuroPortTextBox = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.graphicLowAlpha)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.graphicHighAlpha)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.graphicHighBeta)).BeginInit();
@@ -154,6 +182,10 @@ namespace EEG_Graphics
             this.AttantionAndMeditationPage.SuspendLayout();
             this.currAttenLevelPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.attentionLevelChart)).BeginInit();
+            this.ChartsComparisonPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chartsComparisonChart)).BeginInit();
+            this.ParamsComparisonPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.paramsComparisonChart)).BeginInit();
             this.groupRecordSettings.SuspendLayout();
             this.tabControl2.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -199,7 +231,7 @@ namespace EEG_Graphics
             this.graphicLowAlpha.Series.Add(series1);
             this.graphicLowAlpha.Series.Add(series2);
             this.graphicLowAlpha.Series.Add(series3);
-            this.graphicLowAlpha.Size = new System.Drawing.Size(885, 305);
+            this.graphicLowAlpha.Size = new System.Drawing.Size(976, 328);
             this.graphicLowAlpha.TabIndex = 0;
             this.graphicLowAlpha.Text = "chart1";
             title1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
@@ -255,7 +287,7 @@ namespace EEG_Graphics
             this.graphicHighAlpha.Series.Add(series4);
             this.graphicHighAlpha.Series.Add(series5);
             this.graphicHighAlpha.Series.Add(series6);
-            this.graphicHighAlpha.Size = new System.Drawing.Size(885, 315);
+            this.graphicHighAlpha.Size = new System.Drawing.Size(976, 315);
             this.graphicHighAlpha.TabIndex = 5;
             this.graphicHighAlpha.Text = "chart1";
             title2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
@@ -298,7 +330,7 @@ namespace EEG_Graphics
             this.graphicHighBeta.Series.Add(series7);
             this.graphicHighBeta.Series.Add(series8);
             this.graphicHighBeta.Series.Add(series9);
-            this.graphicHighBeta.Size = new System.Drawing.Size(885, 315);
+            this.graphicHighBeta.Size = new System.Drawing.Size(976, 315);
             this.graphicHighBeta.TabIndex = 9;
             this.graphicHighBeta.Text = "chart1";
             title3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
@@ -342,7 +374,7 @@ namespace EEG_Graphics
             this.graphicLowBeta.Series.Add(series10);
             this.graphicLowBeta.Series.Add(series11);
             this.graphicLowBeta.Series.Add(series12);
-            this.graphicLowBeta.Size = new System.Drawing.Size(885, 305);
+            this.graphicLowBeta.Size = new System.Drawing.Size(976, 303);
             this.graphicLowBeta.TabIndex = 7;
             this.graphicLowBeta.Text = "chart1";
             title4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
@@ -385,7 +417,7 @@ namespace EEG_Graphics
             this.graphicHighGamma.Series.Add(series13);
             this.graphicHighGamma.Series.Add(series14);
             this.graphicHighGamma.Series.Add(series15);
-            this.graphicHighGamma.Size = new System.Drawing.Size(885, 315);
+            this.graphicHighGamma.Size = new System.Drawing.Size(976, 315);
             this.graphicHighGamma.TabIndex = 13;
             this.graphicHighGamma.Text = "chart1";
             title5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
@@ -429,7 +461,7 @@ namespace EEG_Graphics
             this.graphicLowGamma.Series.Add(series16);
             this.graphicLowGamma.Series.Add(series17);
             this.graphicLowGamma.Series.Add(series18);
-            this.graphicLowGamma.Size = new System.Drawing.Size(885, 305);
+            this.graphicLowGamma.Size = new System.Drawing.Size(976, 303);
             this.graphicLowGamma.TabIndex = 11;
             this.graphicLowGamma.Text = "chart1";
             title6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
@@ -472,7 +504,7 @@ namespace EEG_Graphics
             this.graphicDelta.Series.Add(series19);
             this.graphicDelta.Series.Add(series20);
             this.graphicDelta.Series.Add(series21);
-            this.graphicDelta.Size = new System.Drawing.Size(885, 315);
+            this.graphicDelta.Size = new System.Drawing.Size(976, 315);
             this.graphicDelta.TabIndex = 17;
             this.graphicDelta.Text = "chart1";
             title7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
@@ -517,7 +549,7 @@ namespace EEG_Graphics
             this.graphicTheta.Series.Add(series22);
             this.graphicTheta.Series.Add(series23);
             this.graphicTheta.Series.Add(series24);
-            this.graphicTheta.Size = new System.Drawing.Size(885, 305);
+            this.graphicTheta.Size = new System.Drawing.Size(976, 303);
             this.graphicTheta.TabIndex = 15;
             this.graphicTheta.Text = "chart1";
             title8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
@@ -532,6 +564,8 @@ namespace EEG_Graphics
             this.graphicMeditation.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.graphicMeditation.BackColor = System.Drawing.Color.Gray;
+            chartArea9.AxisY.Interval = 5D;
+            chartArea9.AxisY.Title = "Процент расслабления";
             chartArea9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             chartArea9.Name = "ChartArea1";
             this.graphicMeditation.ChartAreas.Add(chartArea9);
@@ -560,7 +594,7 @@ namespace EEG_Graphics
             this.graphicMeditation.Series.Add(series25);
             this.graphicMeditation.Series.Add(series26);
             this.graphicMeditation.Series.Add(series27);
-            this.graphicMeditation.Size = new System.Drawing.Size(885, 315);
+            this.graphicMeditation.Size = new System.Drawing.Size(976, 315);
             this.graphicMeditation.TabIndex = 21;
             this.graphicMeditation.Text = "chart1";
             title9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
@@ -576,6 +610,9 @@ namespace EEG_Graphics
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.graphicAttention.BackColor = System.Drawing.Color.Gray;
+            chartArea10.AxisY.Interval = 5D;
+            chartArea10.AxisY.TextOrientation = System.Windows.Forms.DataVisualization.Charting.TextOrientation.Rotated90;
+            chartArea10.AxisY.Title = "Процент внимания";
             chartArea10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             chartArea10.Name = "ChartArea1";
             this.graphicAttention.ChartAreas.Add(chartArea10);
@@ -604,7 +641,7 @@ namespace EEG_Graphics
             this.graphicAttention.Series.Add(series28);
             this.graphicAttention.Series.Add(series29);
             this.graphicAttention.Series.Add(series30);
-            this.graphicAttention.Size = new System.Drawing.Size(885, 305);
+            this.graphicAttention.Size = new System.Drawing.Size(976, 350);
             this.graphicAttention.TabIndex = 19;
             this.graphicAttention.Text = "chart1";
             title10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
@@ -661,12 +698,14 @@ namespace EEG_Graphics
             this.tabControl1.Controls.Add(this.ThetaAndDeltaPage);
             this.tabControl1.Controls.Add(this.AttantionAndMeditationPage);
             this.tabControl1.Controls.Add(this.currAttenLevelPage);
+            this.tabControl1.Controls.Add(this.ChartsComparisonPage);
+            this.tabControl1.Controls.Add(this.ParamsComparisonPage);
             this.tabControl1.Cursor = System.Windows.Forms.Cursors.Default;
             this.tabControl1.Location = new System.Drawing.Point(12, 10);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(989, 649);
+            this.tabControl1.Size = new System.Drawing.Size(989, 682);
             this.tabControl1.TabIndex = 26;
             // 
             // alphaPage
@@ -678,7 +717,7 @@ namespace EEG_Graphics
             this.alphaPage.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.alphaPage.Name = "alphaPage";
             this.alphaPage.Padding = new System.Windows.Forms.Padding(3, 1, 3, 1);
-            this.alphaPage.Size = new System.Drawing.Size(887, 623);
+            this.alphaPage.Size = new System.Drawing.Size(981, 656);
             this.alphaPage.TabIndex = 0;
             this.alphaPage.Text = "Альфа - волна";
             // 
@@ -691,7 +730,7 @@ namespace EEG_Graphics
             this.betaPage.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.betaPage.Name = "betaPage";
             this.betaPage.Padding = new System.Windows.Forms.Padding(3, 1, 3, 1);
-            this.betaPage.Size = new System.Drawing.Size(887, 623);
+            this.betaPage.Size = new System.Drawing.Size(981, 656);
             this.betaPage.TabIndex = 1;
             this.betaPage.Text = "Бета - волна";
             // 
@@ -703,7 +742,7 @@ namespace EEG_Graphics
             this.gammaPage.Location = new System.Drawing.Point(4, 22);
             this.gammaPage.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.gammaPage.Name = "gammaPage";
-            this.gammaPage.Size = new System.Drawing.Size(887, 623);
+            this.gammaPage.Size = new System.Drawing.Size(981, 656);
             this.gammaPage.TabIndex = 2;
             this.gammaPage.Text = "Гамма - волна";
             // 
@@ -715,7 +754,7 @@ namespace EEG_Graphics
             this.ThetaAndDeltaPage.Location = new System.Drawing.Point(4, 22);
             this.ThetaAndDeltaPage.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.ThetaAndDeltaPage.Name = "ThetaAndDeltaPage";
-            this.ThetaAndDeltaPage.Size = new System.Drawing.Size(887, 623);
+            this.ThetaAndDeltaPage.Size = new System.Drawing.Size(981, 656);
             this.ThetaAndDeltaPage.TabIndex = 3;
             this.ThetaAndDeltaPage.Text = "Тета и Дельта волны";
             // 
@@ -727,7 +766,7 @@ namespace EEG_Graphics
             this.AttantionAndMeditationPage.Location = new System.Drawing.Point(4, 22);
             this.AttantionAndMeditationPage.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.AttantionAndMeditationPage.Name = "AttantionAndMeditationPage";
-            this.AttantionAndMeditationPage.Size = new System.Drawing.Size(887, 623);
+            this.AttantionAndMeditationPage.Size = new System.Drawing.Size(981, 656);
             this.AttantionAndMeditationPage.TabIndex = 4;
             this.AttantionAndMeditationPage.Text = "Внимание и расслабление";
             // 
@@ -738,7 +777,7 @@ namespace EEG_Graphics
             this.currAttenLevelPage.Location = new System.Drawing.Point(4, 22);
             this.currAttenLevelPage.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.currAttenLevelPage.Name = "currAttenLevelPage";
-            this.currAttenLevelPage.Size = new System.Drawing.Size(981, 623);
+            this.currAttenLevelPage.Size = new System.Drawing.Size(981, 656);
             this.currAttenLevelPage.TabIndex = 5;
             this.currAttenLevelPage.Text = "Текущий уровень внимания";
             // 
@@ -766,7 +805,7 @@ namespace EEG_Graphics
             series31.Legend = "Legend1";
             series31.Name = "Уровень внимания";
             this.attentionLevelChart.Series.Add(series31);
-            this.attentionLevelChart.Size = new System.Drawing.Size(973, 621);
+            this.attentionLevelChart.Size = new System.Drawing.Size(973, 656);
             this.attentionLevelChart.TabIndex = 6;
             this.attentionLevelChart.Text = "chart1";
             title11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
@@ -776,11 +815,316 @@ namespace EEG_Graphics
             title11.Text = "Текущий уровень внимания";
             this.attentionLevelChart.Titles.Add(title11);
             // 
+            // ChartsComparisonPage
+            // 
+            this.ChartsComparisonPage.BackColor = System.Drawing.Color.Gray;
+            this.ChartsComparisonPage.Controls.Add(this.button6);
+            this.ChartsComparisonPage.Controls.Add(this.button5);
+            this.ChartsComparisonPage.Controls.Add(this.domainUpDown1);
+            this.ChartsComparisonPage.Controls.Add(this.label7);
+            this.ChartsComparisonPage.Controls.Add(this.button4);
+            this.ChartsComparisonPage.Controls.Add(this.label6);
+            this.ChartsComparisonPage.Controls.Add(this.filePathComparisonTextBox);
+            this.ChartsComparisonPage.Controls.Add(this.button3);
+            this.ChartsComparisonPage.Controls.Add(this.chartsComparisonChart);
+            this.ChartsComparisonPage.Location = new System.Drawing.Point(4, 22);
+            this.ChartsComparisonPage.Name = "ChartsComparisonPage";
+            this.ChartsComparisonPage.Size = new System.Drawing.Size(981, 656);
+            this.ChartsComparisonPage.TabIndex = 6;
+            this.ChartsComparisonPage.Text = "Сравнение графиков";
+            // 
+            // button6
+            // 
+            this.button6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button6.Location = new System.Drawing.Point(326, 583);
+            this.button6.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(165, 24);
+            this.button6.TabIndex = 39;
+            this.button6.Text = "Очистить серию точек";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // button5
+            // 
+            this.button5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button5.Location = new System.Drawing.Point(155, 583);
+            this.button5.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(165, 24);
+            this.button5.TabIndex = 38;
+            this.button5.Text = "Очистить график целиком";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // domainUpDown1
+            // 
+            this.domainUpDown1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.domainUpDown1.Items.Add("Attention(0)");
+            this.domainUpDown1.Items.Add("Meditation(1)");
+            this.domainUpDown1.Items.Add("AlphaLow(2)");
+            this.domainUpDown1.Items.Add("AlphaHigh(3)");
+            this.domainUpDown1.Items.Add("GammaLow(4)");
+            this.domainUpDown1.Items.Add("GammaHigh(5)");
+            this.domainUpDown1.Items.Add("BetaLow(6)");
+            this.domainUpDown1.Items.Add("BetaHigh(7)");
+            this.domainUpDown1.Items.Add("Theta(8)");
+            this.domainUpDown1.Items.Add("Delta(9)");
+            this.domainUpDown1.Location = new System.Drawing.Point(118, 549);
+            this.domainUpDown1.Name = "domainUpDown1";
+            this.domainUpDown1.Size = new System.Drawing.Size(120, 20);
+            this.domainUpDown1.TabIndex = 37;
+            this.domainUpDown1.Text = "Attention(0)";
+            // 
+            // label7
+            // 
+            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(2, 551);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(116, 13);
+            this.label7.TabIndex = 36;
+            this.label7.Text = "Выбрать показатель:";
+            // 
+            // button4
+            // 
+            this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button4.Location = new System.Drawing.Point(4, 583);
+            this.button4.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(145, 24);
+            this.button4.TabIndex = 35;
+            this.button4.Text = "Отобразить график";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // label6
+            // 
+            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(2, 528);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(167, 13);
+            this.label6.TabIndex = 34;
+            this.label6.Text = "Выбрать анализируемый файл:";
+            // 
+            // filePathComparisonTextBox
+            // 
+            this.filePathComparisonTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.filePathComparisonTextBox.Location = new System.Drawing.Point(173, 525);
+            this.filePathComparisonTextBox.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
+            this.filePathComparisonTextBox.Name = "filePathComparisonTextBox";
+            this.filePathComparisonTextBox.ReadOnly = true;
+            this.filePathComparisonTextBox.Size = new System.Drawing.Size(275, 20);
+            this.filePathComparisonTextBox.TabIndex = 33;
+            // 
+            // button3
+            // 
+            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button3.Location = new System.Drawing.Point(454, 522);
+            this.button3.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(89, 24);
+            this.button3.TabIndex = 32;
+            this.button3.Text = "Обзор";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // chartsComparisonChart
+            // 
+            this.chartsComparisonChart.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.chartsComparisonChart.BackColor = System.Drawing.Color.Gray;
+            chartArea12.AxisX.Interval = 10D;
+            chartArea12.AxisY.TextOrientation = System.Windows.Forms.DataVisualization.Charting.TextOrientation.Rotated90;
+            chartArea12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            chartArea12.Name = "ChartArea1";
+            this.chartsComparisonChart.ChartAreas.Add(chartArea12);
+            legend12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            legend12.Name = "Legend1";
+            this.chartsComparisonChart.Legends.Add(legend12);
+            this.chartsComparisonChart.Location = new System.Drawing.Point(3, 1);
+            this.chartsComparisonChart.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
+            this.chartsComparisonChart.Name = "chartsComparisonChart";
+            this.chartsComparisonChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
+            this.chartsComparisonChart.Size = new System.Drawing.Size(976, 519);
+            this.chartsComparisonChart.TabIndex = 20;
+            this.chartsComparisonChart.Text = "chart1";
+            title12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            title12.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.Center;
+            title12.BackSecondaryColor = System.Drawing.Color.White;
+            title12.Font = new System.Drawing.Font("Times New Roman", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            title12.Name = "Title1";
+            title12.Text = "Внимание, %";
+            this.chartsComparisonChart.Titles.Add(title12);
+            // 
+            // ParamsComparisonPage
+            // 
+            this.ParamsComparisonPage.BackColor = System.Drawing.Color.Gray;
+            this.ParamsComparisonPage.Controls.Add(this.paramsComparisonDomain2);
+            this.ParamsComparisonPage.Controls.Add(this.label10);
+            this.ParamsComparisonPage.Controls.Add(this.button8);
+            this.ParamsComparisonPage.Controls.Add(this.paramsComparisonDomain1);
+            this.ParamsComparisonPage.Controls.Add(this.label8);
+            this.ParamsComparisonPage.Controls.Add(this.button9);
+            this.ParamsComparisonPage.Controls.Add(this.label9);
+            this.ParamsComparisonPage.Controls.Add(this.paramsComparisontextBox);
+            this.ParamsComparisonPage.Controls.Add(this.button10);
+            this.ParamsComparisonPage.Controls.Add(this.paramsComparisonChart);
+            this.ParamsComparisonPage.Location = new System.Drawing.Point(4, 22);
+            this.ParamsComparisonPage.Name = "ParamsComparisonPage";
+            this.ParamsComparisonPage.Size = new System.Drawing.Size(981, 656);
+            this.ParamsComparisonPage.TabIndex = 7;
+            this.ParamsComparisonPage.Text = "Сравнение параметров";
+            // 
+            // paramsComparisonDomain2
+            // 
+            this.paramsComparisonDomain2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.paramsComparisonDomain2.Items.Add("Attention(0)");
+            this.paramsComparisonDomain2.Items.Add("Meditation(1)");
+            this.paramsComparisonDomain2.Items.Add("AlphaLow(2)");
+            this.paramsComparisonDomain2.Items.Add("AlphaHigh(3)");
+            this.paramsComparisonDomain2.Items.Add("GammaLow(4)");
+            this.paramsComparisonDomain2.Items.Add("GammaHigh(5)");
+            this.paramsComparisonDomain2.Items.Add("BetaLow(6)");
+            this.paramsComparisonDomain2.Items.Add("BetaHigh(7)");
+            this.paramsComparisonDomain2.Items.Add("Theta(8)");
+            this.paramsComparisonDomain2.Items.Add("Delta(9)");
+            this.paramsComparisonDomain2.Location = new System.Drawing.Point(157, 579);
+            this.paramsComparisonDomain2.Name = "paramsComparisonDomain2";
+            this.paramsComparisonDomain2.Size = new System.Drawing.Size(120, 20);
+            this.paramsComparisonDomain2.TabIndex = 50;
+            this.paramsComparisonDomain2.Text = "Attention(0)";
+            // 
+            // label10
+            // 
+            this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(4, 581);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(154, 13);
+            this.label10.TabIndex = 49;
+            this.label10.Text = "Выбрать второй показатель:";
+            // 
+            // button8
+            // 
+            this.button8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button8.Location = new System.Drawing.Point(156, 610);
+            this.button8.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(165, 24);
+            this.button8.TabIndex = 47;
+            this.button8.Text = "Очистить график целиком";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
+            // 
+            // paramsComparisonDomain1
+            // 
+            this.paramsComparisonDomain1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.paramsComparisonDomain1.Items.Add("Attention(0)");
+            this.paramsComparisonDomain1.Items.Add("Meditation(1)");
+            this.paramsComparisonDomain1.Items.Add("AlphaLow(2)");
+            this.paramsComparisonDomain1.Items.Add("AlphaHigh(3)");
+            this.paramsComparisonDomain1.Items.Add("GammaLow(4)");
+            this.paramsComparisonDomain1.Items.Add("GammaHigh(5)");
+            this.paramsComparisonDomain1.Items.Add("BetaLow(6)");
+            this.paramsComparisonDomain1.Items.Add("BetaHigh(7)");
+            this.paramsComparisonDomain1.Items.Add("Theta(8)");
+            this.paramsComparisonDomain1.Items.Add("Delta(9)");
+            this.paramsComparisonDomain1.Location = new System.Drawing.Point(157, 553);
+            this.paramsComparisonDomain1.Name = "paramsComparisonDomain1";
+            this.paramsComparisonDomain1.Size = new System.Drawing.Size(120, 20);
+            this.paramsComparisonDomain1.TabIndex = 46;
+            this.paramsComparisonDomain1.Text = "Attention(0)";
+            // 
+            // label8
+            // 
+            this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(4, 555);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(157, 13);
+            this.label8.TabIndex = 45;
+            this.label8.Text = "Выбрать первый показатель:";
+            // 
+            // button9
+            // 
+            this.button9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button9.Location = new System.Drawing.Point(5, 610);
+            this.button9.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(145, 24);
+            this.button9.TabIndex = 44;
+            this.button9.Text = "Отобразить график";
+            this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
+            // 
+            // label9
+            // 
+            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(4, 527);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(167, 13);
+            this.label9.TabIndex = 43;
+            this.label9.Text = "Выбрать анализируемый файл:";
+            // 
+            // paramsComparisontextBox
+            // 
+            this.paramsComparisontextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.paramsComparisontextBox.Location = new System.Drawing.Point(175, 524);
+            this.paramsComparisontextBox.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
+            this.paramsComparisontextBox.Name = "paramsComparisontextBox";
+            this.paramsComparisontextBox.ReadOnly = true;
+            this.paramsComparisontextBox.Size = new System.Drawing.Size(275, 20);
+            this.paramsComparisontextBox.TabIndex = 42;
+            // 
+            // button10
+            // 
+            this.button10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button10.Location = new System.Drawing.Point(456, 521);
+            this.button10.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(89, 24);
+            this.button10.TabIndex = 41;
+            this.button10.Text = "Обзор";
+            this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
+            // 
+            // paramsComparisonChart
+            // 
+            this.paramsComparisonChart.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.paramsComparisonChart.BackColor = System.Drawing.Color.Gray;
+            chartArea13.AxisY.TextOrientation = System.Windows.Forms.DataVisualization.Charting.TextOrientation.Rotated90;
+            chartArea13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            chartArea13.Name = "ChartArea1";
+            this.paramsComparisonChart.ChartAreas.Add(chartArea13);
+            legend13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            legend13.Name = "Legend1";
+            this.paramsComparisonChart.Legends.Add(legend13);
+            this.paramsComparisonChart.Location = new System.Drawing.Point(5, 0);
+            this.paramsComparisonChart.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
+            this.paramsComparisonChart.Name = "paramsComparisonChart";
+            this.paramsComparisonChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
+            this.paramsComparisonChart.Size = new System.Drawing.Size(976, 519);
+            this.paramsComparisonChart.TabIndex = 40;
+            this.paramsComparisonChart.Text = "chart1";
+            title13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            title13.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.Center;
+            title13.BackSecondaryColor = System.Drawing.Color.White;
+            title13.Font = new System.Drawing.Font("Times New Roman", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            title13.Name = "Title1";
+            title13.Text = "Внимание, %";
+            this.paramsComparisonChart.Titles.Add(title13);
+            // 
             // groupRecordSettings
             // 
             this.groupRecordSettings.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.groupRecordSettings.Controls.Add(this.tabControl2);
-            this.groupRecordSettings.Location = new System.Drawing.Point(12, 661);
+            this.groupRecordSettings.Location = new System.Drawing.Point(12, 696);
             this.groupRecordSettings.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.groupRecordSettings.Name = "groupRecordSettings";
             this.groupRecordSettings.Padding = new System.Windows.Forms.Padding(3, 1, 3, 1);
@@ -896,7 +1240,7 @@ namespace EEG_Graphics
             this.groupBox2.Controls.Add(this.btnStartRecord);
             this.groupBox2.Controls.Add(this.btnStopRecord);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.groupBox2.Location = new System.Drawing.Point(691, 661);
+            this.groupBox2.Location = new System.Drawing.Point(687, 696);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(3, 1, 3, 1);
@@ -920,19 +1264,31 @@ namespace EEG_Graphics
             // groupBox1
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.groupBox1.Controls.Add(this.button2);
             this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.serieNumericUp);
             this.groupBox1.Controls.Add(this.btnLoadFirstFile);
             this.groupBox1.Controls.Add(this.btnClearAllCharts);
-            this.groupBox1.Location = new System.Drawing.Point(440, 661);
+            this.groupBox1.Location = new System.Drawing.Point(440, 696);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.groupBox1.Size = new System.Drawing.Size(244, 155);
+            this.groupBox1.Size = new System.Drawing.Size(244, 193);
             this.groupBox1.TabIndex = 30;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Управление загруженными графиками";
+            // 
+            // button2
+            // 
+            this.button2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button2.Location = new System.Drawing.Point(7, 148);
+            this.button2.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(229, 30);
+            this.button2.TabIndex = 33;
+            this.button2.Text = "Сгладить серию точек";
+            this.button2.UseVisualStyleBackColor = true;
             // 
             // button1
             // 
@@ -981,7 +1337,7 @@ namespace EEG_Graphics
             this.groupBox3.Controls.Add(this.neuroPortTextBox);
             this.groupBox3.Controls.Add(this.label5);
             this.groupBox3.Controls.Add(this.label4);
-            this.groupBox3.Location = new System.Drawing.Point(691, 749);
+            this.groupBox3.Location = new System.Drawing.Point(687, 784);
             this.groupBox3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -990,14 +1346,19 @@ namespace EEG_Graphics
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "COM - порты устройств";
             // 
-            // label4
+            // spiderPortTextBox
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(7, 28);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(97, 13);
-            this.label4.TabIndex = 0;
-            this.label4.Text = "Нейроинтерфейс:";
+            this.spiderPortTextBox.Location = new System.Drawing.Point(107, 50);
+            this.spiderPortTextBox.Name = "spiderPortTextBox";
+            this.spiderPortTextBox.Size = new System.Drawing.Size(196, 20);
+            this.spiderPortTextBox.TabIndex = 3;
+            // 
+            // neuroPortTextBox
+            // 
+            this.neuroPortTextBox.Location = new System.Drawing.Point(107, 25);
+            this.neuroPortTextBox.Name = "neuroPortTextBox";
+            this.neuroPortTextBox.Size = new System.Drawing.Size(196, 20);
+            this.neuroPortTextBox.TabIndex = 2;
             // 
             // label5
             // 
@@ -1008,26 +1369,21 @@ namespace EEG_Graphics
             this.label5.TabIndex = 1;
             this.label5.Text = "Паук:";
             // 
-            // neuroPortTextBox
+            // label4
             // 
-            this.neuroPortTextBox.Location = new System.Drawing.Point(107, 25);
-            this.neuroPortTextBox.Name = "neuroPortTextBox";
-            this.neuroPortTextBox.Size = new System.Drawing.Size(196, 20);
-            this.neuroPortTextBox.TabIndex = 2;
-            // 
-            // spiderPortTextBox
-            // 
-            this.spiderPortTextBox.Location = new System.Drawing.Point(107, 50);
-            this.spiderPortTextBox.Name = "spiderPortTextBox";
-            this.spiderPortTextBox.Size = new System.Drawing.Size(196, 20);
-            this.spiderPortTextBox.TabIndex = 3;
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(7, 28);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(97, 13);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "Нейроинтерфейс:";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.ClientSize = new System.Drawing.Size(1006, 849);
+            this.ClientSize = new System.Drawing.Size(1006, 901);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox2);
@@ -1055,6 +1411,12 @@ namespace EEG_Graphics
             this.AttantionAndMeditationPage.ResumeLayout(false);
             this.currAttenLevelPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.attentionLevelChart)).EndInit();
+            this.ChartsComparisonPage.ResumeLayout(false);
+            this.ChartsComparisonPage.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chartsComparisonChart)).EndInit();
+            this.ParamsComparisonPage.ResumeLayout(false);
+            this.ParamsComparisonPage.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.paramsComparisonChart)).EndInit();
             this.groupRecordSettings.ResumeLayout(false);
             this.tabControl2.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
@@ -1117,6 +1479,28 @@ namespace EEG_Graphics
         private System.Windows.Forms.TextBox neuroPortTextBox;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.TabPage ChartsComparisonPage;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.DomainUpDown domainUpDown1;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox filePathComparisonTextBox;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chartsComparisonChart;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.TabPage ParamsComparisonPage;
+        private System.Windows.Forms.DomainUpDown paramsComparisonDomain2;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.DomainUpDown paramsComparisonDomain1;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Button button9;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox paramsComparisontextBox;
+        private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.DataVisualization.Charting.Chart paramsComparisonChart;
     }
 }
 

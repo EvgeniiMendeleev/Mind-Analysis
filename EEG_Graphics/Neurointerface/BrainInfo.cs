@@ -5,17 +5,17 @@ namespace NeuroTGAM
 {
     public class BrainInfo : ICloneable
     {
-        public uint second = 0;
-        public uint meditation = 0;
-        public uint attention = 0;
-        public uint alphaLow = 0;
-        public uint alphaHigh = 0;
-        public uint betaLow = 0;
-        public uint betaHigh = 0;
-        public uint gammaLow = 0;
-        public uint gammaHigh = 0;
-        public uint theta = 0;
-        public uint delta = 0;
+        public uint Attention { get; set; } = 0;
+        public uint Meditation { get; set; } = 0;
+        public uint AlphaLow { get; set; } = 0;
+        public uint AlphaHigh { get; set; } = 0;
+        public uint GammaLow { get; set; } = 0;
+        public uint GammaHigh { get; set; } = 0;
+        public uint BetaLow { get; set; } = 0;
+        public uint BetaHigh { get; set; } = 0;
+        public uint Theta { get; set; } = 0;
+        public uint Delta { get; set; } = 0;
+        public uint Second { get; set; } = 0;
 
         public object Clone() => MemberwiseClone();
     }
