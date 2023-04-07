@@ -15,7 +15,7 @@ namespace NeuroTGAM
         public uint BetaHigh { get; set; } = 0;
         public uint Theta { get; set; } = 0;
         public uint Delta { get; set; } = 0;
-        public uint Second { get; set; } = 0;
+        public TimeSpan Second { get; set; } = TimeSpan.Zero;
 
         public object Clone() => MemberwiseClone();
     }
