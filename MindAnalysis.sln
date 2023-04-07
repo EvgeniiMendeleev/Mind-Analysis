@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31624.102
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33414.496
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EEG_Graphics", "EEG_Graphics\EEG_Graphics.csproj", "{C3E33205-C010-4B1A-8AA8-0761E6FB94BC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MindAnalysis", "MindAnalysis\MindAnalysis.csproj", "{C3E33205-C010-4B1A-8AA8-0761E6FB94BC}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "Setup\Setup.vdproj", "{32B207AF-B3B9-4245-85F3-6121C7D41C31}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Mind Analysis Setup", "Setup\Setup.vdproj", "{32B207AF-B3B9-4245-85F3-6121C7D41C31}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,8 +13,8 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C3E33205-C010-4B1A-8AA8-0761E6FB94BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C3E33205-C010-4B1A-8AA8-0761E6FB94BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3E33205-C010-4B1A-8AA8-0761E6FB94BC}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{C3E33205-C010-4B1A-8AA8-0761E6FB94BC}.Debug|Any CPU.Build.0 = Debug|x64
 		{C3E33205-C010-4B1A-8AA8-0761E6FB94BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C3E33205-C010-4B1A-8AA8-0761E6FB94BC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{32B207AF-B3B9-4245-85F3-6121C7D41C31}.Debug|Any CPU.ActiveCfg = Debug
