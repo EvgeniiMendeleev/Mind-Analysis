@@ -5,7 +5,7 @@ using System.IO;
 using System.Net.Sockets;
 using System.Text;
 
-namespace EEG_Graphics
+namespace NeuroTGAM
 {
     /// <summary>
     /// Название данных, которые можно снять с нейрогарнитуры, использующую чип TGAM.
