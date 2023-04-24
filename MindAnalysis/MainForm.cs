@@ -3,14 +3,13 @@ using System.IO;
 using System.Windows.Forms;
 using NeuroTGAM;
 using CsvHelper;
-using System.Drawing;
 using System.Globalization;
 using CsvHelper.Configuration;
 using System.Windows.Forms.DataVisualization.Charting;
-using AttentionModel;
 using System.Linq;
-using MindAnalysis.Forms;
+using Forms;
 using AttentionAnalysis;
+using MindAnalysis.Forms;
 
 namespace MindAnalysis
 {
@@ -20,11 +19,13 @@ namespace MindAnalysis
     //TODO: Добавить оценки качества построенной модели.
     //TODO: Добавить параметры (цепной и базисный темп/прирост) изменения внимания.
     //TODO: Решить проблему с "резиновым интерфейсом". Расположение и размер элементов меняется при разработке на мониторах с разными диагоналями.
+
     public partial class MainForm : Form
     {
         private delegate void DynamicChartDisplay(BrainInfo brainInfo);
         private Neurointerface _neurodevice;
         private DateTime _startTime;
+        private string loadedFile;
 
         public MainForm()
         {
@@ -76,6 +77,7 @@ namespace MindAnalysis
             {
                 if (OPF.ShowDialog() != DialogResult.OK) return;
                 chartAttention.Series[serie].Points.Clear();
+                loadedFile = Path.GetFileName(OPF.FileName);
                 CsvConfiguration csvConfig = new CsvConfiguration(CultureInfo.CurrentCulture) { HasHeaderRecord = false };
                 using (CsvReader csvReader = new CsvReader(File.OpenText(OPF.FileName), csvConfig))
                 {
@@ -96,6 +98,19 @@ namespace MindAnalysis
 
             if (saveFileDialog.FileName.Length > 3) fullFilePathText.Text = Path.GetFullPath(saveFileDialog.FileName);
             else MessageBox.Show("Имя файла слишком маленькое!", "Ошибка сохранения", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private void BuildCorrelogram(object sender, EventArgs e)
+        {
+            if (chartAttention.Series[1].Points.Count == 0)
+            {
+                MessageBox.Show("Данные не были загружены в программу!", "Ошибка построения коррелограммы", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            CorrelogramWindow correlogramWindow = new CorrelogramWindow();
+            correlogramWindow.BuildCorrelogram(chartAttention.Series[1].Points.ToArray(), loadedFile);
+            correlogramWindow.Show();
         }
 
         private void BuildTrendOnChart(object sender, EventArgs e)
