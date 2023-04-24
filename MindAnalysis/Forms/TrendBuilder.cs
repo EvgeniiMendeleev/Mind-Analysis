@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace MindAnalysis.Forms
+namespace Forms
 {
     public enum TrendMode
     {
@@ -30,7 +30,6 @@ namespace MindAnalysis.Forms
         public TrendBuilder()
         {
             InitializeComponent();
-            MaximizeBox = false;
             smoothingModeBox.SelectedIndex = 0;
             trendModeBox.SelectedIndex = 0;
             smoothingModes = new Dictionary<string, TrendSmoothingMode>()

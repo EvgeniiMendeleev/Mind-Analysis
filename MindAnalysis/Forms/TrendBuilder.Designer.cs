@@ -1,4 +1,4 @@
-﻿namespace MindAnalysis.Forms
+﻿namespace Forms
 {
     partial class TrendBuilder
     {
@@ -88,6 +88,7 @@
             // 
             // smoothingParamNumeric
             // 
+            this.smoothingParamNumeric.Cursor = System.Windows.Forms.Cursors.Hand;
             this.smoothingParamNumeric.DecimalPlaces = 5;
             this.smoothingParamNumeric.Increment = new decimal(new int[] {
             1,
@@ -106,12 +107,13 @@
             // 
             // smoothingModeBox
             // 
+            this.smoothingModeBox.Cursor = System.Windows.Forms.Cursors.Hand;
             this.smoothingModeBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.smoothingModeBox.FormattingEnabled = true;
             this.smoothingModeBox.Items.AddRange(new object[] {
             "Сглаживание не требуется",
             "Скользящая средняя",
-            "Экспоненциальная средняя"});
+            "Экспоненциальное сглаживание"});
             this.smoothingModeBox.Location = new System.Drawing.Point(215, 24);
             this.smoothingModeBox.Name = "smoothingModeBox";
             this.smoothingModeBox.Size = new System.Drawing.Size(326, 24);
@@ -120,6 +122,7 @@
             // trendModeBox
             // 
             this.trendModeBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.trendModeBox.Cursor = System.Windows.Forms.Cursors.Hand;
             this.trendModeBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.trendModeBox.FormattingEnabled = true;
             this.trendModeBox.Items.AddRange(new object[] {
@@ -134,6 +137,7 @@
             // btnBuildTrend
             // 
             this.btnBuildTrend.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnBuildTrend.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnBuildTrend.Location = new System.Drawing.Point(402, 149);
             this.btnBuildTrend.Name = "btnBuildTrend";
             this.btnBuildTrend.Size = new System.Drawing.Size(151, 29);
@@ -154,6 +158,7 @@
             this.Controls.Add(label2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "TrendBuilder";
             this.Text = "Построитель тренда";
             groupBox1.ResumeLayout(false);

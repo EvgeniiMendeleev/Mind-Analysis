@@ -4,6 +4,7 @@ using Newtonsoft.Json.Linq;
 using System.IO;
 using System.Net.Sockets;
 using System.Text;
+using System;
 
 namespace NeuroTGAM
 {
@@ -127,7 +128,13 @@ namespace NeuroTGAM
                     if (bytesRead <= 0) continue;
 
                     string[] packets = Encoding.UTF8.GetString(bytesFromConnector, 0, bytesRead).Split('\r');
-                    foreach (string packet in packets) if (!string.IsNullOrEmpty(packet)) ParseJSON(packet.Trim());
+                    foreach (string packet in packets)
+                    {
+                        if (!string.IsNullOrEmpty(packet))
+                        {
+                            ParseJSON(packet.Trim());
+                        }
+                    }
                 }
             }
             catch
@@ -138,6 +145,7 @@ namespace NeuroTGAM
 
         private void ParseJSON(string packet)
         {
+            Console.WriteLine(packet);
             dynamic jsonObject = JObject.Parse(packet);
             if (jsonObject.eegPower == null && jsonObject.eSense == null || jsonObject.status != null)
             {
