@@ -47,8 +47,6 @@ namespace MindAnalysis
             System.Windows.Forms.ToolStripMenuItem очиститьКонкретныйГрафикToolStripMenuItem;
             System.Windows.Forms.ToolStripMenuItem испытаниеToolStripMenuItem;
             System.Windows.Forms.ToolStripMenuItem первоеИспытаниеToolStripMenuItem;
-            System.Windows.Forms.GroupBox groupBox1;
-            System.Windows.Forms.GroupBox groupBox3;
             System.Windows.Forms.GroupBox groupBox2;
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.StripLine stripLine1 = new System.Windows.Forms.DataVisualization.Charting.StripLine();
@@ -84,8 +82,6 @@ namespace MindAnalysis
             очиститьКонкретныйГрафикToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             испытаниеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             первоеИспытаниеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            groupBox1 = new System.Windows.Forms.GroupBox();
-            groupBox3 = new System.Windows.Forms.GroupBox();
             groupBox2 = new System.Windows.Forms.GroupBox();
             tabControl2.SuspendLayout();
             tabPage1.SuspendLayout();
@@ -101,7 +97,7 @@ namespace MindAnalysis
             tabControl2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             tabControl2.Controls.Add(tabPage1);
             tabControl2.Controls.Add(tabPage2);
-            tabControl2.Location = new System.Drawing.Point(12, 489);
+            tabControl2.Location = new System.Drawing.Point(12, 434);
             tabControl2.Margin = new System.Windows.Forms.Padding(12, 1, 12, 1);
             tabControl2.Name = "tabControl2";
             tabControl2.SelectedIndex = 0;
@@ -226,7 +222,7 @@ namespace MindAnalysis
             графикиToolStripMenuItem});
             mainMenuStrip.Location = new System.Drawing.Point(0, 0);
             mainMenuStrip.Name = "mainMenuStrip";
-            mainMenuStrip.Size = new System.Drawing.Size(992, 25);
+            mainMenuStrip.Size = new System.Drawing.Size(834, 25);
             mainMenuStrip.TabIndex = 31;
             mainMenuStrip.Text = "menuStrip1";
             // 
@@ -323,39 +319,13 @@ namespace MindAnalysis
             первоеИспытаниеToolStripMenuItem.Text = "Загруженные данные";
             первоеИспытаниеToolStripMenuItem.Click += new System.EventHandler(this.ClearFirstLoadedFile);
             // 
-            // groupBox1
-            // 
-            groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            groupBox1.Location = new System.Drawing.Point(574, 433);
-            groupBox1.Margin = new System.Windows.Forms.Padding(12, 1, 12, 1);
-            groupBox1.Name = "groupBox1";
-            groupBox1.Padding = new System.Windows.Forms.Padding(12, 1, 12, 1);
-            groupBox1.Size = new System.Drawing.Size(409, 121);
-            groupBox1.TabIndex = 29;
-            groupBox1.TabStop = false;
-            groupBox1.Text = "Характеристики внимания испытуемого";
-            // 
-            // groupBox3
-            // 
-            groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            groupBox3.Location = new System.Drawing.Point(574, 560);
-            groupBox3.Margin = new System.Windows.Forms.Padding(12, 1, 12, 1);
-            groupBox3.Name = "groupBox3";
-            groupBox3.Padding = new System.Windows.Forms.Padding(12, 1, 12, 1);
-            groupBox3.Size = new System.Drawing.Size(409, 137);
-            groupBox3.TabIndex = 30;
-            groupBox3.TabStop = false;
-            groupBox3.Text = "Качество построенной модели";
-            // 
             // groupBox2
             // 
             groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             groupBox2.Controls.Add(this.btnStartRecord);
             groupBox2.Controls.Add(this.btnStopRecord);
             groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            groupBox2.Location = new System.Drawing.Point(12, 433);
+            groupBox2.Location = new System.Drawing.Point(12, 378);
             groupBox2.Margin = new System.Windows.Forms.Padding(12, 1, 12, 1);
             groupBox2.Name = "groupBox2";
             groupBox2.Padding = new System.Windows.Forms.Padding(12, 1, 12, 1);
@@ -442,7 +412,7 @@ namespace MindAnalysis
             this.chartAttention.Series.Add(series2);
             this.chartAttention.Series.Add(series3);
             this.chartAttention.Series.Add(series4);
-            this.chartAttention.Size = new System.Drawing.Size(971, 396);
+            this.chartAttention.Size = new System.Drawing.Size(813, 341);
             this.chartAttention.TabIndex = 19;
             this.chartAttention.Text = "chart1";
             title1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
@@ -459,17 +429,14 @@ namespace MindAnalysis
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.ClientSize = new System.Drawing.Size(992, 709);
+            this.ClientSize = new System.Drawing.Size(834, 654);
             this.Controls.Add(this.chartAttention);
             this.Controls.Add(groupBox2);
-            this.Controls.Add(groupBox3);
             this.Controls.Add(tabControl2);
-            this.Controls.Add(groupBox1);
             this.Controls.Add(mainMenuStrip);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = mainMenuStrip;
             this.Margin = new System.Windows.Forms.Padding(12, 1, 12, 1);
-            this.MinimumSize = new System.Drawing.Size(1010, 756);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Mind Analysis v1.1.a.0";
