@@ -3,11 +3,36 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace AttentionAnalysis
 {
-    internal static class DataScaler
+    internal static class DataTransform
     {
+        public static double[] MeanSmoothing(DataPoint[] inputData, int window)
+        {
+            List<double> outputData = new List<double>();
+            for (int i = 0; i + window < inputData.Count(); i++)
+            {
+                double sum = 0;
+                for (int j = i; j < i + window; j++)
+                {
+                    sum += inputData[j].YValues[0];
+                }
+                outputData.Add(sum / window);
+            }
+            return outputData.ToArray();
+        }
+
+        public static double[] Diff(DataPoint[] inputData)
+        {
+            double[] outputData = new double[inputData.Length - 1];
+            for (int i = 0; i < inputData.Length - 1; i++)
+            {
+                outputData[i] = inputData[i + 1].YValues[0] - inputData[i].YValues[0];
+            }
+            return outputData;
+        }
 
         public static float[] MaxMinScaler(float[] inputData)
         {

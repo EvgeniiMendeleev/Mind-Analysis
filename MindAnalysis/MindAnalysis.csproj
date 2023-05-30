@@ -10,7 +10,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>MindAnalysis</RootNamespace>
     <AssemblyName>Mind Analysis</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
@@ -31,6 +31,7 @@
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -168,27 +169,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AttentionAnalysis\IPredictionModel.cs" />
+    <Compile Include="AttentionAnalysis\Models\ExponentialSmoothing.cs" />
+    <Compile Include="AttentionAnalysis\Models\GiperbolicRegression.cs" />
+    <Compile Include="AttentionAnalysis\Models\LinearRegression.cs" />
+    <Compile Include="AttentionAnalysis\Models\PowerRegression.cs" />
     <Compile Include="AttentionBehaviourModel.consumption.cs">
       <DependentUpon>AttentionBehaviourModel.mbconfig</DependentUpon>
     </Compile>
     <Compile Include="AttentionBehaviourModel.training.cs">
       <DependentUpon>AttentionBehaviourModel.mbconfig</DependentUpon>
     </Compile>
-    <Compile Include="Forms\CorrelogramWindow.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\CorrelogramWindow.Designer.cs">
-      <DependentUpon>CorrelogramWindow.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\TrendBuilder.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\TrendBuilder.Designer.cs">
-      <DependentUpon>TrendBuilder.cs</DependentUpon>
-    </Compile>
-    <Compile Include="AttentionAnalysis\Extrapolation.cs" />
-    <Compile Include="AttentionAnalysis\DataScaler.cs" />
-    <Compile Include="AttentionAnalysis\DataSmoothing.cs" />
+    <Compile Include="AttentionAnalysis\DataTransform.cs" />
     <Compile Include="Neurointerface\BrainInfo.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -199,15 +191,8 @@
     <Compile Include="Neurointerface\Neurointerface.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="GUI\UserControlSystem.cs" />
-    <EmbeddedResource Include="Forms\CorrelogramWindow.resx">
-      <DependentUpon>CorrelogramWindow.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\TrendBuilder.resx">
-      <DependentUpon>TrendBuilder.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
