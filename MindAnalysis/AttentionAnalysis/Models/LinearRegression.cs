@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms.DataVisualization.Charting;
 
@@ -23,18 +24,36 @@ namespace MindAnalysis.AttentionAnalysis.Models
             k = (sum_y * sum_t - n * sum_yt) / (Math.Pow(sum_t, 2) - n * sum_t_pow);
             b = (sum_y - k * sum_t) / n;
 
+            DataPoint[] predictions = new DataPoint[X.Length];
             for (int i = 0; i < X.Length; i++)
             {
-                ModelError += Math.Pow((k * i + b) - X[i].YValues[0], 2);
+                predictions[i] = new DataPoint(X[i].XValue, k * X[i].XValue + b);
             }
-            ModelError /= X.Length;
-            ModelError = Math.Sqrt(ModelError);
+
+            ModelError = CalculateModelError(X, predictions);
         }
 
-        public double Predict(TimeSpan X)
+        private double CalculateModelError(DataPoint[] testData, DataPoint[] predictions)
         {
-            double time = X.Seconds + X.Minutes * 60 + X.Hours * 3600;
-            return k * time + b;
+            int horizont = testData.Length;
+            double modelError = 0.0d;
+            for (int i = 0; i < horizont; i++)
+            {
+                modelError += Math.Abs(testData[i].YValues[0] - predictions[i].YValues[0]);
+            }
+            modelError /= horizont;
+            return modelError;
+        }
+
+        public double Evaluate(DataPoint[] testData)
+        {
+            int horizont = testData.Length;
+            DataPoint[] predictions = new DataPoint[horizont];
+            for (int i = 0; i < horizont; i++)
+            {
+                predictions[i] = new DataPoint(testData[i].XValue, k * testData[i].XValue + b);
+            }
+            return CalculateModelError(testData, predictions);
         }
     }
 }

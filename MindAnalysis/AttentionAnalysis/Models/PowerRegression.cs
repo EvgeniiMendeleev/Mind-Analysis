@@ -1,24 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms.DataVisualization.Charting;
 
 namespace MindAnalysis.AttentionAnalysis.Models
 {
-    internal class PowerRegression
+    internal class PowerRegression : IPredictionModel
     {
         double A;
         double B;
+        public double ModelError { get; private set; }
+
+        public PowerRegression() { }
 
         public void Fit(DataPoint[] X)
         {
-            List<DataPoint> logPoints = new List<DataPoint>(X);
+            List<DataPoint> logPoints = X.Select(point => point.Clone()).ToList();
             logPoints.ForEach(point =>
             {
                 point.XValue = Math.Log10(point.XValue);
-                point.YValues[0] = Math.Log10(point.YValues[0]);
+                point.YValues[0] = point.YValues[0] != 0.0d ? Math.Log10(point.YValues[0]) : point.YValues[0];
             });
 
             int n = logPoints.Count;
@@ -30,12 +31,37 @@ namespace MindAnalysis.AttentionAnalysis.Models
             A = (sum_y * sum_t - n * sum_yt) / (Math.Pow(sum_t, 2) - n * sum_t_pow);
             B = (sum_y - A * sum_t) / n;
             B = Math.Pow(10, B);
+
+            DataPoint[] predictions = new DataPoint[X.Length];
+            for (int i = 0; i < X.Length; i++)
+            {
+                predictions[i] = new DataPoint(X[i].XValue, B * Math.Pow(X[i].XValue, A));
+            }
+
+            ModelError = CalculateModelError(X, predictions);
         }
 
-        public double Predict(TimeSpan X)
+        private double CalculateModelError(DataPoint[] testData, DataPoint[] predictions)
         {
-            double time = X.Seconds + X.Minutes * 60 + X.Hours * 3600;
-            return B * Math.Pow(time, A);
+            int horizont = testData.Length;
+            double modelError = 0.0d;
+            for (int i = 0; i < horizont; i++)
+            {
+                modelError += Math.Abs(testData[i].YValues[0] - predictions[i].YValues[0]);
+            }
+            modelError /= horizont;
+            return modelError;
+        }
+
+        public double Evaluate(DataPoint[] testData)
+        {
+            int horizont = testData.Length;
+            DataPoint[] predictions = new DataPoint[horizont];
+            for (int i = 0; i < horizont; i++)
+            {
+                predictions[i] = new DataPoint(testData[i].XValue, B * Math.Pow(testData[i].XValue, A));
+            }
+            return CalculateModelError(testData, predictions);
         }
     }
 }

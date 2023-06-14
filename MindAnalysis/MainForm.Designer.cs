@@ -71,6 +71,7 @@ namespace MindAnalysis
             this.btnStopRecord = new System.Windows.Forms.Button();
             this.chartAttention = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.chartAttentionDiff = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.button1 = new System.Windows.Forms.Button();
             tabControl2 = new System.Windows.Forms.TabControl();
             tabPage1 = new System.Windows.Forms.TabPage();
             label2 = new System.Windows.Forms.Label();
@@ -377,7 +378,6 @@ namespace MindAnalysis
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.chartAttention.BackColor = System.Drawing.Color.Gray;
-            chartArea1.AxisX.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Hours;
             chartArea1.AxisX.Minimum = 0D;
             chartArea1.AxisX.Title = "Время испытания";
             chartArea1.AxisX.TitleFont = new System.Drawing.Font("Times New Roman", 14.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -441,7 +441,7 @@ namespace MindAnalysis
             AttentionDifference.Controls.Add(this.chartAttentionDiff);
             AttentionDifference.Location = new System.Drawing.Point(4, 22);
             AttentionDifference.Name = "AttentionDifference";
-            AttentionDifference.Size = new System.Drawing.Size(683, 250);
+            AttentionDifference.Size = new System.Drawing.Size(632, 309);
             AttentionDifference.TabIndex = 2;
             AttentionDifference.Text = "Производная концентрации внимания";
             // 
@@ -492,6 +492,19 @@ namespace MindAnalysis
             title2.Text = "Производная";
             this.chartAttentionDiff.Titles.Add(title2);
             // 
+            // button1
+            // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button1.Location = new System.Drawing.Point(434, 380);
+            this.button1.Margin = new System.Windows.Forms.Padding(9, 1, 9, 1);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(205, 24);
+            this.button1.TabIndex = 24;
+            this.button1.Text = "Посчитать ошибки для модели";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.CalculateAllErrors);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -499,6 +512,7 @@ namespace MindAnalysis
             this.AutoScroll = true;
             this.BackColor = System.Drawing.SystemColors.ControlDark;
             this.ClientSize = new System.Drawing.Size(661, 590);
+            this.Controls.Add(this.button1);
             this.Controls.Add(tabControl1);
             this.Controls.Add(groupBox2);
             this.Controls.Add(tabControl2);
@@ -537,6 +551,7 @@ namespace MindAnalysis
         private System.Windows.Forms.Button btnChangeSavePath;
         private System.Windows.Forms.DataVisualization.Charting.Chart chartAttention;
         private System.Windows.Forms.DataVisualization.Charting.Chart chartAttentionDiff;
+        private System.Windows.Forms.Button button1;
     }
 }
 
