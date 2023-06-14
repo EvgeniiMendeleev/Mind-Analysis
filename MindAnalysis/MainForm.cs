@@ -10,7 +10,6 @@ using System.Linq;
 using Forms;
 using AttentionAnalysis;
 using MindAnalysis.Forms;
-using IronPython.Hosting;
 using Microsoft.Scripting.Hosting;
 
 namespace MindAnalysis
@@ -26,7 +25,6 @@ namespace MindAnalysis
     {
         private delegate void DynamicChartDisplay(BrainInfo brainInfo);
         private Neurointerface _neurodevice = new Neurointerface();
-        private ScriptEngine pythonEngine = Python.CreateEngine();
         private DateTime _startTime;
         private string loadedFile;
 
