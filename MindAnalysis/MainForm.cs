@@ -17,9 +17,6 @@ using ConsoleTables;
 
 namespace MindAnalysis
 {
-    //Общие задачи
-    //TODO: [Опционально]. Добавить вкладку "О программе".
-
     public partial class MainForm : Form
     {
         private delegate void DynamicChartDisplay(BrainInfo brainInfo);
@@ -32,16 +29,18 @@ namespace MindAnalysis
             _neurodevice.OnBrainInfoReceived += (BrainInfo brainInfo) =>
             {
                 Invoke(new DynamicChartDisplay(DisplayPointToDynamicGraphic), brainInfo);
-                if (chkSaveRecordData.Checked) SaveBrainInfoToFile(brainInfo);
+                
+                if (!chkSaveRecordData.Checked) return;
+                using (FileStream file = new FileStream(fullFilePathText.Text, FileMode.OpenOrCreate, FileAccess.Write))
+                {
+                    file.Seek(0, SeekOrigin.End);
+                    using (CsvWriter csvWriter = new CsvWriter(new StreamWriter(file), CultureInfo.CurrentCulture))
+                    {
+                        csvWriter.WriteRecord(brainInfo);
+                        csvWriter.NextRecord();
+                    }
+                }
             };
-        }
-
-        private void CreateSinPoints(double radianLimit)
-        {
-            for (double angle = 0; angle < radianLimit; angle++)
-            {
-                chartAttention.Series[0].Points.AddXY(angle, Math.Sin(angle * 180.0d / Math.PI) * 20.0d);
-            }
         }
 
         private void StartToReadDataFromNeurodevice(object sender, EventArgs e)
@@ -65,7 +64,7 @@ namespace MindAnalysis
         {
             if (!_neurodevice.IsDataReading)
             {
-                MessageBox.Show("Соединение с ThinkGear Connector не установлено.", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Соединение с ThinkGear Connector не установлено!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             _neurodevice.CloseConnection();
@@ -74,80 +73,6 @@ namespace MindAnalysis
         }
 
         private void OnChangedValueInSaveMindRecord(object sender, EventArgs e) => btnChangeSavePath.Enabled = !btnChangeSavePath.Enabled;
-
-        private void CalculateAllErrors(object sender, EventArgs e)
-        {
-            string[] filesNames = new string[] { 
-                "B01.csv", "B12.csv", "C01.csv", "C02.csv", "C03.csv",
-                "C04.csv", "C05.csv", "C06.csv", "Бурцева_Проба.csv",
-                "Илья_Проба.csv", "Киселёв_Проба.csv", "Мисилин_Проба.csv",
-                "Яна_Проба.csv"
-            };
-
-            List<double> modelTrainErrors = new List<double>();
-            List<List<double>> modelTestErrors = new List<List<double>>();
-            int[] horizonts = new int[] { 15, 20, 25, 30, 35, 40, 45 };
-
-            var table = new ConsoleTable("Датасет", "Ошибка тренировки", "Прогноз 15 с", "Прогноз 25 с", "Прогноз 35 с", "Прогноз 45 с");
-            foreach (string fileName in filesNames)
-            {
-                string fullPath = $"D:\\JupyterProjects\\AttentionDatasets\\{fileName}";
-
-                List<DataPoint> attentionData = new List<DataPoint>();
-                CsvConfiguration csvConfig = new CsvConfiguration(CultureInfo.CurrentCulture) { HasHeaderRecord = false };
-                using (CsvReader csvReader = new CsvReader(File.OpenText(fullPath), csvConfig))
-                {
-                    var brainInfos = csvReader.GetRecords<BrainInfo>();
-                    foreach (var brainInfo in brainInfos)
-                    {
-                        int timeInSeconds = 3600 * brainInfo.Second.Hours+ 60 * brainInfo.Second.Minutes + brainInfo.Second.Seconds;
-                        attentionData.Add(new DataPoint(timeInSeconds, brainInfo.Attention));
-                    }
-                }
-
-                double alpha = 1.0d; //2.0d / (attentionData.Count + 1);
-                // new ExponentialSmoothing(alpha: alpha, isMeanValue: false);
-                List<double> forecastErrors = new List<double>();
-                IPredictionModel model = new ExponentialSmoothing(alpha: alpha, isMeanValue: false);
-
-                foreach (int horizont in horizonts)
-                {
-                    (DataPoint[] trainData, DataPoint[] testData) = train_data_split(attentionData.ToArray(), 0.7f, horizont);
-                    model.Fit(trainData);
-                    forecastErrors.Add(model.Evaluate(testData));
-                }
-
-                table.AddRow(fileName, model.ModelError, forecastErrors[0], forecastErrors[1], forecastErrors[2], forecastErrors[3]);
-                modelTrainErrors.Add(model.ModelError);
-                modelTestErrors.Add(forecastErrors);
-            }
-
-            table.Write(Format.Alternative);
-
-            double meanModelError = modelTrainErrors.Average();
-            double orkloneniyaErrors = modelTrainErrors.Sum(error => Math.Pow(error - meanModelError, 2)) / modelTrainErrors.Count;
-
-            List<double> meanForecastErrors = new List<double>();
-            for (int j = 0; j < horizonts.Length; j++)
-            {
-                double sum = 0.0d;
-                for (int i = 0; i < modelTestErrors.Count; i++)
-                {
-                    sum += modelTestErrors[i][j];
-                }
-                meanForecastErrors.Add(sum / modelTestErrors.Count);
-            }
-
-            Console.WriteLine("--------------------------------------------[Вывод по модели]--------------------------------------------");
-            Console.WriteLine($"Средняя ошибка по датасету {meanModelError}, отклонение ошибки {orkloneniyaErrors}");
-            Console.Write($"Ошибки прогноза: ");
-            for (int i = 0; i < meanForecastErrors.Count; i++)
-            {
-                Console.Write($"{meanForecastErrors[i]}");
-                if (i != meanForecastErrors.Count - 1) Console.Write(",");
-            }
-            Console.WriteLine("\n---------------------------------------------------------------------------------------------------------");
-        }
 
         private void UploadFileToChart(object sender, EventArgs e)
         {
@@ -168,15 +93,6 @@ namespace MindAnalysis
             }
         }
 
-        private (DataPoint[] trainData, DataPoint[] testData) train_data_split(DataPoint[] data, float trainPercent, int horizont)
-        {
-            int trainDataCount = Convert.ToInt32(data.Length * trainPercent);
-            DataPoint[] trainData = data.Take(trainDataCount).ToArray();
-            DataPoint[] testData = data.Skip(trainDataCount).Take(horizont).ToArray();
-
-            return (trainData, testData);
-        }
-
         private void SaveFilePathOfCurrentMindRecord(object sender, EventArgs e)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
@@ -184,7 +100,7 @@ namespace MindAnalysis
             if (saveFileDialog.ShowDialog() != DialogResult.OK) return;
 
             if (saveFileDialog.FileName.Length > 3) fullFilePathText.Text = Path.GetFullPath(saveFileDialog.FileName);
-            else MessageBox.Show("Имя файла слишком маленькое!", "Ошибка сохранения", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else MessageBox.Show("Минимальная длина имени файла должна быть 3 символа!", "Ошибка сохранения", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void ClearExperiment(object sender, EventArgs e) => chartAttention.Series[0].Points.Clear();
@@ -210,19 +126,6 @@ namespace MindAnalysis
                 chartAttention.ResetAutoValues();
             }
             chartAttention.Series[0].Points.AddXY(brainInfo.Second.ToString(), brainInfo.Attention);
-        }
-
-        private void SaveBrainInfoToFile(BrainInfo brainInfo)
-        {
-            using (FileStream file = new FileStream(fullFilePathText.Text, FileMode.OpenOrCreate, FileAccess.Write))
-            {
-                file.Seek(0, SeekOrigin.End);
-                using (CsvWriter csvWriter = new CsvWriter(new StreamWriter(file), CultureInfo.CurrentCulture))
-                {
-                    csvWriter.WriteRecord(brainInfo);
-                    csvWriter.NextRecord();
-                }
-            }
         }
     }
 }

@@ -55,13 +55,6 @@ namespace MindAnalysis
             System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
-            System.Windows.Forms.TabPage AttentionDifference;
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.StripLine stripLine2 = new System.Windows.Forms.DataVisualization.Charting.StripLine();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title2 = new System.Windows.Forms.DataVisualization.Charting.Title();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.fullFilePathText = new System.Windows.Forms.TextBox();
             this.chkSaveRecordData = new System.Windows.Forms.CheckBox();
@@ -70,8 +63,6 @@ namespace MindAnalysis
             this.btnStartRecord = new System.Windows.Forms.Button();
             this.btnStopRecord = new System.Windows.Forms.Button();
             this.chartAttention = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.chartAttentionDiff = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.button1 = new System.Windows.Forms.Button();
             tabControl2 = new System.Windows.Forms.TabControl();
             tabPage1 = new System.Windows.Forms.TabPage();
             label2 = new System.Windows.Forms.Label();
@@ -90,7 +81,6 @@ namespace MindAnalysis
             groupBox2 = new System.Windows.Forms.GroupBox();
             tabControl1 = new System.Windows.Forms.TabControl();
             AttentionConcentration = new System.Windows.Forms.TabPage();
-            AttentionDifference = new System.Windows.Forms.TabPage();
             tabControl2.SuspendLayout();
             tabPage1.SuspendLayout();
             tabPage2.SuspendLayout();
@@ -100,8 +90,6 @@ namespace MindAnalysis
             tabControl1.SuspendLayout();
             AttentionConcentration.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chartAttention)).BeginInit();
-            AttentionDifference.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chartAttentionDiff)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl2
@@ -354,7 +342,6 @@ namespace MindAnalysis
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             tabControl1.Controls.Add(AttentionConcentration);
-            tabControl1.Controls.Add(AttentionDifference);
             tabControl1.Location = new System.Drawing.Point(9, 27);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
@@ -435,76 +422,6 @@ namespace MindAnalysis
             title1.Text = "Изменение внимания испытуемого";
             this.chartAttention.Titles.Add(title1);
             // 
-            // AttentionDifference
-            // 
-            AttentionDifference.BackColor = System.Drawing.Color.Gray;
-            AttentionDifference.Controls.Add(this.chartAttentionDiff);
-            AttentionDifference.Location = new System.Drawing.Point(4, 22);
-            AttentionDifference.Name = "AttentionDifference";
-            AttentionDifference.Size = new System.Drawing.Size(632, 309);
-            AttentionDifference.TabIndex = 2;
-            AttentionDifference.Text = "Производная концентрации внимания";
-            // 
-            // chartAttentionDiff
-            // 
-            this.chartAttentionDiff.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.chartAttentionDiff.BackColor = System.Drawing.Color.Gray;
-            chartArea2.AxisX.Minimum = 0D;
-            chartArea2.AxisX.Title = "Время испытания";
-            chartArea2.AxisX.TitleFont = new System.Drawing.Font("Times New Roman", 14.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            chartArea2.AxisY.Interval = 10D;
-            chartArea2.AxisY.StripLines.Add(stripLine2);
-            chartArea2.AxisY.TextOrientation = System.Windows.Forms.DataVisualization.Charting.TextOrientation.Rotated90;
-            chartArea2.AxisY.Title = "Процент внимания";
-            chartArea2.AxisY.TitleFont = new System.Drawing.Font("Times New Roman", 14.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            chartArea2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            chartArea2.Name = "ChartArea1";
-            this.chartAttentionDiff.ChartAreas.Add(chartArea2);
-            legend2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            legend2.Name = "Legend1";
-            this.chartAttentionDiff.Legends.Add(legend2);
-            this.chartAttentionDiff.Location = new System.Drawing.Point(-2, 0);
-            this.chartAttentionDiff.Margin = new System.Windows.Forms.Padding(9, 1, 9, 1);
-            this.chartAttentionDiff.Name = "chartAttentionDiff";
-            this.chartAttentionDiff.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
-            series5.BorderWidth = 3;
-            series5.ChartArea = "ChartArea1";
-            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series5.Legend = "Legend1";
-            series5.Name = "Производная функции";
-            series6.BorderWidth = 3;
-            series6.ChartArea = "ChartArea1";
-            series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series6.Legend = "Legend1";
-            series6.Name = "Сглаженный ряд";
-            this.chartAttentionDiff.Series.Add(series5);
-            this.chartAttentionDiff.Series.Add(series6);
-            this.chartAttentionDiff.Size = new System.Drawing.Size(687, 250);
-            this.chartAttentionDiff.TabIndex = 20;
-            this.chartAttentionDiff.Text = "chart1";
-            title2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            title2.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.Center;
-            title2.BackSecondaryColor = System.Drawing.Color.White;
-            title2.Font = new System.Drawing.Font("Times New Roman", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            title2.Name = "Title1";
-            title2.Text = "Производная";
-            this.chartAttentionDiff.Titles.Add(title2);
-            // 
-            // button1
-            // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button1.Location = new System.Drawing.Point(434, 380);
-            this.button1.Margin = new System.Windows.Forms.Padding(9, 1, 9, 1);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(205, 24);
-            this.button1.TabIndex = 24;
-            this.button1.Text = "Посчитать ошибки для модели";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.CalculateAllErrors);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -512,7 +429,6 @@ namespace MindAnalysis
             this.AutoScroll = true;
             this.BackColor = System.Drawing.SystemColors.ControlDark;
             this.ClientSize = new System.Drawing.Size(661, 590);
-            this.Controls.Add(this.button1);
             this.Controls.Add(tabControl1);
             this.Controls.Add(groupBox2);
             this.Controls.Add(tabControl2);
@@ -535,8 +451,6 @@ namespace MindAnalysis
             tabControl1.ResumeLayout(false);
             AttentionConcentration.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.chartAttention)).EndInit();
-            AttentionDifference.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.chartAttentionDiff)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -550,8 +464,6 @@ namespace MindAnalysis
         private System.Windows.Forms.TextBox fullFilePathText;
         private System.Windows.Forms.Button btnChangeSavePath;
         private System.Windows.Forms.DataVisualization.Charting.Chart chartAttention;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chartAttentionDiff;
-        private System.Windows.Forms.Button button1;
     }
 }
 
