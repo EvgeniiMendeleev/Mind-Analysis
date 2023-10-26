@@ -1,19 +1,11 @@
 ﻿using System;
 using System.IO;
 using System.Windows.Forms;
-using System.Collections.Generic;
 using NeuroTGAM;
 using CsvHelper;
 using System.Globalization;
 using CsvHelper.Configuration;
 using System.Windows.Forms.DataVisualization.Charting;
-using System.Linq;
-using AttentionAnalysis;
-using MindAnalysis.AttentionAnalysis.Models;
-using MindAnalysis.AttentionAnalysis;
-using System.Drawing;
-using IronPython.Modules;
-using ConsoleTables;
 
 namespace MindAnalysis
 {
