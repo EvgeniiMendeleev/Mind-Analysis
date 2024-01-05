@@ -43,7 +43,7 @@ namespace NeuroTGAM
         /// </summary>
         public bool IsDataReading 
         { 
-            get { return _connector.Connected; } 
+            get { return _connector.Connected && _readingThread.IsAlive; } 
         }
 
         public Neurointerface()
@@ -58,12 +58,9 @@ namespace NeuroTGAM
         public void Connect()
         {
             if (_connector == null) _connector = new TcpClient();
-
             _connector.Connect("localhost", 13854);
-            _connectorStream = _connector.GetStream();
 
-            byte[] settingsForConnector = Encoding.ASCII.GetBytes(@"{""enableRawOutput"": false,""format"": ""Json""}");
-            _connectorStream.Write(settingsForConnector, 0, settingsForConnector.Length);
+            InitializeReceivingDataSettings();
 
             if (_readingThread == null)
             {
@@ -71,6 +68,13 @@ namespace NeuroTGAM
                 _readingThread.IsBackground = true;
             }
             _readingThread.Start();
+        }
+
+        private void InitializeReceivingDataSettings()
+        {
+            _connectorStream = _connector.GetStream();
+            byte[] settingsForConnector = Encoding.ASCII.GetBytes(@"{""enableRawOutput"": false,""format"": ""Json""}");
+            _connectorStream.Write(settingsForConnector, 0, settingsForConnector.Length);
         }
 
         /// <summary>
@@ -88,11 +92,11 @@ namespace NeuroTGAM
         /// </summary>
         /// <param name="brainDataTitle">Название мозговой волны/состояния.</param>
         /// <returns>Число в диапазоне, заданном протоколом NeuroSky.</returns>
-        public uint GetBrainDataAbout(NeuroData nueroDataType)
+        public uint GetBrainDataAbout(NeuroData neuroDataType)
         {
             uint result = 0;
             _mutex.WaitOne();
-            switch (nueroDataType)
+            switch (neuroDataType)
             {
                 case NeuroData.Attention:
                     result = _currentBrainData.Attention;
