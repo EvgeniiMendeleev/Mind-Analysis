@@ -17,7 +17,6 @@ namespace AttentionAnalysis
             double sum_t = inputPoints.Sum(point => point.XValue);
             double sum_t_pow = inputPoints.Sum(point => Math.Pow(point.XValue, 2));
 
-            //k = (n * sum_yt - sum_y * sum_t) / (n * sum_t_pow - Math.Pow(sum_t, 2));
             k = (sum_y * sum_t - n * sum_yt) / (Math.Pow(sum_t, 2) - n * sum_t_pow);
             b = (sum_y - k * sum_t) / n;
 
