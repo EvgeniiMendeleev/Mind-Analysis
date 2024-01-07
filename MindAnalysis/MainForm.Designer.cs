@@ -29,169 +29,166 @@ namespace MindAnalysis
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TabControl tabControl2;
-            System.Windows.Forms.TabPage tabPage1;
-            System.Windows.Forms.Label label2;
-            System.Windows.Forms.TabPage tabPage2;
-            System.Windows.Forms.Label label1;
-            System.Windows.Forms.MenuStrip mainMenuStrip;
-            System.Windows.Forms.ToolStripMenuItem файлToolStripMenuItem;
-            System.Windows.Forms.ToolStripMenuItem загрузитьФайлДляАнализаToolStripMenuItem;
-            System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-            System.Windows.Forms.ToolStripMenuItem выйтиToolStripMenuItem;
             System.Windows.Forms.ToolStripMenuItem графикиToolStripMenuItem;
-            System.Windows.Forms.ToolStripMenuItem очиститьВсеГрафикиToolStripMenuItem;
-            System.Windows.Forms.ToolStripMenuItem очиститьКонкретныйГрафикToolStripMenuItem;
-            System.Windows.Forms.ToolStripMenuItem испытаниеToolStripMenuItem;
-            System.Windows.Forms.ToolStripMenuItem первоеИспытаниеToolStripMenuItem;
             System.Windows.Forms.GroupBox groupBox2;
-            System.Windows.Forms.TabControl tabControl1;
-            System.Windows.Forms.TabPage AttentionConcentration;
+            System.Windows.Forms.Label label1;
+            System.Windows.Forms.Label label2;
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.StripLine stripLine1 = new System.Windows.Forms.DataVisualization.Charting.StripLine();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.StripLine stripLine2 = new System.Windows.Forms.DataVisualization.Charting.StripLine();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.StripLine stripLine3 = new System.Windows.Forms.DataVisualization.Charting.StripLine();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series9 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series10 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series11 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series12 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea7 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.StripLine stripLine4 = new System.Windows.Forms.DataVisualization.Charting.StripLine();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea8 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend7 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend8 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series13 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series14 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series15 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series16 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea9 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.StripLine stripLine5 = new System.Windows.Forms.DataVisualization.Charting.StripLine();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea10 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend9 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend10 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series17 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series18 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series19 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series20 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            this.fullFilePathText = new System.Windows.Forms.TextBox();
-            this.chkSaveRecordData = new System.Windows.Forms.CheckBox();
-            this.btnChangeSavePath = new System.Windows.Forms.Button();
-            this.numMaxChartPoints = new System.Windows.Forms.NumericUpDown();
+            this.mainMenuStrip = new System.Windows.Forms.MenuStrip();
             this.btnStartRecord = new System.Windows.Forms.Button();
+            this.numMaxChartPoints = new System.Windows.Forms.NumericUpDown();
             this.btnStopRecord = new System.Windows.Forms.Button();
-            this.chartAttention = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            tabControl2 = new System.Windows.Forms.TabControl();
-            tabPage1 = new System.Windows.Forms.TabPage();
-            label2 = new System.Windows.Forms.Label();
-            tabPage2 = new System.Windows.Forms.TabPage();
-            label1 = new System.Windows.Forms.Label();
-            mainMenuStrip = new System.Windows.Forms.MenuStrip();
-            файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            загрузитьФайлДляАнализаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            выйтиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.AttentionPage = new System.Windows.Forms.TabPage();
+            this.AttentionAndMeditationChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.AlphaWavePage = new System.Windows.Forms.TabPage();
+            this.AlphaWaveChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.BetaWavePage = new System.Windows.Forms.TabPage();
+            this.BetaWaveChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.GammaWavePage = new System.Windows.Forms.TabPage();
+            this.GammaWaveChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.ThetaAndDeltaWavesPage = new System.Windows.Forms.TabPage();
+            this.ThetaAndDeltaWavesChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.btnChangeSavePath = new System.Windows.Forms.Button();
+            this.chkSaveRecords = new System.Windows.Forms.CheckBox();
+            this.txtBoxFilePath = new System.Windows.Forms.TextBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.загрузитьДанныеДляАнализаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.очиститьГрафикиСЗагруженнымиДаннымиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             графикиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            очиститьВсеГрафикиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            очиститьКонкретныйГрафикToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            испытаниеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            первоеИспытаниеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             groupBox2 = new System.Windows.Forms.GroupBox();
-            tabControl1 = new System.Windows.Forms.TabControl();
-            AttentionConcentration = new System.Windows.Forms.TabPage();
-            tabControl2.SuspendLayout();
-            tabPage1.SuspendLayout();
-            tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numMaxChartPoints)).BeginInit();
-            mainMenuStrip.SuspendLayout();
+            label1 = new System.Windows.Forms.Label();
+            label2 = new System.Windows.Forms.Label();
+            this.mainMenuStrip.SuspendLayout();
             groupBox2.SuspendLayout();
-            tabControl1.SuspendLayout();
-            AttentionConcentration.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chartAttention)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numMaxChartPoints)).BeginInit();
+            this.tabControl1.SuspendLayout();
+            this.AttentionPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.AttentionAndMeditationChart)).BeginInit();
+            this.AlphaWavePage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.AlphaWaveChart)).BeginInit();
+            this.BetaWavePage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.BetaWaveChart)).BeginInit();
+            this.GammaWavePage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.GammaWaveChart)).BeginInit();
+            this.ThetaAndDeltaWavesPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ThetaAndDeltaWavesChart)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // tabControl2
+            // mainMenuStrip
             // 
-            tabControl2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            tabControl2.Controls.Add(tabPage1);
-            tabControl2.Controls.Add(tabPage2);
-            tabControl2.Location = new System.Drawing.Point(9, 412);
-            tabControl2.Margin = new System.Windows.Forms.Padding(9, 1, 9, 1);
-            tabControl2.Name = "tabControl2";
-            tabControl2.SelectedIndex = 0;
-            tabControl2.Size = new System.Drawing.Size(416, 169);
-            tabControl2.TabIndex = 31;
+            this.mainMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.mainMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            графикиToolStripMenuItem});
+            this.mainMenuStrip.Location = new System.Drawing.Point(0, 0);
+            this.mainMenuStrip.Name = "mainMenuStrip";
+            this.mainMenuStrip.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
+            this.mainMenuStrip.Size = new System.Drawing.Size(945, 25);
+            this.mainMenuStrip.TabIndex = 31;
+            this.mainMenuStrip.Text = "menuStrip1";
             // 
-            // tabPage1
+            // графикиToolStripMenuItem
             // 
-            tabPage1.BackColor = System.Drawing.Color.Gray;
-            tabPage1.Controls.Add(label2);
-            tabPage1.Controls.Add(this.fullFilePathText);
-            tabPage1.Controls.Add(this.chkSaveRecordData);
-            tabPage1.Controls.Add(this.btnChangeSavePath);
-            tabPage1.Location = new System.Drawing.Point(4, 22);
-            tabPage1.Margin = new System.Windows.Forms.Padding(9, 1, 9, 1);
-            tabPage1.Name = "tabPage1";
-            tabPage1.Padding = new System.Windows.Forms.Padding(9, 1, 9, 1);
-            tabPage1.Size = new System.Drawing.Size(408, 143);
-            tabPage1.TabIndex = 0;
-            tabPage1.Text = "Сохранение данных";
+            графикиToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.загрузитьДанныеДляАнализаToolStripMenuItem,
+            this.очиститьГрафикиСЗагруженнымиДаннымиToolStripMenuItem});
+            графикиToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 7.8F);
+            графикиToolStripMenuItem.Name = "графикиToolStripMenuItem";
+            графикиToolStripMenuItem.Size = new System.Drawing.Size(161, 21);
+            графикиToolStripMenuItem.Text = "Операции с графиками";
             // 
-            // label2
+            // groupBox2
             // 
-            label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            label2.AutoSize = true;
-            label2.Location = new System.Drawing.Point(9, 33);
-            label2.Margin = new System.Windows.Forms.Padding(9, 0, 9, 0);
-            label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(141, 13);
-            label2.TabIndex = 32;
-            label2.Text = "Выбрать путь сохранения:";
+            groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            groupBox2.Controls.Add(this.btnStartRecord);
+            groupBox2.Controls.Add(label1);
+            groupBox2.Controls.Add(this.numMaxChartPoints);
+            groupBox2.Controls.Add(this.btnStopRecord);
+            groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            groupBox2.Location = new System.Drawing.Point(10, 595);
+            groupBox2.Margin = new System.Windows.Forms.Padding(12, 1, 12, 1);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Padding = new System.Windows.Forms.Padding(12, 1, 12, 1);
+            groupBox2.Size = new System.Drawing.Size(318, 116);
+            groupBox2.TabIndex = 30;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "Управление сеансом записи";
             // 
-            // fullFilePathText
+            // btnStartRecord
             // 
-            this.fullFilePathText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.fullFilePathText.Location = new System.Drawing.Point(9, 50);
-            this.fullFilePathText.Margin = new System.Windows.Forms.Padding(9, 1, 9, 1);
-            this.fullFilePathText.Name = "fullFilePathText";
-            this.fullFilePathText.ReadOnly = true;
-            this.fullFilePathText.Size = new System.Drawing.Size(295, 20);
-            this.fullFilePathText.TabIndex = 31;
-            // 
-            // chkSaveRecordData
-            // 
-            this.chkSaveRecordData.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.chkSaveRecordData.Location = new System.Drawing.Point(9, 9);
-            this.chkSaveRecordData.Margin = new System.Windows.Forms.Padding(9, 1, 9, 1);
-            this.chkSaveRecordData.Name = "chkSaveRecordData";
-            this.chkSaveRecordData.Size = new System.Drawing.Size(370, 24);
-            this.chkSaveRecordData.TabIndex = 25;
-            this.chkSaveRecordData.Text = "Сохранять данные с нейрогарнитуры во время сеанса записи";
-            this.chkSaveRecordData.UseVisualStyleBackColor = true;
-            this.chkSaveRecordData.CheckedChanged += new System.EventHandler(this.OnChangedValueInSaveMindRecord);
-            // 
-            // btnChangeSavePath
-            // 
-            this.btnChangeSavePath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnChangeSavePath.Enabled = false;
-            this.btnChangeSavePath.Location = new System.Drawing.Point(308, 48);
-            this.btnChangeSavePath.Margin = new System.Windows.Forms.Padding(9, 1, 9, 1);
-            this.btnChangeSavePath.Name = "btnChangeSavePath";
-            this.btnChangeSavePath.Size = new System.Drawing.Size(71, 24);
-            this.btnChangeSavePath.TabIndex = 30;
-            this.btnChangeSavePath.Text = "Обзор";
-            this.btnChangeSavePath.UseVisualStyleBackColor = true;
-            this.btnChangeSavePath.Click += new System.EventHandler(this.SaveFilePathOfCurrentMindRecord);
-            // 
-            // tabPage2
-            // 
-            tabPage2.BackColor = System.Drawing.Color.Gray;
-            tabPage2.Controls.Add(label1);
-            tabPage2.Controls.Add(this.numMaxChartPoints);
-            tabPage2.Location = new System.Drawing.Point(4, 22);
-            tabPage2.Margin = new System.Windows.Forms.Padding(9, 1, 9, 1);
-            tabPage2.Name = "tabPage2";
-            tabPage2.Padding = new System.Windows.Forms.Padding(9, 1, 9, 1);
-            tabPage2.Size = new System.Drawing.Size(408, 143);
-            tabPage2.TabIndex = 1;
-            tabPage2.Text = "Настройки отображения";
+            this.btnStartRecord.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btnStartRecord.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnStartRecord.Location = new System.Drawing.Point(28, 44);
+            this.btnStartRecord.Margin = new System.Windows.Forms.Padding(12, 1, 12, 1);
+            this.btnStartRecord.Name = "btnStartRecord";
+            this.btnStartRecord.Size = new System.Drawing.Size(261, 30);
+            this.btnStartRecord.TabIndex = 2;
+            this.btnStartRecord.Text = "Начать считывание данных\r\n";
+            this.btnStartRecord.UseVisualStyleBackColor = true;
+            this.btnStartRecord.Click += new System.EventHandler(this.StartRecording);
             // 
             // label1
             // 
-            label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            label1.Anchor = System.Windows.Forms.AnchorStyles.Top;
             label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(4, 18);
-            label1.Margin = new System.Windows.Forms.Padding(9, 0, 9, 0);
+            label1.Location = new System.Drawing.Point(20, 22);
+            label1.Margin = new System.Windows.Forms.Padding(12, 0, 12, 0);
             label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(240, 13);
-            label1.TabIndex = 28;
-            label1.Text = "Максимальное количество точек на графике:";
+            label1.Size = new System.Drawing.Size(207, 16);
+            label1.TabIndex = 34;
+            label1.Text = "Количество точек на графике:";
             // 
             // numMaxChartPoints
             // 
-            this.numMaxChartPoints.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.numMaxChartPoints.Location = new System.Drawing.Point(242, 16);
-            this.numMaxChartPoints.Margin = new System.Windows.Forms.Padding(9, 1, 9, 1);
+            this.numMaxChartPoints.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.numMaxChartPoints.Location = new System.Drawing.Point(236, 20);
+            this.numMaxChartPoints.Margin = new System.Windows.Forms.Padding(12, 1, 12, 1);
             this.numMaxChartPoints.Maximum = new decimal(new int[] {
             80,
             0,
@@ -203,238 +200,659 @@ namespace MindAnalysis
             0,
             0});
             this.numMaxChartPoints.Name = "numMaxChartPoints";
-            this.numMaxChartPoints.Size = new System.Drawing.Size(52, 20);
-            this.numMaxChartPoints.TabIndex = 27;
+            this.numMaxChartPoints.Size = new System.Drawing.Size(52, 22);
+            this.numMaxChartPoints.TabIndex = 33;
             this.numMaxChartPoints.Value = new decimal(new int[] {
             10,
             0,
             0,
             0});
             // 
-            // mainMenuStrip
-            // 
-            mainMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
-            mainMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            файлToolStripMenuItem,
-            графикиToolStripMenuItem});
-            mainMenuStrip.Location = new System.Drawing.Point(0, 0);
-            mainMenuStrip.Name = "mainMenuStrip";
-            mainMenuStrip.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
-            mainMenuStrip.Size = new System.Drawing.Size(661, 24);
-            mainMenuStrip.TabIndex = 31;
-            mainMenuStrip.Text = "menuStrip1";
-            // 
-            // файлToolStripMenuItem
-            // 
-            файлToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            загрузитьФайлДляАнализаToolStripMenuItem,
-            toolStripSeparator1,
-            выйтиToolStripMenuItem});
-            файлToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 7.8F);
-            файлToolStripMenuItem.Name = "файлToolStripMenuItem";
-            файлToolStripMenuItem.Size = new System.Drawing.Size(45, 20);
-            файлToolStripMenuItem.Text = "Файл";
-            // 
-            // загрузитьФайлДляАнализаToolStripMenuItem
-            // 
-            загрузитьФайлДляАнализаToolStripMenuItem.Name = "загрузитьФайлДляАнализаToolStripMenuItem";
-            загрузитьФайлДляАнализаToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
-            загрузитьФайлДляАнализаToolStripMenuItem.Text = "Загрузить файл для анализа";
-            загрузитьФайлДляАнализаToolStripMenuItem.Click += new System.EventHandler(this.UploadFileToChart);
-            // 
-            // toolStripSeparator1
-            // 
-            toolStripSeparator1.Name = "toolStripSeparator1";
-            toolStripSeparator1.Size = new System.Drawing.Size(221, 6);
-            // 
-            // выйтиToolStripMenuItem
-            // 
-            выйтиToolStripMenuItem.Name = "выйтиToolStripMenuItem";
-            выйтиToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
-            выйтиToolStripMenuItem.Text = "Выйти";
-            // 
-            // графикиToolStripMenuItem
-            // 
-            графикиToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            очиститьВсеГрафикиToolStripMenuItem,
-            очиститьКонкретныйГрафикToolStripMenuItem});
-            графикиToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 7.8F);
-            графикиToolStripMenuItem.Name = "графикиToolStripMenuItem";
-            графикиToolStripMenuItem.Size = new System.Drawing.Size(66, 20);
-            графикиToolStripMenuItem.Text = "Графики";
-            // 
-            // очиститьВсеГрафикиToolStripMenuItem
-            // 
-            очиститьВсеГрафикиToolStripMenuItem.Name = "очиститьВсеГрафикиToolStripMenuItem";
-            очиститьВсеГрафикиToolStripMenuItem.Size = new System.Drawing.Size(237, 22);
-            очиститьВсеГрафикиToolStripMenuItem.Text = "Очистить все графики";
-            очиститьВсеГрафикиToolStripMenuItem.Click += new System.EventHandler(this.ClearAllGraphics);
-            // 
-            // очиститьКонкретныйГрафикToolStripMenuItem
-            // 
-            очиститьКонкретныйГрафикToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            испытаниеToolStripMenuItem,
-            первоеИспытаниеToolStripMenuItem});
-            очиститьКонкретныйГрафикToolStripMenuItem.Name = "очиститьКонкретныйГрафикToolStripMenuItem";
-            очиститьКонкретныйГрафикToolStripMenuItem.Size = new System.Drawing.Size(237, 22);
-            очиститьКонкретныйГрафикToolStripMenuItem.Text = "Очистить конкретный график";
-            // 
-            // испытаниеToolStripMenuItem
-            // 
-            испытаниеToolStripMenuItem.Name = "испытаниеToolStripMenuItem";
-            испытаниеToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
-            испытаниеToolStripMenuItem.Text = "Сеанс записи";
-            испытаниеToolStripMenuItem.Click += new System.EventHandler(this.ClearExperiment);
-            // 
-            // первоеИспытаниеToolStripMenuItem
-            // 
-            первоеИспытаниеToolStripMenuItem.Name = "первоеИспытаниеToolStripMenuItem";
-            первоеИспытаниеToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
-            первоеИспытаниеToolStripMenuItem.Text = "Загруженные данные";
-            первоеИспытаниеToolStripMenuItem.Click += new System.EventHandler(this.ClearFirstLoadedFile);
-            // 
-            // groupBox2
-            // 
-            groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            groupBox2.Controls.Add(this.btnStartRecord);
-            groupBox2.Controls.Add(this.btnStopRecord);
-            groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            groupBox2.Location = new System.Drawing.Point(9, 366);
-            groupBox2.Margin = new System.Windows.Forms.Padding(9, 1, 9, 1);
-            groupBox2.Name = "groupBox2";
-            groupBox2.Padding = new System.Windows.Forms.Padding(9, 1, 9, 1);
-            groupBox2.Size = new System.Drawing.Size(416, 44);
-            groupBox2.TabIndex = 30;
-            groupBox2.TabStop = false;
-            groupBox2.Text = "Управление записью данных";
-            // 
-            // btnStartRecord
-            // 
-            this.btnStartRecord.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnStartRecord.Location = new System.Drawing.Point(3, 14);
-            this.btnStartRecord.Margin = new System.Windows.Forms.Padding(9, 1, 9, 1);
-            this.btnStartRecord.Name = "btnStartRecord";
-            this.btnStartRecord.Size = new System.Drawing.Size(196, 24);
-            this.btnStartRecord.TabIndex = 2;
-            this.btnStartRecord.Text = "Начать запись";
-            this.btnStartRecord.UseVisualStyleBackColor = true;
-            this.btnStartRecord.Click += new System.EventHandler(this.StartToReadDataFromNeurodevice);
-            // 
             // btnStopRecord
             // 
-            this.btnStopRecord.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnStopRecord.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.btnStopRecord.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnStopRecord.Enabled = false;
-            this.btnStopRecord.Location = new System.Drawing.Point(202, 14);
-            this.btnStopRecord.Margin = new System.Windows.Forms.Padding(9, 1, 9, 1);
+            this.btnStopRecord.Location = new System.Drawing.Point(28, 76);
+            this.btnStopRecord.Margin = new System.Windows.Forms.Padding(12, 1, 12, 1);
             this.btnStopRecord.Name = "btnStopRecord";
-            this.btnStopRecord.Size = new System.Drawing.Size(205, 24);
+            this.btnStopRecord.Size = new System.Drawing.Size(261, 30);
             this.btnStopRecord.TabIndex = 23;
-            this.btnStopRecord.Text = "Остановить запись";
+            this.btnStopRecord.Text = "Остановить считывание данных\r\n";
             this.btnStopRecord.UseVisualStyleBackColor = true;
-            this.btnStopRecord.Click += new System.EventHandler(this.StopToReadDataFromNeurodevice);
+            this.btnStopRecord.Click += new System.EventHandler(this.StopRecording);
+            // 
+            // label2
+            // 
+            label2.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            label2.AutoSize = true;
+            label2.Location = new System.Drawing.Point(39, 53);
+            label2.Margin = new System.Windows.Forms.Padding(12, 0, 12, 0);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(121, 16);
+            label2.TabIndex = 32;
+            label2.Text = "Путь сохранения:";
             // 
             // tabControl1
             // 
-            tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            tabControl1.Controls.Add(AttentionConcentration);
-            tabControl1.Location = new System.Drawing.Point(9, 27);
-            tabControl1.Name = "tabControl1";
-            tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new System.Drawing.Size(640, 335);
-            tabControl1.TabIndex = 32;
+            this.tabControl1.Controls.Add(this.AttentionPage);
+            this.tabControl1.Controls.Add(this.AlphaWavePage);
+            this.tabControl1.Controls.Add(this.BetaWavePage);
+            this.tabControl1.Controls.Add(this.GammaWavePage);
+            this.tabControl1.Controls.Add(this.ThetaAndDeltaWavesPage);
+            this.tabControl1.Location = new System.Drawing.Point(6, 35);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(927, 554);
+            this.tabControl1.TabIndex = 32;
             // 
-            // AttentionConcentration
+            // AttentionPage
             // 
-            AttentionConcentration.BackColor = System.Drawing.Color.Gray;
-            AttentionConcentration.Controls.Add(this.chartAttention);
-            AttentionConcentration.Location = new System.Drawing.Point(4, 22);
-            AttentionConcentration.Name = "AttentionConcentration";
-            AttentionConcentration.Padding = new System.Windows.Forms.Padding(3);
-            AttentionConcentration.Size = new System.Drawing.Size(632, 309);
-            AttentionConcentration.TabIndex = 1;
-            AttentionConcentration.Text = "Концентрация внимания";
+            this.AttentionPage.Controls.Add(this.AttentionAndMeditationChart);
+            this.AttentionPage.Location = new System.Drawing.Point(4, 25);
+            this.AttentionPage.Name = "AttentionPage";
+            this.AttentionPage.Padding = new System.Windows.Forms.Padding(3);
+            this.AttentionPage.Size = new System.Drawing.Size(919, 525);
+            this.AttentionPage.TabIndex = 0;
+            this.AttentionPage.Text = "Внимание и медитация";
+            this.AttentionPage.UseVisualStyleBackColor = true;
             // 
-            // chartAttention
+            // AttentionAndMeditationChart
             // 
-            this.chartAttention.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.AttentionAndMeditationChart.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.chartAttention.BackColor = System.Drawing.Color.Gray;
+            this.AttentionAndMeditationChart.BackColor = System.Drawing.Color.Gray;
             chartArea1.AxisX.Minimum = 0D;
-            chartArea1.AxisX.Title = "Время испытания";
             chartArea1.AxisX.TitleFont = new System.Drawing.Font("Times New Roman", 14.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             chartArea1.AxisY.Interval = 10D;
             chartArea1.AxisY.Maximum = 103D;
             chartArea1.AxisY.Minimum = 0D;
             chartArea1.AxisY.StripLines.Add(stripLine1);
             chartArea1.AxisY.TextOrientation = System.Windows.Forms.DataVisualization.Charting.TextOrientation.Rotated90;
-            chartArea1.AxisY.Title = "Процент внимания";
-            chartArea1.AxisY.TitleFont = new System.Drawing.Font("Times New Roman", 14.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            chartArea1.AxisY.Title = "Уровень внимания";
+            chartArea1.AxisY.TitleFont = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             chartArea1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            chartArea1.Name = "ChartArea1";
-            this.chartAttention.ChartAreas.Add(chartArea1);
+            chartArea1.Name = "Attention";
+            chartArea2.AxisX.Minimum = 0D;
+            chartArea2.AxisX.Title = "Время испытания";
+            chartArea2.AxisX.TitleFont = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            chartArea2.AxisY.Interval = 10D;
+            chartArea2.AxisY.Maximum = 103D;
+            chartArea2.AxisY.Minimum = 0D;
+            chartArea2.AxisY.TextOrientation = System.Windows.Forms.DataVisualization.Charting.TextOrientation.Rotated90;
+            chartArea2.AxisY.Title = "Уровень медитации";
+            chartArea2.AxisY.TitleFont = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            chartArea2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            chartArea2.Name = "Meditation";
+            this.AttentionAndMeditationChart.ChartAreas.Add(chartArea1);
+            this.AttentionAndMeditationChart.ChartAreas.Add(chartArea2);
             legend1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            legend1.Name = "Legend1";
-            this.chartAttention.Legends.Add(legend1);
-            this.chartAttention.Location = new System.Drawing.Point(0, 0);
-            this.chartAttention.Margin = new System.Windows.Forms.Padding(9, 1, 9, 1);
-            this.chartAttention.Name = "chartAttention";
-            this.chartAttention.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
+            legend1.DockedToChartArea = "Attention";
+            legend1.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            legend1.IsDockedInsideChartArea = false;
+            legend1.IsTextAutoFit = false;
+            legend1.Name = "AttentionChartLegend";
+            legend1.ShadowOffset = 2;
+            legend1.Title = "Внимание";
+            legend1.TitleBackColor = System.Drawing.Color.MediumSeaGreen;
+            legend1.TitleFont = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            legend1.TitleSeparator = System.Windows.Forms.DataVisualization.Charting.LegendSeparatorStyle.GradientLine;
+            legend2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            legend2.DockedToChartArea = "Meditation";
+            legend2.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            legend2.IsDockedInsideChartArea = false;
+            legend2.IsTextAutoFit = false;
+            legend2.Name = "MeditationChartLegend";
+            legend2.ShadowOffset = 2;
+            legend2.Title = "Медитация";
+            legend2.TitleBackColor = System.Drawing.Color.MediumSeaGreen;
+            legend2.TitleFont = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            legend2.TitleSeparator = System.Windows.Forms.DataVisualization.Charting.LegendSeparatorStyle.GradientLine;
+            this.AttentionAndMeditationChart.Legends.Add(legend1);
+            this.AttentionAndMeditationChart.Legends.Add(legend2);
+            this.AttentionAndMeditationChart.Location = new System.Drawing.Point(0, 0);
+            this.AttentionAndMeditationChart.Margin = new System.Windows.Forms.Padding(12, 1, 12, 1);
+            this.AttentionAndMeditationChart.Name = "AttentionAndMeditationChart";
+            this.AttentionAndMeditationChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
             series1.BorderWidth = 3;
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series1.Legend = "Legend1";
-            series1.Name = "Сеанс записи";
+            series1.ChartArea = "Attention";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.Color = System.Drawing.Color.Green;
+            series1.Legend = "AttentionChartLegend";
+            series1.LegendText = "Сеанс";
+            series1.Name = "Attention";
             series2.BorderWidth = 3;
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series2.Legend = "Legend1";
-            series2.Name = "Загруженные данные";
-            this.chartAttention.Series.Add(series1);
-            this.chartAttention.Series.Add(series2);
-            this.chartAttention.Size = new System.Drawing.Size(636, 309);
-            this.chartAttention.TabIndex = 19;
-            this.chartAttention.Text = "chart1";
-            title1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            title1.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.Center;
-            title1.BackSecondaryColor = System.Drawing.Color.White;
-            title1.Font = new System.Drawing.Font("Times New Roman", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            title1.Name = "Title1";
-            title1.Text = "Изменение внимания испытуемого";
-            this.chartAttention.Titles.Add(title1);
+            series2.ChartArea = "Meditation";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series2.Color = System.Drawing.Color.Green;
+            series2.Legend = "MeditationChartLegend";
+            series2.LegendText = "Сеанс";
+            series2.Name = "Meditation";
+            series3.BorderWidth = 3;
+            series3.ChartArea = "Attention";
+            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series3.Color = System.Drawing.Color.Blue;
+            series3.Legend = "AttentionChartLegend";
+            series3.LegendText = "Загруженная";
+            series3.Name = "LoadedAttention";
+            series4.BorderWidth = 3;
+            series4.ChartArea = "Meditation";
+            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series4.Color = System.Drawing.Color.Blue;
+            series4.Legend = "MeditationChartLegend";
+            series4.LegendText = "Загруженная";
+            series4.Name = "LoadedMeditation";
+            this.AttentionAndMeditationChart.Series.Add(series1);
+            this.AttentionAndMeditationChart.Series.Add(series2);
+            this.AttentionAndMeditationChart.Series.Add(series3);
+            this.AttentionAndMeditationChart.Series.Add(series4);
+            this.AttentionAndMeditationChart.Size = new System.Drawing.Size(919, 524);
+            this.AttentionAndMeditationChart.TabIndex = 21;
+            // 
+            // AlphaWavePage
+            // 
+            this.AlphaWavePage.Controls.Add(this.AlphaWaveChart);
+            this.AlphaWavePage.Location = new System.Drawing.Point(4, 25);
+            this.AlphaWavePage.Name = "AlphaWavePage";
+            this.AlphaWavePage.Padding = new System.Windows.Forms.Padding(3);
+            this.AlphaWavePage.Size = new System.Drawing.Size(919, 513);
+            this.AlphaWavePage.TabIndex = 1;
+            this.AlphaWavePage.Text = "Альфа - волна";
+            this.AlphaWavePage.UseVisualStyleBackColor = true;
+            // 
+            // AlphaWaveChart
+            // 
+            this.AlphaWaveChart.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.AlphaWaveChart.BackColor = System.Drawing.Color.Gray;
+            chartArea3.AxisX.Minimum = 0D;
+            chartArea3.AxisX.TitleFont = new System.Drawing.Font("Times New Roman", 14.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            chartArea3.AxisY.Minimum = 0D;
+            chartArea3.AxisY.StripLines.Add(stripLine2);
+            chartArea3.AxisY.TextOrientation = System.Windows.Forms.DataVisualization.Charting.TextOrientation.Rotated90;
+            chartArea3.AxisY.Title = "Уровень волны";
+            chartArea3.AxisY.TitleFont = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            chartArea3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            chartArea3.Name = "HighAlphaArea";
+            chartArea4.AxisX.Minimum = 0D;
+            chartArea4.AxisX.Title = "Время испытания";
+            chartArea4.AxisX.TitleFont = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            chartArea4.AxisY.Minimum = 0D;
+            chartArea4.AxisY.TextOrientation = System.Windows.Forms.DataVisualization.Charting.TextOrientation.Rotated90;
+            chartArea4.AxisY.Title = "Уровень волны";
+            chartArea4.AxisY.TitleFont = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            chartArea4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            chartArea4.Name = "LowAlphaArea";
+            this.AlphaWaveChart.ChartAreas.Add(chartArea3);
+            this.AlphaWaveChart.ChartAreas.Add(chartArea4);
+            legend3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            legend3.DockedToChartArea = "HighAlphaArea";
+            legend3.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            legend3.IsDockedInsideChartArea = false;
+            legend3.IsTextAutoFit = false;
+            legend3.Name = "AlphaHighChartLegend";
+            legend3.ShadowOffset = 2;
+            legend3.Title = "Высокая Альфа";
+            legend3.TitleBackColor = System.Drawing.Color.MediumSeaGreen;
+            legend3.TitleFont = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            legend3.TitleSeparator = System.Windows.Forms.DataVisualization.Charting.LegendSeparatorStyle.GradientLine;
+            legend4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            legend4.DockedToChartArea = "LowAlphaArea";
+            legend4.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            legend4.IsDockedInsideChartArea = false;
+            legend4.IsTextAutoFit = false;
+            legend4.Name = "AlphaLowChartLegend";
+            legend4.ShadowOffset = 2;
+            legend4.Title = "Низкая Альфа";
+            legend4.TitleBackColor = System.Drawing.Color.MediumSeaGreen;
+            legend4.TitleFont = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            legend4.TitleSeparator = System.Windows.Forms.DataVisualization.Charting.LegendSeparatorStyle.GradientLine;
+            this.AlphaWaveChart.Legends.Add(legend3);
+            this.AlphaWaveChart.Legends.Add(legend4);
+            this.AlphaWaveChart.Location = new System.Drawing.Point(0, 0);
+            this.AlphaWaveChart.Margin = new System.Windows.Forms.Padding(12, 1, 12, 1);
+            this.AlphaWaveChart.Name = "AlphaWaveChart";
+            this.AlphaWaveChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
+            series5.BorderWidth = 3;
+            series5.ChartArea = "HighAlphaArea";
+            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series5.Color = System.Drawing.Color.Green;
+            series5.Legend = "AlphaHighChartLegend";
+            series5.LegendText = "Сеанс";
+            series5.Name = "HighAlpha";
+            series6.BorderWidth = 3;
+            series6.ChartArea = "LowAlphaArea";
+            series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series6.Color = System.Drawing.Color.Green;
+            series6.Legend = "AlphaLowChartLegend";
+            series6.LegendText = "Сеанс";
+            series6.Name = "LowAlpha";
+            series7.BorderWidth = 3;
+            series7.ChartArea = "HighAlphaArea";
+            series7.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series7.Color = System.Drawing.Color.Blue;
+            series7.Legend = "AlphaHighChartLegend";
+            series7.LegendText = "Загруженная";
+            series7.Name = "LoadedHighAlpha";
+            series8.BorderWidth = 3;
+            series8.ChartArea = "LowAlphaArea";
+            series8.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series8.Color = System.Drawing.Color.Blue;
+            series8.Legend = "AlphaLowChartLegend";
+            series8.LegendText = "Загруженная";
+            series8.Name = "LoadedLowAlpha";
+            this.AlphaWaveChart.Series.Add(series5);
+            this.AlphaWaveChart.Series.Add(series6);
+            this.AlphaWaveChart.Series.Add(series7);
+            this.AlphaWaveChart.Series.Add(series8);
+            this.AlphaWaveChart.Size = new System.Drawing.Size(919, 512);
+            this.AlphaWaveChart.TabIndex = 20;
+            // 
+            // BetaWavePage
+            // 
+            this.BetaWavePage.Controls.Add(this.BetaWaveChart);
+            this.BetaWavePage.Location = new System.Drawing.Point(4, 25);
+            this.BetaWavePage.Name = "BetaWavePage";
+            this.BetaWavePage.Size = new System.Drawing.Size(919, 513);
+            this.BetaWavePage.TabIndex = 2;
+            this.BetaWavePage.Text = "Бета - волна";
+            this.BetaWavePage.UseVisualStyleBackColor = true;
+            // 
+            // BetaWaveChart
+            // 
+            this.BetaWaveChart.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.BetaWaveChart.BackColor = System.Drawing.Color.Gray;
+            chartArea5.AxisX.Minimum = 0D;
+            chartArea5.AxisX.TitleFont = new System.Drawing.Font("Times New Roman", 14.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            chartArea5.AxisY.Minimum = 0D;
+            chartArea5.AxisY.StripLines.Add(stripLine3);
+            chartArea5.AxisY.TextOrientation = System.Windows.Forms.DataVisualization.Charting.TextOrientation.Rotated90;
+            chartArea5.AxisY.Title = "Уровень волны";
+            chartArea5.AxisY.TitleFont = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            chartArea5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            chartArea5.Name = "HighBetaArea";
+            chartArea6.AxisX.Minimum = 0D;
+            chartArea6.AxisX.Title = "Время испытания";
+            chartArea6.AxisX.TitleFont = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            chartArea6.AxisY.Minimum = 0D;
+            chartArea6.AxisY.TextOrientation = System.Windows.Forms.DataVisualization.Charting.TextOrientation.Rotated90;
+            chartArea6.AxisY.Title = "Уровень волны";
+            chartArea6.AxisY.TitleFont = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            chartArea6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            chartArea6.Name = "LowBetaArea";
+            this.BetaWaveChart.ChartAreas.Add(chartArea5);
+            this.BetaWaveChart.ChartAreas.Add(chartArea6);
+            legend5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            legend5.DockedToChartArea = "HighBetaArea";
+            legend5.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            legend5.IsDockedInsideChartArea = false;
+            legend5.IsTextAutoFit = false;
+            legend5.Name = "BetaHighChartLegend";
+            legend5.ShadowOffset = 2;
+            legend5.Title = "Высокая Бета";
+            legend5.TitleBackColor = System.Drawing.Color.MediumSeaGreen;
+            legend5.TitleFont = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            legend5.TitleSeparator = System.Windows.Forms.DataVisualization.Charting.LegendSeparatorStyle.GradientLine;
+            legend6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            legend6.DockedToChartArea = "LowBetaArea";
+            legend6.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            legend6.IsDockedInsideChartArea = false;
+            legend6.IsTextAutoFit = false;
+            legend6.Name = "BetaLowChartLegend";
+            legend6.ShadowOffset = 2;
+            legend6.Title = "Низкая Бета";
+            legend6.TitleBackColor = System.Drawing.Color.MediumSeaGreen;
+            legend6.TitleFont = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            legend6.TitleSeparator = System.Windows.Forms.DataVisualization.Charting.LegendSeparatorStyle.GradientLine;
+            this.BetaWaveChart.Legends.Add(legend5);
+            this.BetaWaveChart.Legends.Add(legend6);
+            this.BetaWaveChart.Location = new System.Drawing.Point(0, 0);
+            this.BetaWaveChart.Margin = new System.Windows.Forms.Padding(12, 1, 12, 1);
+            this.BetaWaveChart.Name = "BetaWaveChart";
+            this.BetaWaveChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
+            series9.BorderWidth = 3;
+            series9.ChartArea = "HighBetaArea";
+            series9.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series9.Color = System.Drawing.Color.Green;
+            series9.Legend = "BetaHighChartLegend";
+            series9.LegendText = "Сеанс";
+            series9.Name = "HighBeta";
+            series10.BorderWidth = 3;
+            series10.ChartArea = "LowBetaArea";
+            series10.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series10.Color = System.Drawing.Color.Green;
+            series10.Legend = "BetaLowChartLegend";
+            series10.LegendText = "Сеанс";
+            series10.Name = "LowBeta";
+            series11.BorderWidth = 3;
+            series11.ChartArea = "HighBetaArea";
+            series11.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series11.Color = System.Drawing.Color.Blue;
+            series11.Legend = "BetaHighChartLegend";
+            series11.LegendText = "Загруженная";
+            series11.Name = "LoadedHighBeta";
+            series12.BorderWidth = 3;
+            series12.ChartArea = "LowBetaArea";
+            series12.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series12.Color = System.Drawing.Color.Blue;
+            series12.Legend = "BetaLowChartLegend";
+            series12.LegendText = "Загруженная";
+            series12.Name = "LoadedLowBeta";
+            this.BetaWaveChart.Series.Add(series9);
+            this.BetaWaveChart.Series.Add(series10);
+            this.BetaWaveChart.Series.Add(series11);
+            this.BetaWaveChart.Series.Add(series12);
+            this.BetaWaveChart.Size = new System.Drawing.Size(919, 512);
+            this.BetaWaveChart.TabIndex = 21;
+            // 
+            // GammaWavePage
+            // 
+            this.GammaWavePage.Controls.Add(this.GammaWaveChart);
+            this.GammaWavePage.Location = new System.Drawing.Point(4, 25);
+            this.GammaWavePage.Name = "GammaWavePage";
+            this.GammaWavePage.Size = new System.Drawing.Size(919, 513);
+            this.GammaWavePage.TabIndex = 3;
+            this.GammaWavePage.Text = "Гамма - волна";
+            this.GammaWavePage.UseVisualStyleBackColor = true;
+            // 
+            // GammaWaveChart
+            // 
+            this.GammaWaveChart.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.GammaWaveChart.BackColor = System.Drawing.Color.Gray;
+            chartArea7.AxisX.Minimum = 0D;
+            chartArea7.AxisX.TitleFont = new System.Drawing.Font("Times New Roman", 14.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            chartArea7.AxisY.Minimum = 0D;
+            chartArea7.AxisY.StripLines.Add(stripLine4);
+            chartArea7.AxisY.TextOrientation = System.Windows.Forms.DataVisualization.Charting.TextOrientation.Rotated90;
+            chartArea7.AxisY.Title = "Уровень волны";
+            chartArea7.AxisY.TitleFont = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            chartArea7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            chartArea7.Name = "HighGammaArea";
+            chartArea8.AxisX.Minimum = 0D;
+            chartArea8.AxisX.Title = "Время испытания";
+            chartArea8.AxisX.TitleFont = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            chartArea8.AxisY.Minimum = 0D;
+            chartArea8.AxisY.TextOrientation = System.Windows.Forms.DataVisualization.Charting.TextOrientation.Rotated90;
+            chartArea8.AxisY.Title = "Уровень волны";
+            chartArea8.AxisY.TitleFont = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            chartArea8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            chartArea8.Name = "LowGammaArea";
+            this.GammaWaveChart.ChartAreas.Add(chartArea7);
+            this.GammaWaveChart.ChartAreas.Add(chartArea8);
+            legend7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            legend7.DockedToChartArea = "HighGammaArea";
+            legend7.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            legend7.IsDockedInsideChartArea = false;
+            legend7.IsTextAutoFit = false;
+            legend7.Name = "GammaHighChartLegend";
+            legend7.ShadowOffset = 2;
+            legend7.Title = "Высокая Гамма";
+            legend7.TitleBackColor = System.Drawing.Color.MediumSeaGreen;
+            legend7.TitleFont = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            legend7.TitleSeparator = System.Windows.Forms.DataVisualization.Charting.LegendSeparatorStyle.GradientLine;
+            legend8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            legend8.DockedToChartArea = "LowGammaArea";
+            legend8.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            legend8.IsDockedInsideChartArea = false;
+            legend8.IsTextAutoFit = false;
+            legend8.Name = "GammaLowChartLegend";
+            legend8.ShadowOffset = 2;
+            legend8.Title = "Низкая Гамма";
+            legend8.TitleBackColor = System.Drawing.Color.MediumSeaGreen;
+            legend8.TitleFont = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            legend8.TitleSeparator = System.Windows.Forms.DataVisualization.Charting.LegendSeparatorStyle.GradientLine;
+            this.GammaWaveChart.Legends.Add(legend7);
+            this.GammaWaveChart.Legends.Add(legend8);
+            this.GammaWaveChart.Location = new System.Drawing.Point(0, 1);
+            this.GammaWaveChart.Margin = new System.Windows.Forms.Padding(12, 1, 12, 1);
+            this.GammaWaveChart.Name = "GammaWaveChart";
+            this.GammaWaveChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
+            series13.BorderWidth = 3;
+            series13.ChartArea = "HighGammaArea";
+            series13.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series13.Color = System.Drawing.Color.Green;
+            series13.Legend = "GammaHighChartLegend";
+            series13.LegendText = "Сеанс";
+            series13.Name = "HighGamma";
+            series14.BorderWidth = 3;
+            series14.ChartArea = "LowGammaArea";
+            series14.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series14.Color = System.Drawing.Color.Green;
+            series14.Legend = "GammaLowChartLegend";
+            series14.LegendText = "Сеанс";
+            series14.Name = "LowGamma";
+            series15.BorderWidth = 3;
+            series15.ChartArea = "HighGammaArea";
+            series15.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series15.Color = System.Drawing.Color.Blue;
+            series15.Legend = "GammaHighChartLegend";
+            series15.LegendText = "Загруженная";
+            series15.Name = "LoadedHighGamma";
+            series16.BorderWidth = 3;
+            series16.ChartArea = "LowGammaArea";
+            series16.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series16.Color = System.Drawing.Color.Blue;
+            series16.Legend = "GammaLowChartLegend";
+            series16.LegendText = "Загруженная";
+            series16.Name = "LoadedLowGamma";
+            this.GammaWaveChart.Series.Add(series13);
+            this.GammaWaveChart.Series.Add(series14);
+            this.GammaWaveChart.Series.Add(series15);
+            this.GammaWaveChart.Series.Add(series16);
+            this.GammaWaveChart.Size = new System.Drawing.Size(919, 512);
+            this.GammaWaveChart.TabIndex = 22;
+            // 
+            // ThetaAndDeltaWavesPage
+            // 
+            this.ThetaAndDeltaWavesPage.Controls.Add(this.ThetaAndDeltaWavesChart);
+            this.ThetaAndDeltaWavesPage.Location = new System.Drawing.Point(4, 25);
+            this.ThetaAndDeltaWavesPage.Name = "ThetaAndDeltaWavesPage";
+            this.ThetaAndDeltaWavesPage.Size = new System.Drawing.Size(919, 513);
+            this.ThetaAndDeltaWavesPage.TabIndex = 4;
+            this.ThetaAndDeltaWavesPage.Text = "Тета и Дельта волны";
+            this.ThetaAndDeltaWavesPage.UseVisualStyleBackColor = true;
+            // 
+            // ThetaAndDeltaWavesChart
+            // 
+            this.ThetaAndDeltaWavesChart.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ThetaAndDeltaWavesChart.BackColor = System.Drawing.Color.Gray;
+            chartArea9.AxisX.Minimum = 0D;
+            chartArea9.AxisX.TitleFont = new System.Drawing.Font("Times New Roman", 14.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            chartArea9.AxisY.Minimum = 0D;
+            chartArea9.AxisY.StripLines.Add(stripLine5);
+            chartArea9.AxisY.TextOrientation = System.Windows.Forms.DataVisualization.Charting.TextOrientation.Rotated90;
+            chartArea9.AxisY.Title = "Уровень волны";
+            chartArea9.AxisY.TitleFont = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            chartArea9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            chartArea9.Name = "ThetaArea";
+            chartArea10.AxisX.Minimum = 0D;
+            chartArea10.AxisX.Title = "Время испытания";
+            chartArea10.AxisX.TitleFont = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            chartArea10.AxisY.Minimum = 0D;
+            chartArea10.AxisY.TextOrientation = System.Windows.Forms.DataVisualization.Charting.TextOrientation.Rotated90;
+            chartArea10.AxisY.Title = "Уровень волны";
+            chartArea10.AxisY.TitleFont = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            chartArea10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            chartArea10.Name = "DeltaArea";
+            this.ThetaAndDeltaWavesChart.ChartAreas.Add(chartArea9);
+            this.ThetaAndDeltaWavesChart.ChartAreas.Add(chartArea10);
+            legend9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            legend9.DockedToChartArea = "ThetaArea";
+            legend9.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            legend9.IsDockedInsideChartArea = false;
+            legend9.IsTextAutoFit = false;
+            legend9.Name = "ThetaChartLegend";
+            legend9.ShadowOffset = 2;
+            legend9.Title = "Тета - волна";
+            legend9.TitleBackColor = System.Drawing.Color.MediumSeaGreen;
+            legend9.TitleFont = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            legend9.TitleSeparator = System.Windows.Forms.DataVisualization.Charting.LegendSeparatorStyle.GradientLine;
+            legend10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            legend10.DockedToChartArea = "DeltaArea";
+            legend10.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            legend10.IsDockedInsideChartArea = false;
+            legend10.IsTextAutoFit = false;
+            legend10.Name = "DeltaChartLegend";
+            legend10.ShadowOffset = 2;
+            legend10.Title = "Дельта - волна";
+            legend10.TitleBackColor = System.Drawing.Color.MediumSeaGreen;
+            legend10.TitleFont = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            legend10.TitleSeparator = System.Windows.Forms.DataVisualization.Charting.LegendSeparatorStyle.GradientLine;
+            this.ThetaAndDeltaWavesChart.Legends.Add(legend9);
+            this.ThetaAndDeltaWavesChart.Legends.Add(legend10);
+            this.ThetaAndDeltaWavesChart.Location = new System.Drawing.Point(0, 0);
+            this.ThetaAndDeltaWavesChart.Margin = new System.Windows.Forms.Padding(12, 1, 12, 1);
+            this.ThetaAndDeltaWavesChart.Name = "ThetaAndDeltaWavesChart";
+            this.ThetaAndDeltaWavesChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
+            series17.BorderWidth = 3;
+            series17.ChartArea = "ThetaArea";
+            series17.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series17.Color = System.Drawing.Color.Green;
+            series17.Legend = "ThetaChartLegend";
+            series17.LegendText = "Сеанс";
+            series17.Name = "Theta";
+            series18.BorderWidth = 3;
+            series18.ChartArea = "DeltaArea";
+            series18.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series18.Color = System.Drawing.Color.Green;
+            series18.Legend = "DeltaChartLegend";
+            series18.LegendText = "Сеанс";
+            series18.Name = "Delta";
+            series19.BorderWidth = 3;
+            series19.ChartArea = "ThetaArea";
+            series19.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series19.Color = System.Drawing.Color.Blue;
+            series19.Legend = "ThetaChartLegend";
+            series19.LegendText = "Загруженная";
+            series19.Name = "LoadedTheta";
+            series20.BorderWidth = 3;
+            series20.ChartArea = "DeltaArea";
+            series20.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series20.Color = System.Drawing.Color.Blue;
+            series20.Legend = "DeltaChartLegend";
+            series20.LegendText = "Загруженная";
+            series20.Name = "LoadedDelta";
+            this.ThetaAndDeltaWavesChart.Series.Add(series17);
+            this.ThetaAndDeltaWavesChart.Series.Add(series18);
+            this.ThetaAndDeltaWavesChart.Series.Add(series19);
+            this.ThetaAndDeltaWavesChart.Series.Add(series20);
+            this.ThetaAndDeltaWavesChart.Size = new System.Drawing.Size(919, 512);
+            this.ThetaAndDeltaWavesChart.TabIndex = 23;
+            // 
+            // btnChangeSavePath
+            // 
+            this.btnChangeSavePath.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btnChangeSavePath.Enabled = false;
+            this.btnChangeSavePath.Location = new System.Drawing.Point(451, 71);
+            this.btnChangeSavePath.Margin = new System.Windows.Forms.Padding(12, 1, 12, 1);
+            this.btnChangeSavePath.Name = "btnChangeSavePath";
+            this.btnChangeSavePath.Size = new System.Drawing.Size(95, 30);
+            this.btnChangeSavePath.TabIndex = 30;
+            this.btnChangeSavePath.Text = "Обзор";
+            this.btnChangeSavePath.UseVisualStyleBackColor = true;
+            this.btnChangeSavePath.Click += new System.EventHandler(this.SaveFilePathForRecording);
+            // 
+            // chkSaveRecordData
+            // 
+            this.chkSaveRecords.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.chkSaveRecords.Location = new System.Drawing.Point(42, 22);
+            this.chkSaveRecords.Margin = new System.Windows.Forms.Padding(12, 1, 12, 1);
+            this.chkSaveRecords.Name = "chkSaveRecordData";
+            this.chkSaveRecords.Size = new System.Drawing.Size(493, 30);
+            this.chkSaveRecords.TabIndex = 25;
+            this.chkSaveRecords.Text = "Сохранять данные с нейрогарнитуры во время сеанса записи";
+            this.chkSaveRecords.UseVisualStyleBackColor = true;
+            this.chkSaveRecords.CheckedChanged += new System.EventHandler(this.OnChangedValueInSaveMindRecord);
+            // 
+            // txtBoxFilePath
+            // 
+            this.txtBoxFilePath.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.txtBoxFilePath.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.txtBoxFilePath.Enabled = false;
+            this.txtBoxFilePath.Font = new System.Drawing.Font("Times New Roman", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtBoxFilePath.Location = new System.Drawing.Point(41, 76);
+            this.txtBoxFilePath.Margin = new System.Windows.Forms.Padding(12, 1, 12, 1);
+            this.txtBoxFilePath.Name = "txtBoxFilePath";
+            this.txtBoxFilePath.ReadOnly = true;
+            this.txtBoxFilePath.Size = new System.Drawing.Size(401, 22);
+            this.txtBoxFilePath.TabIndex = 0;
+            this.txtBoxFilePath.TabStop = false;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.groupBox1.Controls.Add(label2);
+            this.groupBox1.Controls.Add(this.btnChangeSavePath);
+            this.groupBox1.Controls.Add(this.chkSaveRecords);
+            this.groupBox1.Controls.Add(this.txtBoxFilePath);
+            this.groupBox1.Location = new System.Drawing.Point(334, 595);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(595, 116);
+            this.groupBox1.TabIndex = 35;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Настройки сохранения";
+            // 
+            // загрузитьДанныеДляАнализаToolStripMenuItem
+            // 
+            this.загрузитьДанныеДляАнализаToolStripMenuItem.Name = "загрузитьДанныеДляАнализаToolStripMenuItem";
+            this.загрузитьДанныеДляАнализаToolStripMenuItem.Size = new System.Drawing.Size(355, 26);
+            this.загрузитьДанныеДляАнализаToolStripMenuItem.Text = "Загрузить данные для анализа";
+            this.загрузитьДанныеДляАнализаToolStripMenuItem.Click += new System.EventHandler(this.LoadFileOnChart);
+            // 
+            // очиститьГрафикиСЗагруженнымиДаннымиToolStripMenuItem
+            // 
+            this.очиститьГрафикиСЗагруженнымиДаннымиToolStripMenuItem.Name = "очиститьГрафикиСЗагруженнымиДаннымиToolStripMenuItem";
+            this.очиститьГрафикиСЗагруженнымиДаннымиToolStripMenuItem.Size = new System.Drawing.Size(355, 26);
+            this.очиститьГрафикиСЗагруженнымиДаннымиToolStripMenuItem.Text = "Очистить графики с загруженными данными";
+            this.очиститьГрафикиСЗагруженнымиДаннымиToolStripMenuItem.Click += new System.EventHandler(this.ClearLoadedRecords);
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.ClientSize = new System.Drawing.Size(661, 590);
-            this.Controls.Add(tabControl1);
+            this.ClientSize = new System.Drawing.Size(945, 716);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.tabControl1);
             this.Controls.Add(groupBox2);
-            this.Controls.Add(tabControl2);
-            this.Controls.Add(mainMenuStrip);
+            this.Controls.Add(this.mainMenuStrip);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MainMenuStrip = mainMenuStrip;
-            this.Margin = new System.Windows.Forms.Padding(9, 1, 9, 1);
+            this.MainMenuStrip = this.mainMenuStrip;
+            this.Margin = new System.Windows.Forms.Padding(12, 1, 12, 1);
+            this.MinimumSize = new System.Drawing.Size(963, 751);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Mind Analysis v1.1.a.0";
-            tabControl2.ResumeLayout(false);
-            tabPage1.ResumeLayout(false);
-            tabPage1.PerformLayout();
-            tabPage2.ResumeLayout(false);
-            tabPage2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numMaxChartPoints)).EndInit();
-            mainMenuStrip.ResumeLayout(false);
-            mainMenuStrip.PerformLayout();
+            this.Text = "Mind Analysis v1.2.0";
+            this.mainMenuStrip.ResumeLayout(false);
+            this.mainMenuStrip.PerformLayout();
             groupBox2.ResumeLayout(false);
-            tabControl1.ResumeLayout(false);
-            AttentionConcentration.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.chartAttention)).EndInit();
+            groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numMaxChartPoints)).EndInit();
+            this.tabControl1.ResumeLayout(false);
+            this.AttentionPage.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.AttentionAndMeditationChart)).EndInit();
+            this.AlphaWavePage.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.AlphaWaveChart)).EndInit();
+            this.BetaWavePage.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.BetaWaveChart)).EndInit();
+            this.GammaWavePage.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.GammaWaveChart)).EndInit();
+            this.ThetaAndDeltaWavesPage.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.ThetaAndDeltaWavesChart)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -443,11 +861,25 @@ namespace MindAnalysis
         #endregion
         private System.Windows.Forms.Button btnStartRecord;
         private System.Windows.Forms.Button btnStopRecord;
-        private System.Windows.Forms.CheckBox chkSaveRecordData;
-        private System.Windows.Forms.NumericUpDown numMaxChartPoints;
-        private System.Windows.Forms.TextBox fullFilePathText;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage AttentionPage;
+        private System.Windows.Forms.TabPage AlphaWavePage;
         private System.Windows.Forms.Button btnChangeSavePath;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chartAttention;
+        private System.Windows.Forms.CheckBox chkSaveRecords;
+        private System.Windows.Forms.NumericUpDown numMaxChartPoints;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.DataVisualization.Charting.Chart AlphaWaveChart;
+        private System.Windows.Forms.DataVisualization.Charting.Chart AttentionAndMeditationChart;
+        private System.Windows.Forms.TabPage BetaWavePage;
+        private System.Windows.Forms.TabPage GammaWavePage;
+        private System.Windows.Forms.TabPage ThetaAndDeltaWavesPage;
+        private System.Windows.Forms.DataVisualization.Charting.Chart BetaWaveChart;
+        private System.Windows.Forms.DataVisualization.Charting.Chart GammaWaveChart;
+        private System.Windows.Forms.DataVisualization.Charting.Chart ThetaAndDeltaWavesChart;
+        private System.Windows.Forms.TextBox txtBoxFilePath;
+        private System.Windows.Forms.MenuStrip mainMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem загрузитьДанныеДляАнализаToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem очиститьГрафикиСЗагруженнымиДаннымиToolStripMenuItem;
     }
 }
 
