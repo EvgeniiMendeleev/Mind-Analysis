@@ -8,11 +8,9 @@ using Newtonsoft.Json.Linq;
 
 namespace NeuroTGAM
 {
-    //TODO: Переписать парсинг JSON пакетов, поступающих с нейроинтрефейса на принимающее устройство.
     public class Neurointerface
     {
-#region The initialize section
-        private TcpClient _thinkgearConnector;
+        private TcpClient _client;
         private Thread _brainDataReadingThread;
         private Stream _streamToThinkgearConnector;
         private Mutex _mutex;
@@ -24,15 +22,14 @@ namespace NeuroTGAM
         { 
             get { return _brainDataReadingThread.IsAlive; } 
         }
-#endregion
-#region The functions section
+
         public Neurointerface()
         {
             CurrentBrainData = new BrainInfo();
-
-            _thinkgearConnector = new TcpClient();
+            _client = new TcpClient();
             _mutex = new Mutex();
             _brainDataReadingThread = new Thread(BrainDataReadingThread);
+
             _brainDataReadingThread.IsBackground = true;
         }
 
@@ -41,7 +38,7 @@ namespace NeuroTGAM
             try
             {
                 byte[] bytesFromConnector = new byte[2048];
-                while (_thinkgearConnector.Connected)
+                while (_client.Connected)
                 {
                     int bytesRead = _streamToThinkgearConnector.Read(bytesFromConnector, 0, 2048);
                     if (bytesRead <= 0) continue;
@@ -62,6 +59,7 @@ namespace NeuroTGAM
             }
         }
 
+        //TODO: Переписать парсинг JSON пакетов, поступающих с нейроинтрефейса в программу.
         private void ParseJSON(string packet)
         {
             Console.WriteLine(packet);
@@ -72,14 +70,14 @@ namespace NeuroTGAM
             }
 
             _mutex.WaitOne();
-            CurrentBrainData.AlphaLow = (uint)jsonObject.eegPower["lowAlpha"];
-            CurrentBrainData.AlphaHigh = (uint)jsonObject.eegPower["highAlpha"];
+            CurrentBrainData.LowAlpha = (uint)jsonObject.eegPower["lowAlpha"];
+            CurrentBrainData.HighAlpha = (uint)jsonObject.eegPower["highAlpha"];
 
-            CurrentBrainData.BetaLow = (uint)jsonObject.eegPower["lowBeta"];
-            CurrentBrainData.BetaHigh = (uint)jsonObject.eegPower["highBeta"];
+            CurrentBrainData.LowBeta = (uint)jsonObject.eegPower["lowBeta"];
+            CurrentBrainData.HighBeta = (uint)jsonObject.eegPower["highBeta"];
 
-            CurrentBrainData.GammaLow = (uint)jsonObject.eegPower["lowGamma"];
-            CurrentBrainData.GammaHigh = (uint)jsonObject.eegPower["highGamma"];
+            CurrentBrainData.LowGamma = (uint)jsonObject.eegPower["lowGamma"];
+            CurrentBrainData.HighGamma = (uint)jsonObject.eegPower["highGamma"];
 
             CurrentBrainData.Theta = (uint)jsonObject.eegPower["theta"];
             CurrentBrainData.Delta = (uint)jsonObject.eegPower["delta"];
@@ -93,9 +91,9 @@ namespace NeuroTGAM
 
         public void Connect()
         {
-            _thinkgearConnector.Connect("localhost", 13854);
+            _client.Connect("localhost", 13854);
 
-            _streamToThinkgearConnector = _thinkgearConnector.GetStream();
+            _streamToThinkgearConnector = _client.GetStream();
             InitializeСonnectorStartSettings();
 
             _brainDataReadingThread.Start();
@@ -109,9 +107,8 @@ namespace NeuroTGAM
 
         public void CloseConnection()
         {
-            _thinkgearConnector.Close();
-            _thinkgearConnector = new TcpClient();
+            _client.Close();
+            _brainDataReadingThread.Abort();
         }
-#endregion
     }
 }

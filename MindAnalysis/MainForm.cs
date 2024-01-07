@@ -1,47 +1,78 @@
-﻿using CsvHelper;
-using CsvHelper.Configuration;
+﻿using MindAnalysis.GUI;
+using MindAnalysis.NeuroTGAM;
 using NeuroTGAM;
 using System;
-using System.Globalization;
 using System.IO;
 using System.Windows.Forms;
-using System.Windows.Forms.DataVisualization.Charting;
 
 namespace MindAnalysis
 {
     public partial class MainForm : Form
     {
-        private delegate void DynamicChartDisplay(BrainInfo brainInfo);
-        private Neurointerface _neurodevice = new Neurointerface();
-        private DateTime _startTime;
+        private delegate void SessionChartDisplay(BrainInfo brainInfo);
+        
+        private Neurointerface _neurodevice;
+        private WavesCharts _wavesCharts;
+        private MindFile _mindFile;
 
         public MainForm()
         {
             InitializeComponent();
-            _neurodevice.OnBrainDataReceived += (BrainInfo brainInfo) =>
-            {
-                Invoke(new DynamicChartDisplay(DisplayPointToDynamicGraphic), brainInfo);
-                if (chkSaveRecordData.Checked) SaveBrainInfoToFile(brainInfo);
-            };
+            InitializeChartsStorage();
         }
 
-        private void StartToReadDataFromNeurodevice(object sender, EventArgs e)
+        private void InitializeChartsStorage()
+        {
+            _wavesCharts = new WavesCharts
+                (
+                new WaveChartDescription { waveChartType = WaveChart.Attention, waveChart = AttentionAndMeditationChart },
+                new WaveChartDescription { waveChartType = WaveChart.Meditation, waveChart = AttentionAndMeditationChart },
+                new WaveChartDescription { waveChartType = WaveChart.HighAlpha, waveChart = AlphaWaveChart },
+                new WaveChartDescription { waveChartType = WaveChart.LowAlpha, waveChart = AlphaWaveChart },
+                new WaveChartDescription { waveChartType = WaveChart.HighBeta, waveChart = BetaWaveChart },
+                new WaveChartDescription { waveChartType = WaveChart.LowBeta, waveChart = BetaWaveChart },
+                new WaveChartDescription { waveChartType = WaveChart.HighGamma, waveChart = GammaWaveChart },
+                new WaveChartDescription { waveChartType = WaveChart.LowGamma, waveChart = GammaWaveChart },
+                new WaveChartDescription { waveChartType = WaveChart.Theta, waveChart = ThetaAndDeltaWavesChart },
+                new WaveChartDescription { waveChartType = WaveChart.Delta, waveChart = ThetaAndDeltaWavesChart }
+                );
+        }
+
+        private void StartRecording(object sender, EventArgs e)
         {
             try
             {
+                _neurodevice = new Neurointerface();
+                _neurodevice.OnBrainDataReceived += OnBrainDataReceived;
                 _neurodevice.Connect();
-                _startTime = DateTime.Now;
             }
             catch
             {
                 MessageBox.Show("Ошибка подключения к нейроинтерфейсу", "Ошибка соединения!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            chartAttention.Series[0].Points.Clear();
-            UserControlSystem.GetSystem().Disable(btnStartRecord).Enable(btnStopRecord);
+            _wavesCharts.MaxPointsOnCharts = numMaxChartPoints.Value;
+            _wavesCharts.StartTime = DateTime.Now;
+            _wavesCharts.ClearSessionRecord();
+
+            if (chkSaveRecords.Checked) _mindFile = new MindFile(txtBoxFilePath.Text);
+
+            UserControlSystem.GetSystem()
+                .Disable(btnStartRecord)
+                .Enable(btnStopRecord)
+                .Disable(numMaxChartPoints)
+                .Disable(chkSaveRecords)
+                .Disable(txtBoxFilePath)
+                .Disable(mainMenuStrip);
         }
 
-        private void StopToReadDataFromNeurodevice(object sender, EventArgs e)
+        private void OnBrainDataReceived(BrainInfo brainInfo)
+        {
+            Invoke(new SessionChartDisplay(_wavesCharts.AddPointOnSessionCharts), brainInfo);
+            _mindFile?.AppendRecord(brainInfo);
+        }
+
+        private void StopRecording(object sender, EventArgs e)
         {
             if (!_neurodevice.IsDataReading)
             {
@@ -49,78 +80,51 @@ namespace MindAnalysis
                 return;
             }
             _neurodevice.CloseConnection();
-            UserControlSystem.GetSystem().Disable(btnStopRecord).Enable(btnStartRecord);
+            _neurodevice = null;
+            _wavesCharts.ClearSessionRecord();
+            _mindFile?.Close();
+            _mindFile = null;
+
+            UserControlSystem.GetSystem()
+                .Disable(btnStopRecord)
+                .Enable(btnStartRecord)
+                .Enable(numMaxChartPoints)
+                .Enable(chkSaveRecords)
+                .Enable(txtBoxFilePath)
+                .Enable(mainMenuStrip);
         }
 
-        private void OnChangedValueInSaveMindRecord(object sender, EventArgs e) => btnChangeSavePath.Enabled = !btnChangeSavePath.Enabled;
-
-        private void UploadFirstFileToChart(object sender, EventArgs e) => UploadBrainFile(1);
-
-        private void UploadBrainFile(int serie)
+        private void OnChangedValueInSaveMindRecord(object sender, EventArgs e)
         {
-            using (OpenFileDialog OPF = new OpenFileDialog() { Filter = "Csv files (*.csv) | *.csv" })
-            {
-                if (OPF.ShowDialog() != DialogResult.OK) return;
-                chartAttention.Series[serie].Points.Clear();
+            UserControlSystem GUISystem = UserControlSystem.GetSystem();
 
-                CsvConfiguration csvConfig = new CsvConfiguration(CultureInfo.CurrentCulture) { HasHeaderRecord = false };
-                using (CsvReader csvReader = new CsvReader(File.OpenText(OPF.FileName), csvConfig))
-                {
-                    var brainInfos = csvReader.GetRecords<BrainInfo>();
-                    foreach (var brainInfo in brainInfos)
-                    {
-                        chartAttention.Series[serie].Points.AddXY(brainInfo.Second.ToString(), brainInfo.Attention);
-                    }
-                }
+            if (chkSaveRecords.Checked) GUISystem.Enable(btnChangeSavePath).Enable(txtBoxFilePath);
+            else GUISystem.Disable(btnChangeSavePath).Disable(txtBoxFilePath);
+        }
+
+        private void LoadFileOnChart(object sender, EventArgs e)
+        {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog() { Filter = "Csv files (*.csv) | *.csv" })
+            {
+                if (openFileDialog.ShowDialog() != DialogResult.OK) return;
+                _wavesCharts.LoadFileOnCharts(openFileDialog.FileName);
             }
         }
 
-        private void SaveFilePathOfCurrentMindRecord(object sender, EventArgs e)
+        private void SaveFilePathForRecording(object sender, EventArgs e)
         {
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "Csv files (*.csv) | *.csv";
+            SaveFileDialog saveFileDialog = new SaveFileDialog() { Filter = "Csv files (*.csv) | *.csv" };
             if (saveFileDialog.ShowDialog() != DialogResult.OK) return;
 
-            if (saveFileDialog.FileName.Length > 3) fullFilePathText.Text = Path.GetFullPath(saveFileDialog.FileName);
+            if (saveFileDialog.FileName.Length > 3) txtBoxFilePath.Text = Path.GetFullPath(saveFileDialog.FileName);
             else MessageBox.Show("Имя файла слишком маленькое!", "Ошибка сохранения", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        private void ClearExperiment(object sender, EventArgs e) => chartAttention.Series[0].Points.Clear();
-        private void ClearFirstLoadedFile(object sender, EventArgs e) => chartAttention.Series[1].Points.Clear();
-
-        private void ClearAllGraphics(object sender, EventArgs e)
-        {
-            foreach (Series serie in chartAttention.Series)
-            {
-                serie.Points.Clear();
-            }
-        }
-
-        void DisplayPointToDynamicGraphic(BrainInfo brainInfo)
-        {
-            TimeSpan elapsedTime = DateTime.Now - _startTime;
-            elapsedTime = new TimeSpan(elapsedTime.Hours, elapsedTime.Minutes, elapsedTime.Seconds);
-            brainInfo.Second = elapsedTime;
-
-            if (numMaxChartPoints.Value < chartAttention.Series[0].Points.Count)
-            {
-                chartAttention.Series[0].Points.RemoveAt(0);
-                chartAttention.ResetAutoValues();
-            }
-            chartAttention.Series[0].Points.AddXY(brainInfo.Second.ToString(), brainInfo.Attention);
-        }
+        private void ClearLoadedRecords(object sender, EventArgs e) => _wavesCharts.ClearLoadedRecords();
 
         private void SaveBrainInfoToFile(BrainInfo brainInfo)
         {
-            using (FileStream file = new FileStream(fullFilePathText.Text, FileMode.OpenOrCreate, FileAccess.Write))
-            {
-                file.Seek(0, SeekOrigin.End);
-                using (CsvWriter csvWriter = new CsvWriter(new StreamWriter(file), CultureInfo.CurrentCulture))
-                {
-                    csvWriter.WriteRecord(brainInfo);
-                    csvWriter.NextRecord();
-                }
-            }
+            _mindFile.AppendRecord(brainInfo);
         }
     }
 }
