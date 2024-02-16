@@ -79,10 +79,12 @@ namespace MindAnalysis
             System.Windows.Forms.DataVisualization.Charting.Series series19 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series20 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            this.mainMenuStrip = new System.Windows.Forms.MenuStrip();
+            this.загрузитьДанныеДляАнализаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.очиститьГрафикиСЗагруженнымиДаннымиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnStartRecord = new System.Windows.Forms.Button();
             this.numMaxChartPoints = new System.Windows.Forms.NumericUpDown();
             this.btnStopRecord = new System.Windows.Forms.Button();
+            this.mainMenuStrip = new System.Windows.Forms.MenuStrip();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.AttentionPage = new System.Windows.Forms.TabPage();
             this.AttentionAndMeditationChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
@@ -98,15 +100,13 @@ namespace MindAnalysis
             this.chkSaveRecords = new System.Windows.Forms.CheckBox();
             this.txtBoxFilePath = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.загрузитьДанныеДляАнализаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.очиститьГрафикиСЗагруженнымиДаннымиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             графикиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             groupBox2 = new System.Windows.Forms.GroupBox();
             label1 = new System.Windows.Forms.Label();
             label2 = new System.Windows.Forms.Label();
-            this.mainMenuStrip.SuspendLayout();
             groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numMaxChartPoints)).BeginInit();
+            this.mainMenuStrip.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.AttentionPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.AttentionAndMeditationChart)).BeginInit();
@@ -121,18 +121,6 @@ namespace MindAnalysis
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // mainMenuStrip
-            // 
-            this.mainMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.mainMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            графикиToolStripMenuItem});
-            this.mainMenuStrip.Location = new System.Drawing.Point(0, 0);
-            this.mainMenuStrip.Name = "mainMenuStrip";
-            this.mainMenuStrip.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
-            this.mainMenuStrip.Size = new System.Drawing.Size(945, 25);
-            this.mainMenuStrip.TabIndex = 31;
-            this.mainMenuStrip.Text = "menuStrip1";
-            // 
             // графикиToolStripMenuItem
             // 
             графикиToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -142,6 +130,20 @@ namespace MindAnalysis
             графикиToolStripMenuItem.Name = "графикиToolStripMenuItem";
             графикиToolStripMenuItem.Size = new System.Drawing.Size(161, 21);
             графикиToolStripMenuItem.Text = "Операции с графиками";
+            // 
+            // загрузитьДанныеДляАнализаToolStripMenuItem
+            // 
+            this.загрузитьДанныеДляАнализаToolStripMenuItem.Name = "загрузитьДанныеДляАнализаToolStripMenuItem";
+            this.загрузитьДанныеДляАнализаToolStripMenuItem.Size = new System.Drawing.Size(355, 26);
+            this.загрузитьДанныеДляАнализаToolStripMenuItem.Text = "Загрузить данные для анализа";
+            this.загрузитьДанныеДляАнализаToolStripMenuItem.Click += new System.EventHandler(this.LoadFileOnChart);
+            // 
+            // очиститьГрафикиСЗагруженнымиДаннымиToolStripMenuItem
+            // 
+            this.очиститьГрафикиСЗагруженнымиДаннымиToolStripMenuItem.Name = "очиститьГрафикиСЗагруженнымиДаннымиToolStripMenuItem";
+            this.очиститьГрафикиСЗагруженнымиДаннымиToolStripMenuItem.Size = new System.Drawing.Size(355, 26);
+            this.очиститьГрафикиСЗагруженнымиДаннымиToolStripMenuItem.Text = "Очистить графики с загруженными данными";
+            this.очиститьГрафикиСЗагруженнымиДаннымиToolStripMenuItem.Click += new System.EventHandler(this.ClearLoadedRecords);
             // 
             // groupBox2
             // 
@@ -233,6 +235,18 @@ namespace MindAnalysis
             label2.TabIndex = 32;
             label2.Text = "Путь сохранения:";
             // 
+            // mainMenuStrip
+            // 
+            this.mainMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.mainMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            графикиToolStripMenuItem});
+            this.mainMenuStrip.Location = new System.Drawing.Point(0, 0);
+            this.mainMenuStrip.Name = "mainMenuStrip";
+            this.mainMenuStrip.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
+            this.mainMenuStrip.Size = new System.Drawing.Size(945, 25);
+            this.mainMenuStrip.TabIndex = 31;
+            this.mainMenuStrip.Text = "menuStrip1";
+            // 
             // tabControl1
             // 
             this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -257,7 +271,7 @@ namespace MindAnalysis
             this.AttentionPage.Padding = new System.Windows.Forms.Padding(3);
             this.AttentionPage.Size = new System.Drawing.Size(919, 525);
             this.AttentionPage.TabIndex = 0;
-            this.AttentionPage.Text = "Внимание и медитация";
+            this.AttentionPage.Text = "Внимание и расслабление";
             this.AttentionPage.UseVisualStyleBackColor = true;
             // 
             // AttentionAndMeditationChart
@@ -284,7 +298,7 @@ namespace MindAnalysis
             chartArea2.AxisY.Maximum = 103D;
             chartArea2.AxisY.Minimum = 0D;
             chartArea2.AxisY.TextOrientation = System.Windows.Forms.DataVisualization.Charting.TextOrientation.Rotated90;
-            chartArea2.AxisY.Title = "Уровень медитации";
+            chartArea2.AxisY.Title = "Уровень расслабления";
             chartArea2.AxisY.TitleFont = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             chartArea2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             chartArea2.Name = "Meditation";
@@ -308,7 +322,7 @@ namespace MindAnalysis
             legend2.IsTextAutoFit = false;
             legend2.Name = "MeditationChartLegend";
             legend2.ShadowOffset = 2;
-            legend2.Title = "Медитация";
+            legend2.Title = "Расслабление";
             legend2.TitleBackColor = System.Drawing.Color.MediumSeaGreen;
             legend2.TitleFont = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             legend2.TitleSeparator = System.Windows.Forms.DataVisualization.Charting.LegendSeparatorStyle.GradientLine;
@@ -359,7 +373,7 @@ namespace MindAnalysis
             this.AlphaWavePage.Location = new System.Drawing.Point(4, 25);
             this.AlphaWavePage.Name = "AlphaWavePage";
             this.AlphaWavePage.Padding = new System.Windows.Forms.Padding(3);
-            this.AlphaWavePage.Size = new System.Drawing.Size(919, 513);
+            this.AlphaWavePage.Size = new System.Drawing.Size(919, 525);
             this.AlphaWavePage.TabIndex = 1;
             this.AlphaWavePage.Text = "Альфа - волна";
             this.AlphaWavePage.UseVisualStyleBackColor = true;
@@ -458,7 +472,7 @@ namespace MindAnalysis
             this.BetaWavePage.Controls.Add(this.BetaWaveChart);
             this.BetaWavePage.Location = new System.Drawing.Point(4, 25);
             this.BetaWavePage.Name = "BetaWavePage";
-            this.BetaWavePage.Size = new System.Drawing.Size(919, 513);
+            this.BetaWavePage.Size = new System.Drawing.Size(919, 525);
             this.BetaWavePage.TabIndex = 2;
             this.BetaWavePage.Text = "Бета - волна";
             this.BetaWavePage.UseVisualStyleBackColor = true;
@@ -557,7 +571,7 @@ namespace MindAnalysis
             this.GammaWavePage.Controls.Add(this.GammaWaveChart);
             this.GammaWavePage.Location = new System.Drawing.Point(4, 25);
             this.GammaWavePage.Name = "GammaWavePage";
-            this.GammaWavePage.Size = new System.Drawing.Size(919, 513);
+            this.GammaWavePage.Size = new System.Drawing.Size(919, 525);
             this.GammaWavePage.TabIndex = 3;
             this.GammaWavePage.Text = "Гамма - волна";
             this.GammaWavePage.UseVisualStyleBackColor = true;
@@ -656,7 +670,7 @@ namespace MindAnalysis
             this.ThetaAndDeltaWavesPage.Controls.Add(this.ThetaAndDeltaWavesChart);
             this.ThetaAndDeltaWavesPage.Location = new System.Drawing.Point(4, 25);
             this.ThetaAndDeltaWavesPage.Name = "ThetaAndDeltaWavesPage";
-            this.ThetaAndDeltaWavesPage.Size = new System.Drawing.Size(919, 513);
+            this.ThetaAndDeltaWavesPage.Size = new System.Drawing.Size(919, 525);
             this.ThetaAndDeltaWavesPage.TabIndex = 4;
             this.ThetaAndDeltaWavesPage.Text = "Тета и Дельта волны";
             this.ThetaAndDeltaWavesPage.UseVisualStyleBackColor = true;
@@ -763,12 +777,12 @@ namespace MindAnalysis
             this.btnChangeSavePath.UseVisualStyleBackColor = true;
             this.btnChangeSavePath.Click += new System.EventHandler(this.SaveFilePathForRecording);
             // 
-            // chkSaveRecordData
+            // chkSaveRecords
             // 
             this.chkSaveRecords.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.chkSaveRecords.Location = new System.Drawing.Point(42, 22);
             this.chkSaveRecords.Margin = new System.Windows.Forms.Padding(12, 1, 12, 1);
-            this.chkSaveRecords.Name = "chkSaveRecordData";
+            this.chkSaveRecords.Name = "chkSaveRecords";
             this.chkSaveRecords.Size = new System.Drawing.Size(493, 30);
             this.chkSaveRecords.TabIndex = 25;
             this.chkSaveRecords.Text = "Сохранять данные с нейрогарнитуры во время сеанса записи";
@@ -803,20 +817,6 @@ namespace MindAnalysis
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Настройки сохранения";
             // 
-            // загрузитьДанныеДляАнализаToolStripMenuItem
-            // 
-            this.загрузитьДанныеДляАнализаToolStripMenuItem.Name = "загрузитьДанныеДляАнализаToolStripMenuItem";
-            this.загрузитьДанныеДляАнализаToolStripMenuItem.Size = new System.Drawing.Size(355, 26);
-            this.загрузитьДанныеДляАнализаToolStripMenuItem.Text = "Загрузить данные для анализа";
-            this.загрузитьДанныеДляАнализаToolStripMenuItem.Click += new System.EventHandler(this.LoadFileOnChart);
-            // 
-            // очиститьГрафикиСЗагруженнымиДаннымиToolStripMenuItem
-            // 
-            this.очиститьГрафикиСЗагруженнымиДаннымиToolStripMenuItem.Name = "очиститьГрафикиСЗагруженнымиДаннымиToolStripMenuItem";
-            this.очиститьГрафикиСЗагруженнымиДаннымиToolStripMenuItem.Size = new System.Drawing.Size(355, 26);
-            this.очиститьГрафикиСЗагруженнымиДаннымиToolStripMenuItem.Text = "Очистить графики с загруженными данными";
-            this.очиститьГрафикиСЗагруженнымиДаннымиToolStripMenuItem.Click += new System.EventHandler(this.ClearLoadedRecords);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -835,11 +835,11 @@ namespace MindAnalysis
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Mind Analysis v1.2.0";
-            this.mainMenuStrip.ResumeLayout(false);
-            this.mainMenuStrip.PerformLayout();
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numMaxChartPoints)).EndInit();
+            this.mainMenuStrip.ResumeLayout(false);
+            this.mainMenuStrip.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.AttentionPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.AttentionAndMeditationChart)).EndInit();
