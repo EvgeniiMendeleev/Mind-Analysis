@@ -121,10 +121,5 @@ namespace MindAnalysis
         }
 
         private void ClearLoadedRecords(object sender, EventArgs e) => _wavesCharts.ClearLoadedRecords();
-
-        private void SaveBrainInfoToFile(BrainInfo brainInfo)
-        {
-            _mindFile.AppendRecord(brainInfo);
-        }
     }
 }
