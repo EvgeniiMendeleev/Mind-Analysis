@@ -4,6 +4,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Text.Json;
 using System.Threading;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace NeuroTGAM
@@ -62,31 +63,38 @@ namespace NeuroTGAM
         //TODO: Переписать парсинг JSON пакетов, поступающих с нейроинтрефейса в программу.
         private void ParseJSON(string packet)
         {
-            Console.WriteLine(packet);
-            dynamic jsonObject = JObject.Parse(packet);
-            if (jsonObject.eegPower == null && jsonObject.eSense == null || jsonObject.status != null)
+            try
+            {
+                Console.WriteLine(packet);
+                dynamic jsonObject = JObject.Parse(packet);
+                if (jsonObject.eegPower == null && jsonObject.eSense == null || jsonObject.status != null)
+                {
+                    return;
+                }
+
+                _mutex.WaitOne();
+                CurrentBrainData.LowAlpha = (uint)jsonObject.eegPower["lowAlpha"];
+                CurrentBrainData.HighAlpha = (uint)jsonObject.eegPower["highAlpha"];
+
+                CurrentBrainData.LowBeta = (uint)jsonObject.eegPower["lowBeta"];
+                CurrentBrainData.HighBeta = (uint)jsonObject.eegPower["highBeta"];
+
+                CurrentBrainData.LowGamma = (uint)jsonObject.eegPower["lowGamma"];
+                CurrentBrainData.HighGamma = (uint)jsonObject.eegPower["highGamma"];
+
+                CurrentBrainData.Theta = (uint)jsonObject.eegPower["theta"];
+                CurrentBrainData.Delta = (uint)jsonObject.eegPower["delta"];
+
+                CurrentBrainData.Attention = (uint)jsonObject.eSense["attention"];
+                CurrentBrainData.Meditation = (uint)jsonObject.eSense["meditation"];
+                _mutex.ReleaseMutex();
+
+                OnBrainDataReceived?.Invoke(CurrentBrainData.Clone() as BrainInfo);
+            }
+            catch (JsonReaderException)
             {
                 return;
             }
-
-            _mutex.WaitOne();
-            CurrentBrainData.LowAlpha = (uint)jsonObject.eegPower["lowAlpha"];
-            CurrentBrainData.HighAlpha = (uint)jsonObject.eegPower["highAlpha"];
-
-            CurrentBrainData.LowBeta = (uint)jsonObject.eegPower["lowBeta"];
-            CurrentBrainData.HighBeta = (uint)jsonObject.eegPower["highBeta"];
-
-            CurrentBrainData.LowGamma = (uint)jsonObject.eegPower["lowGamma"];
-            CurrentBrainData.HighGamma = (uint)jsonObject.eegPower["highGamma"];
-
-            CurrentBrainData.Theta = (uint)jsonObject.eegPower["theta"];
-            CurrentBrainData.Delta = (uint)jsonObject.eegPower["delta"];
-
-            CurrentBrainData.Attention = (uint)jsonObject.eSense["attention"];
-            CurrentBrainData.Meditation = (uint)jsonObject.eSense["meditation"];
-            _mutex.ReleaseMutex();
-
-            OnBrainDataReceived?.Invoke(CurrentBrainData.Clone() as BrainInfo);
         }
 
         public void Connect()
