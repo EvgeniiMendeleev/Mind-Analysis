@@ -53,17 +53,17 @@ namespace MindAnalysis
             }
             _wavesCharts.MaxPointsOnCharts = numMaxChartPoints.Value;
             _wavesCharts.StartTime = DateTime.Now;
-            _wavesCharts.ClearSessionRecord();
+            _wavesCharts.ClearAllCharts();
+            _wavesCharts.SetIntervalOX(WaveChart.Attention, 0);
 
-            if (chkSaveRecords.Checked) _mindFile = new MindFile(txtBoxFilePath.Text);
+            if (chkSaveRecords.Checked)
+            {
+                _mindFile = new MindFile(txtBoxFilePath.Text);
+            }
 
-            UserControlSystem.GetSystem()
-                .Disable(btnStartRecord)
-                .Enable(btnStopRecord)
-                .Disable(numMaxChartPoints)
-                .Disable(chkSaveRecords)
-                .Disable(txtBoxFilePath)
-                .Disable(mainMenuStrip);
+            var GUISystem = UserControlSystem.GetSystem();
+            GUISystem.DisableParams(btnStartRecord, numMaxChartPoints, chkSaveRecords, txtBoxFilePath, mainMenuStrip);
+            GUISystem.EnableParams(btnStopRecord);
         }
 
         private void OnBrainDataReceived(BrainInfo brainInfo)
@@ -81,32 +81,42 @@ namespace MindAnalysis
             }
             _neurodevice.CloseConnection();
             _neurodevice = null;
-            _wavesCharts.ClearSessionRecord();
+
+            //_wavesCharts.ClearSessionRecord();
             _mindFile?.Close();
             _mindFile = null;
 
-            UserControlSystem.GetSystem()
-                .Disable(btnStopRecord)
-                .Enable(btnStartRecord)
-                .Enable(numMaxChartPoints)
-                .Enable(chkSaveRecords)
-                .Enable(txtBoxFilePath)
-                .Enable(mainMenuStrip);
+            var GUISystem = UserControlSystem.GetSystem();
+            GUISystem.DisableParams(btnStopRecord);
+            GUISystem.EnableParams(btnStartRecord, numMaxChartPoints, chkSaveRecords, txtBoxFilePath, mainMenuStrip);
         }
 
         private void OnChangedValueInSaveMindRecord(object sender, EventArgs e)
         {
             UserControlSystem GUISystem = UserControlSystem.GetSystem();
 
-            if (chkSaveRecords.Checked) GUISystem.Enable(btnChangeSavePath).Enable(txtBoxFilePath);
-            else GUISystem.Disable(btnChangeSavePath).Disable(txtBoxFilePath);
+            if (chkSaveRecords.Checked)
+            {
+                GUISystem.EnableParams(btnChangeSavePath, txtBoxFilePath);
+            }
+            else
+            {
+                GUISystem.DisableParams(btnChangeSavePath, txtBoxFilePath);
+            }
         }
 
         private void LoadFileOnChart(object sender, EventArgs e)
         {
             using (OpenFileDialog openFileDialog = new OpenFileDialog() { Filter = "Csv files (*.csv) | *.csv" })
             {
-                if (openFileDialog.ShowDialog() != DialogResult.OK) return;
+                if (openFileDialog.ShowDialog() != DialogResult.OK)
+                {
+                    return;
+                }
+
+                _wavesCharts.ClearAllCharts();
+                _wavesCharts.SetIntervalOX(WaveChart.Attention, 60);
+                _wavesCharts.SetIntervalOX(WaveChart.Meditation, 60);
                 _wavesCharts.LoadFileOnCharts(openFileDialog.FileName);
             }
         }
@@ -114,17 +124,30 @@ namespace MindAnalysis
         private void SaveFilePathForRecording(object sender, EventArgs e)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog() { Filter = "Csv files (*.csv) | *.csv" };
-            if (saveFileDialog.ShowDialog() != DialogResult.OK) return;
+            if (saveFileDialog.ShowDialog() != DialogResult.OK)
+            {
+                return;
+            }
 
-            if (saveFileDialog.FileName.Length > 3) txtBoxFilePath.Text = Path.GetFullPath(saveFileDialog.FileName);
-            else MessageBox.Show("Имя файла слишком маленькое!", "Ошибка сохранения", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            if (saveFileDialog.FileName.Length > 3)
+            {
+                txtBoxFilePath.Text = Path.GetFullPath(saveFileDialog.FileName);
+            }
+            else
+            {
+                MessageBox.Show("Имя файла слишком маленькое!", "Ошибка сохранения", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
-        private void ClearLoadedRecords(object sender, EventArgs e) => _wavesCharts.ClearLoadedRecords();
-
-        private void SaveBrainInfoToFile(BrainInfo brainInfo)
+        private void ClearLoadedRecords(object sender, EventArgs e)
         {
-            _mindFile.AppendRecord(brainInfo);
+            _wavesCharts.ClearLoadedRecords();
+        }
+
+        private void OpenMarkingDatasetDialog(object sender, EventArgs e)
+        {
+            MarkingDatasetForm markingDatasetForm = new MarkingDatasetForm();
+            markingDatasetForm.ShowDialog(this);
         }
     }
 }

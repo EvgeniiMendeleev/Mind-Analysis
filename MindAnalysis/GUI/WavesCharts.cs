@@ -9,7 +9,7 @@ using System.Windows.Forms.DataVisualization.Charting;
 
 namespace MindAnalysis.GUI
 {
-    internal enum WaveChart
+    public enum WaveChart
     {
         Attention,
         Meditation,
@@ -67,24 +67,30 @@ namespace MindAnalysis.GUI
             }
         }
 
-        private void AddBrainRecordToCharts(BrainInfo brainRecord)
+        private void AddBrainRecordToCharts(BrainInfo brainRecord, string seriesPref = "")
         {
-            AddXY(WaveChart.Meditation, brainRecord.Second.ToString(), brainRecord.Meditation);
-            AddXY(WaveChart.Attention, brainRecord.Second.ToString(), brainRecord.Attention);
-            AddXY(WaveChart.HighAlpha, brainRecord.Second.ToString(), brainRecord.HighAlpha);
-            AddXY(WaveChart.LowAlpha, brainRecord.Second.ToString(), brainRecord.LowAlpha);
-            AddXY(WaveChart.HighBeta, brainRecord.Second.ToString(), brainRecord.HighBeta);
-            AddXY(WaveChart.LowBeta, brainRecord.Second.ToString(), brainRecord.LowBeta);
-            AddXY(WaveChart.HighGamma, brainRecord.Second.ToString(), brainRecord.HighGamma);
-            AddXY(WaveChart.LowGamma, brainRecord.Second.ToString(), brainRecord.LowGamma);
-            AddXY(WaveChart.Theta, brainRecord.Second.ToString(), brainRecord.Theta);
-            AddXY(WaveChart.Delta, brainRecord.Second.ToString(), brainRecord.Delta);
+            AddXY(WaveChart.Meditation, seriesPref, brainRecord.Second.ToString(), brainRecord.Meditation);
+            AddXY(WaveChart.Attention, seriesPref, brainRecord.Second.ToString(), brainRecord.Attention);
+            AddXY(WaveChart.HighAlpha, seriesPref, brainRecord.Second.ToString(), brainRecord.HighAlpha);
+            AddXY(WaveChart.LowAlpha, seriesPref, brainRecord.Second.ToString(), brainRecord.LowAlpha);
+            AddXY(WaveChart.HighBeta, seriesPref, brainRecord.Second.ToString(), brainRecord.HighBeta);
+            AddXY(WaveChart.LowBeta, seriesPref, brainRecord.Second.ToString(), brainRecord.LowBeta);
+            AddXY(WaveChart.HighGamma, seriesPref, brainRecord.Second.ToString(), brainRecord.HighGamma);
+            AddXY(WaveChart.LowGamma, seriesPref, brainRecord.Second.ToString(), brainRecord.LowGamma);
+            AddXY(WaveChart.Theta, seriesPref, brainRecord.Second.ToString(), brainRecord.Theta);
+            AddXY(WaveChart.Delta, seriesPref, brainRecord.Second.ToString(), brainRecord.Delta);
         }
 
-        private void AddXY(WaveChart waveChartType, object XValue, object YValue)
+        private void AddXY(WaveChart waveChartType, string seriesPref, object XValue, object YValue)
         {
             string serieName = waveChartType.ToString();
-            _charts[waveChartType].Series[serieName].Points.AddXY(XValue, YValue);
+            _charts[waveChartType].Series[seriesPref + serieName].Points.AddXY(XValue, YValue);
+        }
+
+        public void SetIntervalOX(WaveChart waveChart, uint interval)
+        {
+            string chartAreaName = waveChart.ToString();
+            _charts[WaveChart.Attention].ChartAreas[chartAreaName].AxisX.Interval = interval;
         }
 
         public void LoadFileOnCharts(string filePath)
@@ -100,7 +106,7 @@ namespace MindAnalysis.GUI
                 var brainRecords = csvReader.GetRecords<BrainInfo>();
                 foreach (var brainRecord in brainRecords)
                 {
-                    AddBrainRecordToCharts(brainRecord);
+                    AddBrainRecordToCharts(brainRecord, "Loaded");
                 }
             }
         }

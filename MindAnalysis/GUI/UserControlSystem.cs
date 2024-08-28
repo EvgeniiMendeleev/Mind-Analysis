@@ -30,5 +30,23 @@ namespace MindAnalysis
             control.Enabled = true;
             return instance;
         }
+
+        public UserControlSystem DisableParams(params Control[] controls)
+        {
+            foreach (Control control in controls)
+            {
+                control.Enabled = false;
+            }
+            return instance;
+        }
+
+        public UserControlSystem EnableParams(params Control[] controls)
+        {
+            foreach (Control control in controls)
+            {
+                control.Enabled = true;
+            }
+            return instance;
+        }
     }
 }

@@ -112,8 +112,8 @@
     <Reference Include="System.Text.Encodings.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Text.Encodings.Web.8.0.0\lib\net462\System.Text.Encodings.Web.dll</HintPath>
     </Reference>
-    <Reference Include="System.Text.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Text.Json.8.0.0\lib\net462\System.Text.Json.dll</HintPath>
+    <Reference Include="System.Text.Json, Version=8.0.0.4, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Json.8.0.4\lib\net462\System.Text.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Threading.Channels, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Threading.Channels.7.0.0\lib\net462\System.Threading.Channels.dll</HintPath>
@@ -152,6 +152,18 @@
     <Compile Include="AttentionAnalysis\DataScaler.cs" />
     <Compile Include="AttentionAnalysis\DataSmoothing.cs" />
     <Compile Include="GUI\WavesCharts.cs" />
+    <Compile Include="MarkingDatasetForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MarkingDatasetForm.Designer.cs">
+      <DependentUpon>MarkingDatasetForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MarkingProcess.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MarkingProcess.Designer.cs">
+      <DependentUpon>MarkingProcess.cs</DependentUpon>
+    </Compile>
     <Compile Include="NeuroTGAM\BrainInfo.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -172,6 +184,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\TrendBuilder.resx">
       <DependentUpon>TrendBuilder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MarkingDatasetForm.resx">
+      <DependentUpon>MarkingDatasetForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MarkingProcess.resx">
+      <DependentUpon>MarkingProcess.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -209,5 +227,6 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
