@@ -4,6 +4,10 @@ using NeuroTGAM;
 using System;
 using System.IO;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
+using System.Collections.Generic;
+using AttentionAnalysis;
+using Microsoft.Scripting.Utils;
 
 namespace MindAnalysis
 {
@@ -13,7 +17,7 @@ namespace MindAnalysis
         
         private Neurointerface _neurodevice;
         private WavesCharts _wavesCharts;
-        private MindFile _mindFile;
+        private MindFileWriter _mindFile;
 
         public MainForm()
         {
@@ -58,7 +62,7 @@ namespace MindAnalysis
 
             if (chkSaveRecords.Checked)
             {
-                _mindFile = new MindFile(txtBoxFilePath.Text);
+                _mindFile = new MindFileWriter(txtBoxFilePath.Text);
             }
 
             var GUISystem = UserControlSystem.GetSystem();
@@ -82,7 +86,6 @@ namespace MindAnalysis
             _neurodevice.CloseConnection();
             _neurodevice = null;
 
-            //_wavesCharts.ClearSessionRecord();
             _mindFile?.Close();
             _mindFile = null;
 
@@ -115,9 +118,27 @@ namespace MindAnalysis
                 }
 
                 _wavesCharts.ClearAllCharts();
+                smoothedChart.Series["SmoothedChart"].Points.Clear();
+                smoothedChart.Series["StartPoints"].Points.Clear();
                 _wavesCharts.SetIntervalOX(WaveChart.Attention, 60);
                 _wavesCharts.SetIntervalOX(WaveChart.Meditation, 60);
                 _wavesCharts.LoadFileOnCharts(openFileDialog.FileName);
+
+                MindFileReader mindFile = new MindFileReader(openFileDialog.FileName);
+
+                List<DataPoint> startedPoints = new List<DataPoint>();
+                int a = 1;
+                foreach (var brainInfo in mindFile)
+                {
+                    DataPoint attentionPoint = new DataPoint(a, brainInfo.Attention);
+                    startedPoints.Add(attentionPoint);
+                    a++;
+                }
+
+                DataPoint[] smoothedPoints = DataSmoothing.ExponentialSmoothing(startedPoints.ToArray());
+
+                smoothedChart.Series["SmoothedChart"].Points.AddRange(smoothedPoints);
+                //smoothedChart.Series["StartPoints"].Points.AddRange(startedPoints);
             }
         }
 

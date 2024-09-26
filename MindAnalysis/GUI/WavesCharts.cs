@@ -69,16 +69,17 @@ namespace MindAnalysis.GUI
 
         private void AddBrainRecordToCharts(BrainInfo brainRecord, string seriesPref = "")
         {
-            AddXY(WaveChart.Meditation, seriesPref, brainRecord.Second.ToString(), brainRecord.Meditation);
-            AddXY(WaveChart.Attention, seriesPref, brainRecord.Second.ToString(), brainRecord.Attention);
-            AddXY(WaveChart.HighAlpha, seriesPref, brainRecord.Second.ToString(), brainRecord.HighAlpha);
-            AddXY(WaveChart.LowAlpha, seriesPref, brainRecord.Second.ToString(), brainRecord.LowAlpha);
-            AddXY(WaveChart.HighBeta, seriesPref, brainRecord.Second.ToString(), brainRecord.HighBeta);
-            AddXY(WaveChart.LowBeta, seriesPref, brainRecord.Second.ToString(), brainRecord.LowBeta);
-            AddXY(WaveChart.HighGamma, seriesPref, brainRecord.Second.ToString(), brainRecord.HighGamma);
-            AddXY(WaveChart.LowGamma, seriesPref, brainRecord.Second.ToString(), brainRecord.LowGamma);
-            AddXY(WaveChart.Theta, seriesPref, brainRecord.Second.ToString(), brainRecord.Theta);
-            AddXY(WaveChart.Delta, seriesPref, brainRecord.Second.ToString(), brainRecord.Delta);
+            double time = brainRecord.Second.TotalSeconds;
+            AddXY(WaveChart.Meditation, seriesPref, time, brainRecord.Meditation);
+            AddXY(WaveChart.Attention, seriesPref, time, brainRecord.Attention);
+            AddXY(WaveChart.HighAlpha, seriesPref, time, brainRecord.HighAlpha);
+            AddXY(WaveChart.LowAlpha, seriesPref, time, brainRecord.LowAlpha);
+            AddXY(WaveChart.HighBeta, seriesPref, time, brainRecord.HighBeta);
+            AddXY(WaveChart.LowBeta, seriesPref, time, brainRecord.LowBeta);
+            AddXY(WaveChart.HighGamma, seriesPref, time, brainRecord.HighGamma);
+            AddXY(WaveChart.LowGamma, seriesPref, time, brainRecord.LowGamma);
+            AddXY(WaveChart.Theta, seriesPref, time, brainRecord.Theta);
+            AddXY(WaveChart.Delta, seriesPref, time, brainRecord.Delta);
         }
 
         private void AddXY(WaveChart waveChartType, string seriesPref, object XValue, object YValue)

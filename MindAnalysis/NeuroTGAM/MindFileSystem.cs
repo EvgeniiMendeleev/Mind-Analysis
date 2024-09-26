@@ -2,32 +2,64 @@
 using NeuroTGAM;
 using System.IO;
 using System.Globalization;
+using System.Collections;
+using System.Collections.Generic;
+using CsvHelper.Configuration;
+using System.Runtime.CompilerServices;
 
 namespace MindAnalysis.NeuroTGAM
 {
-    internal class MindFile
+    internal class MindFileWriter
     {
-        private CsvWriter csvWriter;
+        private CsvWriter _csvWriter;
 
-        public MindFile(string filePath)
+        public MindFileWriter(string filePath)
         {
             FileStream file = new FileStream(filePath, FileMode.Create, FileAccess.ReadWrite);
-            StreamWriter reader = new StreamWriter(file);
-            csvWriter = new CsvWriter(reader, CultureInfo.CurrentCulture);
             
-            csvWriter.WriteHeader<BrainInfo>();
-            csvWriter.NextRecord();
+            StreamWriter writer = new StreamWriter(file);
+            _csvWriter = new CsvWriter(writer, CultureInfo.CurrentCulture);
+
+            _csvWriter.WriteHeader<BrainInfo>();
+            _csvWriter.NextRecord();
         }
 
         public void AppendRecord(BrainInfo brainInfo)
         {
-            csvWriter.WriteRecord(brainInfo);
-            csvWriter.NextRecord();
+            _csvWriter.WriteRecord(brainInfo);
+            _csvWriter.NextRecord();
         }
 
         public void Close()
         {
-            csvWriter.Dispose();
+            _csvWriter.Dispose();
+        }
+    }
+
+    internal class MindFileReader
+    {
+        private readonly CsvReader _reader;
+
+        public MindFileReader(string filePath)
+        {
+            FileStream file = new FileStream(filePath, FileMode.Open, FileAccess.Read);
+
+            StreamReader reader = new StreamReader(file);
+            _reader = new CsvReader(reader, CultureInfo.CurrentCulture);
+        }
+
+        public IEnumerator<BrainInfo> GetEnumerator()
+        {
+            var brainRecords = _reader.GetRecords<BrainInfo>();
+            foreach (var brainRecord in brainRecords)
+            {
+                yield return brainRecord;
+            }
+        }
+
+        public void Close()
+        {
+            _reader.Dispose();
         }
     }
 }

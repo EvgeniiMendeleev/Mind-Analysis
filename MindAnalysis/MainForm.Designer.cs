@@ -78,9 +78,16 @@ namespace MindAnalysis
             System.Windows.Forms.DataVisualization.Charting.Series series18 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series19 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series20 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea11 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.StripLine stripLine6 = new System.Windows.Forms.DataVisualization.Charting.StripLine();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend11 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series21 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series22 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.загрузитьДанныеДляАнализаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.очиститьГрафикиСЗагруженнымиДаннымиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.маркировкаСеансаЗаписиToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.btnStartRecord = new System.Windows.Forms.Button();
             this.numMaxChartPoints = new System.Windows.Forms.NumericUpDown();
             this.btnStopRecord = new System.Windows.Forms.Button();
@@ -96,12 +103,12 @@ namespace MindAnalysis
             this.GammaWaveChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.ThetaAndDeltaWavesPage = new System.Windows.Forms.TabPage();
             this.ThetaAndDeltaWavesChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.SmoothedDataPage = new System.Windows.Forms.TabPage();
+            this.smoothedChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.btnChangeSavePath = new System.Windows.Forms.Button();
             this.chkSaveRecords = new System.Windows.Forms.CheckBox();
             this.txtBoxFilePath = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.маркировкаСеансаЗаписиToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             графикиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             groupBox2 = new System.Windows.Forms.GroupBox();
             label1 = new System.Windows.Forms.Label();
@@ -120,6 +127,8 @@ namespace MindAnalysis
             ((System.ComponentModel.ISupportInitialize)(this.GammaWaveChart)).BeginInit();
             this.ThetaAndDeltaWavesPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ThetaAndDeltaWavesChart)).BeginInit();
+            this.SmoothedDataPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.smoothedChart)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -148,6 +157,18 @@ namespace MindAnalysis
             this.очиститьГрафикиСЗагруженнымиДаннымиToolStripMenuItem.Size = new System.Drawing.Size(318, 22);
             this.очиститьГрафикиСЗагруженнымиДаннымиToolStripMenuItem.Text = "Очистить графики с загруженными данными";
             this.очиститьГрафикиСЗагруженнымиДаннымиToolStripMenuItem.Click += new System.EventHandler(this.ClearLoadedRecords);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(315, 6);
+            // 
+            // маркировкаСеансаЗаписиToolStripMenuItem1
+            // 
+            this.маркировкаСеансаЗаписиToolStripMenuItem1.Name = "маркировкаСеансаЗаписиToolStripMenuItem1";
+            this.маркировкаСеансаЗаписиToolStripMenuItem1.Size = new System.Drawing.Size(318, 22);
+            this.маркировкаСеансаЗаписиToolStripMenuItem1.Text = "Маркировка сеанса записи";
+            this.маркировкаСеансаЗаписиToolStripMenuItem1.Click += new System.EventHandler(this.OpenMarkingDatasetDialog);
             // 
             // groupBox2
             // 
@@ -262,6 +283,7 @@ namespace MindAnalysis
             this.tabControl1.Controls.Add(this.BetaWavePage);
             this.tabControl1.Controls.Add(this.GammaWavePage);
             this.tabControl1.Controls.Add(this.ThetaAndDeltaWavesPage);
+            this.tabControl1.Controls.Add(this.SmoothedDataPage);
             this.tabControl1.Location = new System.Drawing.Point(0, 26);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(2);
             this.tabControl1.Name = "tabControl1";
@@ -381,7 +403,7 @@ namespace MindAnalysis
             this.AlphaWavePage.Margin = new System.Windows.Forms.Padding(2);
             this.AlphaWavePage.Name = "AlphaWavePage";
             this.AlphaWavePage.Padding = new System.Windows.Forms.Padding(2);
-            this.AlphaWavePage.Size = new System.Drawing.Size(803, 491);
+            this.AlphaWavePage.Size = new System.Drawing.Size(820, 497);
             this.AlphaWavePage.TabIndex = 1;
             this.AlphaWavePage.Text = "Альфа - волна";
             this.AlphaWavePage.UseVisualStyleBackColor = true;
@@ -481,7 +503,7 @@ namespace MindAnalysis
             this.BetaWavePage.Location = new System.Drawing.Point(4, 24);
             this.BetaWavePage.Margin = new System.Windows.Forms.Padding(2);
             this.BetaWavePage.Name = "BetaWavePage";
-            this.BetaWavePage.Size = new System.Drawing.Size(803, 491);
+            this.BetaWavePage.Size = new System.Drawing.Size(820, 497);
             this.BetaWavePage.TabIndex = 2;
             this.BetaWavePage.Text = "Бета - волна";
             this.BetaWavePage.UseVisualStyleBackColor = true;
@@ -581,7 +603,7 @@ namespace MindAnalysis
             this.GammaWavePage.Location = new System.Drawing.Point(4, 24);
             this.GammaWavePage.Margin = new System.Windows.Forms.Padding(2);
             this.GammaWavePage.Name = "GammaWavePage";
-            this.GammaWavePage.Size = new System.Drawing.Size(803, 491);
+            this.GammaWavePage.Size = new System.Drawing.Size(820, 497);
             this.GammaWavePage.TabIndex = 3;
             this.GammaWavePage.Text = "Гамма - волна";
             this.GammaWavePage.UseVisualStyleBackColor = true;
@@ -775,6 +797,70 @@ namespace MindAnalysis
             this.ThetaAndDeltaWavesChart.Size = new System.Drawing.Size(821, 496);
             this.ThetaAndDeltaWavesChart.TabIndex = 23;
             // 
+            // SmoothedDataPage
+            // 
+            this.SmoothedDataPage.BackColor = System.Drawing.Color.DarkGray;
+            this.SmoothedDataPage.Controls.Add(this.smoothedChart);
+            this.SmoothedDataPage.Location = new System.Drawing.Point(4, 24);
+            this.SmoothedDataPage.Name = "SmoothedDataPage";
+            this.SmoothedDataPage.Size = new System.Drawing.Size(820, 497);
+            this.SmoothedDataPage.TabIndex = 5;
+            this.SmoothedDataPage.Text = "Сглаженные данные";
+            // 
+            // smoothedChart
+            // 
+            this.smoothedChart.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.smoothedChart.BackColor = System.Drawing.Color.Gray;
+            chartArea11.AxisX.Interval = 20D;
+            chartArea11.AxisX.Minimum = 0D;
+            chartArea11.AxisX.TitleFont = new System.Drawing.Font("Times New Roman", 14.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            chartArea11.AxisY.Interval = 5D;
+            chartArea11.AxisY.Maximum = 102D;
+            chartArea11.AxisY.Minimum = 0D;
+            chartArea11.AxisY.StripLines.Add(stripLine6);
+            chartArea11.AxisY.TextOrientation = System.Windows.Forms.DataVisualization.Charting.TextOrientation.Rotated90;
+            chartArea11.AxisY.Title = "Уровень волны";
+            chartArea11.AxisY.TitleFont = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            chartArea11.BackColor = System.Drawing.Color.Lavender;
+            chartArea11.Name = "SmoothedArea";
+            this.smoothedChart.ChartAreas.Add(chartArea11);
+            legend11.BackColor = System.Drawing.Color.Lavender;
+            legend11.DockedToChartArea = "SmoothedArea";
+            legend11.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            legend11.IsDockedInsideChartArea = false;
+            legend11.IsTextAutoFit = false;
+            legend11.Name = "ThetaChartLegend";
+            legend11.ShadowOffset = 2;
+            legend11.Title = " Данные";
+            legend11.TitleBackColor = System.Drawing.Color.MediumSeaGreen;
+            legend11.TitleFont = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            legend11.TitleSeparator = System.Windows.Forms.DataVisualization.Charting.LegendSeparatorStyle.GradientLine;
+            this.smoothedChart.Legends.Add(legend11);
+            this.smoothedChart.Location = new System.Drawing.Point(0, 0);
+            this.smoothedChart.Margin = new System.Windows.Forms.Padding(10, 1, 10, 1);
+            this.smoothedChart.Name = "smoothedChart";
+            this.smoothedChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
+            series21.BorderWidth = 3;
+            series21.ChartArea = "SmoothedArea";
+            series21.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series21.Color = System.Drawing.Color.Peru;
+            series21.Legend = "ThetaChartLegend";
+            series21.LegendText = "Изначальные точки";
+            series21.Name = "StartPoints";
+            series22.BorderWidth = 3;
+            series22.ChartArea = "SmoothedArea";
+            series22.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series22.Color = System.Drawing.Color.OliveDrab;
+            series22.Legend = "ThetaChartLegend";
+            series22.LegendText = "Сеанс";
+            series22.Name = "SmoothedChart";
+            this.smoothedChart.Series.Add(series21);
+            this.smoothedChart.Series.Add(series22);
+            this.smoothedChart.Size = new System.Drawing.Size(821, 496);
+            this.smoothedChart.TabIndex = 24;
+            // 
             // btnChangeSavePath
             // 
             this.btnChangeSavePath.Anchor = System.Windows.Forms.AnchorStyles.Top;
@@ -832,18 +918,6 @@ namespace MindAnalysis
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Настройки сохранения";
             // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(315, 6);
-            // 
-            // маркировкаСеансаЗаписиToolStripMenuItem1
-            // 
-            this.маркировкаСеансаЗаписиToolStripMenuItem1.Name = "маркировкаСеансаЗаписиToolStripMenuItem1";
-            this.маркировкаСеансаЗаписиToolStripMenuItem1.Size = new System.Drawing.Size(318, 22);
-            this.маркировкаСеансаЗаписиToolStripMenuItem1.Text = "Маркировка сеанса записи";
-            this.маркировкаСеансаЗаписиToolStripMenuItem1.Click += new System.EventHandler(this.OpenMarkingDatasetDialog);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -878,6 +952,8 @@ namespace MindAnalysis
             ((System.ComponentModel.ISupportInitialize)(this.GammaWaveChart)).EndInit();
             this.ThetaAndDeltaWavesPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ThetaAndDeltaWavesChart)).EndInit();
+            this.SmoothedDataPage.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.smoothedChart)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
@@ -909,6 +985,8 @@ namespace MindAnalysis
         private System.Windows.Forms.ToolStripMenuItem очиститьГрафикиСЗагруженнымиДаннымиToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem маркировкаСеансаЗаписиToolStripMenuItem1;
+        private System.Windows.Forms.TabPage SmoothedDataPage;
+        private System.Windows.Forms.DataVisualization.Charting.Chart smoothedChart;
     }
 }
 
